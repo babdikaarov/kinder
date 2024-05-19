@@ -80,7 +80,7 @@ services:
          - ./cms/yarn.lock:/opt/yarn.lock
          - ./cms/.env:/opt/app/.env
          - ./cms/public/uploads:/opt/app/public/uploads
-         - strapi-data:/opt/app/public/uploads
+         - strapi-data:/data
       ports:
          - "1337:1337"
       networks:
