@@ -28,7 +28,7 @@ services:
          - kindergarten_network
          - strapi
       environment:
-         CMS_API: http://16.171.254.90:1337
+         CMS_API: http://16.170.170.229:1337
       depends_on:
          - strapi
 
@@ -58,7 +58,7 @@ services:
       restart: unless-stopped
       env_file: ./cms/.env
       environment:
-         STRAPI_ADMIN_BACKEND_URL: http://16.171.254.90:1337
+         STRAPI_ADMIN_BACKEND_URL: http://16.170.170.229:1337
          DATABASE_CLIENT: postgres
          DATABASE_PORT: 5432
          DATABASE_NAME: cms
