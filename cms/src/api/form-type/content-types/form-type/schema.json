@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "form_types",
+  "info": {
+    "singularName": "form-type",
+    "pluralName": "form-types",
+    "displayName": "formType"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "twoParents": {
+      "type": "json",
+      "required": true
+    },
+    "oneParent": {
+      "type": "json",
+      "required": true
+    },
+    "divorced": {
+      "type": "json",
+      "required": true
+    },
+    "guardian": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "docs_lists",
+  "info": {
+    "singularName": "docs-list",
+    "pluralName": "docs-lists",
+    "displayName": "docsList"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "docType": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

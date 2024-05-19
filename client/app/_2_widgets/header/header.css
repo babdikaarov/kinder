@@ -1,0 +1,33 @@
+.burgerButton .line {
+  transition:
+    transform 300ms ease-in 600ms,
+    rotate 300ms ease-in 300ms,
+    opacity 0ms 600ms,
+    left 0.3s ease-in;
+  transform-origin: center;
+}
+
+.burgerButton[data-state='open'] .line {
+  transition:
+    transform 300ms ease-in 300ms,
+    rotate 300ms ease-in 600ms,
+    opacity 0ms 600ms;
+}
+
+.burgerButton[data-state='open'] .top {
+  transform: translate(0px, 20px);
+  rotate: 45deg;
+}
+
+.burgerButton[data-state='open'] .middle {
+  opacity: 0;
+}
+
+.burgerButton[data-state='open'] .bottom {
+  transform: translate(0px, -20px);
+  rotate: -45deg;
+}
+
+.burgerButton[data-state='open'] .burgerSVG {
+  fill: white;
+}
