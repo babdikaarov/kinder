@@ -39,19 +39,18 @@ services:
    strapiDB:
       image: postgres:16-alpine
       container_name: "strapiDB"
+      restart: unless-stopped
       ports:
          - "5432:5432"
       environment:
          POSTGRES_DB: cms
          POSTGRES_USER: postgres
-         POSTGRES_PASSWORD: postgres
+         POSTGRES_PASSWORD: beksultan
       volumes:
-         - ./cms_data/cms_v2.sql:/docker-entrypoint-initdb.d/cms_v2.sql
+         - ./cms_data/cms.sql:/docker-entrypoint-initdb.d/cms.sql
          - postgres-data:/var/lib/postgresql/data
-      restart: unless-stopped
       user: "postgres"
       networks:
-         - kindergarten_network
          - strapi
 
    strapi:
@@ -67,7 +66,7 @@ services:
          DATABASE_PORT: 5432
          DATABASE_NAME: cms
          DATABASE_USERNAME: postgres
-         DATABASE_PASSWORD: postgres
+         DATABASE_PASSWORD: beksultan
          DATABASE_HOST: strapiDB
          API_TOKEN_SALT: aMqqi4260qfhHxg3C8XXbw==
          TRANSFER_TOKEN_SALT: 2Mm2TehHXvdhoMUEc9XPaA==
