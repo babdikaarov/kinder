@@ -1,5 +1,6 @@
-import withNextIntl from 'next-intl/plugin'
+// @ts-ignore
 // @ts-check
+import withNextIntl from 'next-intl/plugin'
 /**
  * @type {import('next').NextConfig}
  */
@@ -14,13 +15,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: process.env.CMS_HOST | 'localhost',
-        port: process.env.CMS_PORT | '1337',
+        hostname: process.env.CMS_HOST || 'localhost',
+        port: process.env.CMS_PORT || '1337',
       },
       {
         protocol: 'http',
-        hostname: process.env.HOST | 'localhost',
-        port: process.env.PORT | '3000',
+        hostname: process.env.HOST || 'localhost',
+        port: process.env.PORT || '3000',
       },
     ],
   },
