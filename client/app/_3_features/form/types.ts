@@ -21,24 +21,26 @@ export type Ttext = {
     isSubmitting: string
     default: string
   }
-  addFile: {
-    add: string
-    loaded: string
-    choosen: string
-  }
-  modal: {
-    button: string
-    title: string
-    save: string
-    note: string
-    clickDrop: {
-      clickAndDrop: string
-      drop: string
+  fileInput: {
+    addFile: {
+      add: string
+      loaded: string
+      choosen: string
     }
-    upload: string
-    error: {
-      duplicate: string
-      limit: string
+    modal: {
+      button: string
+      title: string
+      save: string
+      note: string
+      clickDrop: {
+        clickAndDrop: string
+        drop: string
+      }
+      upload: string
+      error: {
+        duplicate: string
+        limit: string
+      }
     }
   }
   errors: {
@@ -74,18 +76,25 @@ export interface DocFileInputProps {
   onChange: (file: any) => void
   error: ValidationError[]
   text: {
-    button: string
-    title: string
-    save: string
-    note: string
-    clickDrop: {
-      clickAndDrop: string
-      drop: string
+    modal: {
+      button: string
+      title: string
+      save: string
+      note: string
+      clickDrop: {
+        clickAndDrop: string
+        drop: string
+      }
+      upload: string
+      error: {
+        duplicate: string
+        limit: string
+      }
     }
-    upload: string
-    error: {
-      duplicate: string
-      limit: string
+    addFile: {
+      add: string
+      loaded: string
+      choosen: string
     }
   }
 }

@@ -6,16 +6,25 @@ import Image from 'next/image'
 interface HeroProps extends myTS.I {}
 
 const Hero: React.FC<HeroProps> = async ({ i }) => {
-  const { title, description, image } = await getData('/api/hero?populate=*')
-  const t = await getTranslations('homePage.hero')
+  const { title, description, image, link } = await getData(
+    '/api/hero?populate=*'
+  )
+  const t = await getTranslations()
   return (
-    <Wrapper className='smExtra:py-10 relative  flex w-full max-w-wrapperLimit items-center justify-center gap-5 px-4 py-20'>
+    <Wrapper
+      className={`relative flex  w-full max-w-wrapperLimit items-center justify-center gap-5 px-4 py-20 smExtra:h-[390px] smExtra:w-svw smExtra:py-10`}
+    >
       <Image
         className='absolute size-full object-cover brightness-50'
         src={image.src}
         alt={title ?? 'hero background'}
         width={1200}
         height={530}
+        style={{
+          width: 'auto',
+          height: 'auto',
+          objectFit: 'cover',
+        }}
         priority
       />
       <article className='z-10 flex max-w-[700px] flex-col items-center justify-between gap-4 text-center font-poppins text-white'>
@@ -26,8 +35,8 @@ const Hero: React.FC<HeroProps> = async ({ i }) => {
           <p className='text-fs-lg'>{description[i]}</p>
         </div>
         <button className='button mt-4 h-[62px] w-full max-w-[400px]'>
-          <a href='#' className='text-fs-lg  text-white'>
-            {t('button')}
+          <a href={link} target='_blank' className='text-fs-lg  text-white'>
+            {t('home_hero_button')}
           </a>
         </button>
       </article>

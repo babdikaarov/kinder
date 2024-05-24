@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import './gallery.css'
 
 interface GalleryProps {
-  data: DataEntry[]
+  data: ImageData[]
   header: string
 }
 export interface ImageFormat {
@@ -21,20 +21,27 @@ export interface ImageData {
   alt: string | null
   src: string
   formats: {
-    large: ImageFormat
-    small: ImageFormat
-    medium: ImageFormat
-    thumbnail: ImageFormat
+    large?: ImageFormat
+    small?: ImageFormat
+    medium?: ImageFormat
+    thumbnail?: ImageFormat
   }
 }
 
-export interface DataEntry {
+export type DataEntry = {
   data: ImageData[]
 }
 
 const GalleryClient: React.FC<GalleryProps> = ({ data, header }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [index, setIndex] = useState(0)
 
+  const handleOpen = (i: number) => {
+    // console.log(i, 'handleopen')
+
+    setIndex(i)
+    setIsOpen(true)
+  }
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === 'Space') {
@@ -61,27 +68,24 @@ const GalleryClient: React.FC<GalleryProps> = ({ data, header }) => {
             'smExtra:grid-cols-1'
           )}
         >
-          {data.map(({ data }) => {
-            return data.map((image) => (
-              <article key={image.id}>
-                <Image
-                  className='size-full object-cover rounded-10 hover:cursor-pointer'
-                  onClick={() => setIsOpen(true)}
-                  src={image.src}
-                  alt={image.alt ?? 'galley image'}
-                  width={289}
-                  height={351}
-                  // style={{
-                  //   width: 'auto',
-                  //   height: 'auto',
-                  //   objectFit: 'cover',
-                  // }}
-                />
-              </article>
-            ))
-          })}
+          {data.map((image, i) => (
+            <article key={image.id} onClick={() => handleOpen(i)}>
+              <Image
+                className='size-full rounded-10 object-cover hover:cursor-pointer'
+                src={image.src}
+                alt={image.alt ?? 'galley image'}
+                width={289}
+                height={351}
+                style={{
+                  width: 'auto',
+                  height: 'auto',
+                  objectFit: 'cover',
+                }}
+              />
+            </article>
+          ))}
         </div>
-        <LightBox open={isOpen} close={setIsOpen} images={data} />
+        <LightBox index={index} open={isOpen} close={setIsOpen} images={data} />
       </Wrapper>
     </>
   )

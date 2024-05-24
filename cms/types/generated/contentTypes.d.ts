@@ -629,13 +629,6 @@ export interface ApiAboutAbout extends Schema.CollectionType {
                localized: false;
             };
          }>;
-      order: Attribute.Integer &
-         Attribute.Required &
-         Attribute.SetPluginOptions<{
-            i18n: {
-               localized: false;
-            };
-         }>;
       createdAt: Attribute.DateTime;
       updatedAt: Attribute.DateTime;
       createdBy: Attribute.Relation<"api::about.about", "oneToOne", "admin::user"> & Attribute.Private;
@@ -703,14 +696,258 @@ export interface ApiCalendarCalendar extends Schema.CollectionType {
    options: {
       draftAndPublish: false;
    };
+   pluginOptions: {
+      i18n: {
+         localized: true;
+      };
+   };
    attributes: {
-      calendatID: Attribute.String & Attribute.Required;
-      publicKey: Attribute.String & Attribute.Required;
-      category: Attribute.String & Attribute.Required;
+      calendatID: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: false;
+            };
+         }>;
+      publicKey: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: false;
+            };
+         }>;
+      category: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
       createdAt: Attribute.DateTime;
       updatedAt: Attribute.DateTime;
       createdBy: Attribute.Relation<"api::calendar.calendar", "oneToOne", "admin::user"> & Attribute.Private;
       updatedBy: Attribute.Relation<"api::calendar.calendar", "oneToOne", "admin::user"> & Attribute.Private;
+      localizations: Attribute.Relation<"api::calendar.calendar", "oneToMany", "api::calendar.calendar">;
+      locale: Attribute.String;
+   };
+}
+
+export interface ApiContentFormContentForm extends Schema.SingleType {
+   collectionName: "content_forms";
+   info: {
+      singularName: "content-form";
+      pluralName: "content-forms";
+      displayName: "contentForm";
+      description: "";
+   };
+   options: {
+      draftAndPublish: false;
+   };
+   pluginOptions: {
+      i18n: {
+         localized: true;
+      };
+   };
+   attributes: {
+      form_INN: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_email: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_modal_title: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_modal_button: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_upload: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_error_inn: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_error_addFile: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_error_formType: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_error_lastName: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_error_firstName: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_error_uploadFile: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_error_phoneNumber: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_error_email: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_modal_note: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_modal_save: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_modal_error_limit: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_modal_error_limit_duplicate: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_modal_clickDrop_drop: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_modal_clickDrop_clickDrop: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_submit_default: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_submit_isSubmitting: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_addFile_add: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_addFile_loaded: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_addFile_chosen: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_firstName: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_lastName: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_phoneNumber: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      createdAt: Attribute.DateTime;
+      updatedAt: Attribute.DateTime;
+      createdBy: Attribute.Relation<"api::content-form.content-form", "oneToOne", "admin::user"> & Attribute.Private;
+      updatedBy: Attribute.Relation<"api::content-form.content-form", "oneToOne", "admin::user"> & Attribute.Private;
+      localizations: Attribute.Relation<
+         "api::content-form.content-form",
+         "oneToMany",
+         "api::content-form.content-form"
+      >;
+      locale: Attribute.String;
    };
 }
 
@@ -773,72 +1010,19 @@ export interface ApiDetailDetail extends Schema.SingleType {
                localized: true;
             };
          }>;
+      googleMapEmbededLink: Attribute.Text &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: false;
+            };
+         }>;
       createdAt: Attribute.DateTime;
       updatedAt: Attribute.DateTime;
       createdBy: Attribute.Relation<"api::detail.detail", "oneToOne", "admin::user"> & Attribute.Private;
       updatedBy: Attribute.Relation<"api::detail.detail", "oneToOne", "admin::user"> & Attribute.Private;
       localizations: Attribute.Relation<"api::detail.detail", "oneToMany", "api::detail.detail">;
       locale: Attribute.String;
-   };
-}
-
-export interface ApiDocsListDocsList extends Schema.CollectionType {
-   collectionName: "docs_lists";
-   info: {
-      singularName: "docs-list";
-      pluralName: "docs-lists";
-      displayName: "docsList";
-   };
-   options: {
-      draftAndPublish: false;
-   };
-   attributes: {
-      docType: Attribute.JSON & Attribute.Required;
-      createdAt: Attribute.DateTime;
-      updatedAt: Attribute.DateTime;
-      createdBy: Attribute.Relation<"api::docs-list.docs-list", "oneToOne", "admin::user"> & Attribute.Private;
-      updatedBy: Attribute.Relation<"api::docs-list.docs-list", "oneToOne", "admin::user"> & Attribute.Private;
-   };
-}
-
-export interface ApiFormErrorFormError extends Schema.SingleType {
-   collectionName: "form_errors";
-   info: {
-      singularName: "form-error";
-      pluralName: "form-errors";
-      displayName: "formError";
-   };
-   options: {
-      draftAndPublish: false;
-   };
-   attributes: {
-      errors: Attribute.JSON & Attribute.Required;
-      createdAt: Attribute.DateTime;
-      updatedAt: Attribute.DateTime;
-      createdBy: Attribute.Relation<"api::form-error.form-error", "oneToOne", "admin::user"> & Attribute.Private;
-      updatedBy: Attribute.Relation<"api::form-error.form-error", "oneToOne", "admin::user"> & Attribute.Private;
-   };
-}
-
-export interface ApiFormTypeFormType extends Schema.SingleType {
-   collectionName: "form_types";
-   info: {
-      singularName: "form-type";
-      pluralName: "form-types";
-      displayName: "formType";
-   };
-   options: {
-      draftAndPublish: false;
-   };
-   attributes: {
-      twoParents: Attribute.JSON & Attribute.Required;
-      oneParent: Attribute.JSON & Attribute.Required;
-      divorced: Attribute.JSON & Attribute.Required;
-      guardian: Attribute.JSON & Attribute.Required;
-      createdAt: Attribute.DateTime;
-      updatedAt: Attribute.DateTime;
-      createdBy: Attribute.Relation<"api::form-type.form-type", "oneToOne", "admin::user"> & Attribute.Private;
-      updatedBy: Attribute.Relation<"api::form-type.form-type", "oneToOne", "admin::user"> & Attribute.Private;
    };
 }
 
@@ -907,13 +1091,6 @@ export interface ApiGroupCategoryGroupCategory extends Schema.CollectionType {
                localized: false;
             };
          }>;
-      order: Attribute.Integer &
-         Attribute.Required &
-         Attribute.SetPluginOptions<{
-            i18n: {
-               localized: false;
-            };
-         }>;
       createdAt: Attribute.DateTime;
       updatedAt: Attribute.DateTime;
       createdBy: Attribute.Relation<"api::group-category.group-category", "oneToOne", "admin::user"> &
@@ -961,6 +1138,13 @@ export interface ApiHeroHero extends Schema.SingleType {
             };
          }>;
       image: Attribute.Media &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: false;
+            };
+         }>;
+      link: Attribute.String &
          Attribute.Required &
          Attribute.SetPluginOptions<{
             i18n: {
@@ -1053,6 +1237,13 @@ export interface ApiHomeProgramItemHomeProgramItem extends Schema.CollectionType
                localized: false;
             };
          }>;
+      description: Attribute.Text &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
       createdAt: Attribute.DateTime;
       updatedAt: Attribute.DateTime;
       createdBy: Attribute.Relation<"api::home-program-item.home-program-item", "oneToOne", "admin::user"> &
@@ -1101,25 +1292,266 @@ export interface ApiInstructionInstruction extends Schema.SingleType {
    };
 }
 
-export interface ApiLangLang extends Schema.SingleType {
-   collectionName: "langs";
+export interface ApiLanguageLanguage extends Schema.SingleType {
+   collectionName: "languages";
    info: {
-      singularName: "lang";
-      pluralName: "langs";
-      displayName: "lang";
+      singularName: "language";
+      pluralName: "languages";
+      displayName: "language";
       description: "";
    };
    options: {
-      draftAndPublish: true;
+      draftAndPublish: false;
+   };
+   pluginOptions: {
+      i18n: {
+         localized: true;
+      };
    };
    attributes: {
-      ky: Attribute.JSON & Attribute.Required;
-      ru: Attribute.JSON & Attribute.Required;
+      navigation_main: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      navigation_about: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      navigation_admin: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      navigation_gallery: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      navigation_parents: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      footer_address: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      gallery_header: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      parent_header: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      parents_button: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      calendar_label: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      calendar_filter: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      calendar_header: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_map_hours: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_map_contacts: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_hero_button: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_about_header: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_why_us_header: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_programs_header: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_ourGroups_header: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_galleryInfo_header: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_galleryInfo_button: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_calendar_reference_promo: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_calendar_reference_button: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      home_calendar_reference_header: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      share_link_copy: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      share_link_share: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      share_link_copied: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
       createdAt: Attribute.DateTime;
       updatedAt: Attribute.DateTime;
-      publishedAt: Attribute.DateTime;
-      createdBy: Attribute.Relation<"api::lang.lang", "oneToOne", "admin::user"> & Attribute.Private;
-      updatedBy: Attribute.Relation<"api::lang.lang", "oneToOne", "admin::user"> & Attribute.Private;
+      createdBy: Attribute.Relation<"api::language.language", "oneToOne", "admin::user"> & Attribute.Private;
+      updatedBy: Attribute.Relation<"api::language.language", "oneToOne", "admin::user"> & Attribute.Private;
+      localizations: Attribute.Relation<"api::language.language", "oneToMany", "api::language.language">;
+      locale: Attribute.String;
+   };
+}
+
+export interface ApiListDocListDoc extends Schema.CollectionType {
+   collectionName: "list_docs";
+   info: {
+      singularName: "list-doc";
+      pluralName: "list-docs";
+      displayName: "listDoc";
+      description: "";
+   };
+   options: {
+      draftAndPublish: false;
+   };
+   pluginOptions: {
+      i18n: {
+         localized: true;
+      };
+   };
+   attributes: {
+      text: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      variant: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: false;
+            };
+         }>;
+      multiple: Attribute.Boolean &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: false;
+            };
+         }> &
+         Attribute.DefaultTo<false>;
+      createdAt: Attribute.DateTime;
+      updatedAt: Attribute.DateTime;
+      createdBy: Attribute.Relation<"api::list-doc.list-doc", "oneToOne", "admin::user"> & Attribute.Private;
+      updatedBy: Attribute.Relation<"api::list-doc.list-doc", "oneToOne", "admin::user"> & Attribute.Private;
+      localizations: Attribute.Relation<"api::list-doc.list-doc", "oneToMany", "api::list-doc.list-doc">;
+      locale: Attribute.String;
    };
 }
 
@@ -1135,7 +1567,7 @@ export interface ApiLogoLogo extends Schema.SingleType {
       draftAndPublish: false;
    };
    attributes: {
-      logo: Attribute.Media;
+      logo: Attribute.Media & Attribute.Required;
       createdAt: Attribute.DateTime;
       updatedAt: Attribute.DateTime;
       createdBy: Attribute.Relation<"api::logo.logo", "oneToOne", "admin::user"> & Attribute.Private;
@@ -1143,12 +1575,13 @@ export interface ApiLogoLogo extends Schema.SingleType {
    };
 }
 
-export interface ApiSubmitDocSubmitDoc extends Schema.CollectionType {
-   collectionName: "submit_docs";
+export interface ApiTypeFormTypeForm extends Schema.CollectionType {
+   collectionName: "type_forms";
    info: {
-      singularName: "submit-doc";
-      pluralName: "submit-docs";
-      displayName: "submitDoc";
+      singularName: "type-form";
+      pluralName: "type-forms";
+      displayName: "typeForm";
+      description: "";
    };
    options: {
       draftAndPublish: false;
@@ -1159,18 +1592,43 @@ export interface ApiSubmitDocSubmitDoc extends Schema.CollectionType {
       };
    };
    attributes: {
-      formVariant: Attribute.JSON &
+      text: Attribute.String &
          Attribute.Required &
          Attribute.SetPluginOptions<{
             i18n: {
                localized: true;
             };
          }>;
+      variants: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: false;
+            };
+         }>;
+      name: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: false;
+            };
+         }>;
+      order: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: false;
+            };
+         }> &
+         Attribute.SetMinMaxLength<{
+            minLength: 1;
+            maxLength: 4;
+         }>;
       createdAt: Attribute.DateTime;
       updatedAt: Attribute.DateTime;
-      createdBy: Attribute.Relation<"api::submit-doc.submit-doc", "oneToOne", "admin::user"> & Attribute.Private;
-      updatedBy: Attribute.Relation<"api::submit-doc.submit-doc", "oneToOne", "admin::user"> & Attribute.Private;
-      localizations: Attribute.Relation<"api::submit-doc.submit-doc", "oneToMany", "api::submit-doc.submit-doc">;
+      createdBy: Attribute.Relation<"api::type-form.type-form", "oneToOne", "admin::user"> & Attribute.Private;
+      updatedBy: Attribute.Relation<"api::type-form.type-form", "oneToOne", "admin::user"> & Attribute.Private;
+      localizations: Attribute.Relation<"api::type-form.type-form", "oneToMany", "api::type-form.type-form">;
       locale: Attribute.String;
    };
 }
@@ -1197,13 +1655,6 @@ export interface ApiWhyUsWhyUs extends Schema.CollectionType {
          Attribute.SetPluginOptions<{
             i18n: {
                localized: true;
-            };
-         }>;
-      order: Attribute.Integer &
-         Attribute.Required &
-         Attribute.SetPluginOptions<{
-            i18n: {
-               localized: false;
             };
          }>;
       image: Attribute.Media &
@@ -1243,19 +1694,18 @@ declare module "@strapi/types" {
          "api::about.about": ApiAboutAbout;
          "api::blog.blog": ApiBlogBlog;
          "api::calendar.calendar": ApiCalendarCalendar;
+         "api::content-form.content-form": ApiContentFormContentForm;
          "api::detail.detail": ApiDetailDetail;
-         "api::docs-list.docs-list": ApiDocsListDocsList;
-         "api::form-error.form-error": ApiFormErrorFormError;
-         "api::form-type.form-type": ApiFormTypeFormType;
          "api::gallery.gallery": ApiGalleryGallery;
          "api::group-category.group-category": ApiGroupCategoryGroupCategory;
          "api::hero.hero": ApiHeroHero;
          "api::home-gallery-info.home-gallery-info": ApiHomeGalleryInfoHomeGalleryInfo;
          "api::home-program-item.home-program-item": ApiHomeProgramItemHomeProgramItem;
          "api::instruction.instruction": ApiInstructionInstruction;
-         "api::lang.lang": ApiLangLang;
+         "api::language.language": ApiLanguageLanguage;
+         "api::list-doc.list-doc": ApiListDocListDoc;
          "api::logo.logo": ApiLogoLogo;
-         "api::submit-doc.submit-doc": ApiSubmitDocSubmitDoc;
+         "api::type-form.type-form": ApiTypeFormTypeForm;
          "api::why-us.why-us": ApiWhyUsWhyUs;
       }
    }

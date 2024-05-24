@@ -18,21 +18,20 @@ export type TData = {
 interface CalendarProps extends myTS.I {}
 
 const Calendar: React.FC<CalendarProps> = async ({ i }) => {
-  const url = process.env.CMS_API + '/api/calendars'
+  const url = process.env.CMS_API + `/api/calendars?locale=${i}`
   const response = await fetch(url, { cache: 'no-cache' })
   if (!response.ok) throw Error('server is not responding')
   const { data, category } = await response.json()
-  console.log(data)
 
   const seedData = data
     .map((el: TData) => (el.rrule ? seedRecurrence(el) : el))
     .flat()
 
-  const t = await getTranslations('calendar')
+  const t = await getTranslations()
   const text = {
-    header: t('header'),
-    label: t('label'),
-    filter: t('filter'),
+    header: t('calendar_header'),
+    label: t('calendar_label'),
+    filter: t('calendar_filter'),
   }
   return (
     <main className='mb-32 mt-24 flex w-full flex-1 items-center justify-center font-poppins'>

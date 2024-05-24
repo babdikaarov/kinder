@@ -158,6 +158,11 @@ export default function DialogDemo({
           e.preventDefault()
         }}
       >
+        <DialogClose asChild>
+          <button className='absolute right-0 top-0' aria-label='Close'>
+            <X />
+          </button>
+        </DialogClose>
         <DialogHeader>
           <DialogTitle className='text-fs-lg text-black'>
             {text.title}

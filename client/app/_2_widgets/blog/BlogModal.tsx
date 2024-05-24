@@ -29,8 +29,8 @@ const BlogModal: React.FC<BlogModalProps> = ({
   return (
     <Modal>
       <section className='boxShadow max-h-[400px] max-w-[900px] overflow-auto rounded-16 bg-white'>
-        <Arrow className='fixed mt-2' />
-        <div className='fixed right-0 mr-2 mt-3'>
+        <Arrow className='fixed mt-5' />
+        <div className='fixed right-0 mr-2 mt-10'>
           <ShareLinks
             locale={locale}
             text={shareText}

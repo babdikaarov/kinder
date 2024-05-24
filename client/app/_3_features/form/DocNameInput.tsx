@@ -19,7 +19,7 @@ const DocNameInput: React.FC<DocNameInputProps> = ({
         onChange={onChange}
         type='text'
         className={
-          'peer h-[50px] w-full rounded border-[0.5px] border-dark-600 placeholder-transparent focus:border-dark-600 focus:outline-none'
+          'peer h-[50px] w-full rounded border-[0.5px] border-dark-600 text-base placeholder-transparent focus:border-dark-600 focus:outline-none'
         }
         placeholder={name}
         autoComplete='off'

@@ -1,33 +1,28 @@
 'use client'
 
-import { useEffect } from 'react'
 // yarl
-import Lightbox, {
-  SlideImage,
-  ImageSlideProps,
-} from 'yet-another-react-lightbox'
+import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
 
 import NextJsImage from './NextJsImage'
-import { DataEntry, ImageFormat } from '@/app/_1_pages/gallery/GalleryClient'
+import { ImageFormat, ImageData } from '@/app/_1_pages/gallery/GalleryClient'
 
 interface ILightBoxProp {
   open: boolean
   close: (arg: boolean) => void
-  images: DataEntry[]
+  images: ImageData[]
+  index: number
 }
 const LightBox: React.FC<ILightBoxProp> = (props) => {
-  const { open, close, images } = props
+  const { open, close, images, index } = props
   const imagesWithSrcSet = images
-    .map((items) => {
-      return items.data.map((item) => {
-        return {
-          src: item.src,
-          width: 3840,
-          height: 2560,
-          srcSet: convertFormatsToArray(item.formats),
-        }
-      })
+    .map((item) => {
+      return {
+        src: item.src,
+        width: 3840,
+        height: 2560,
+        srcSet: convertFormatsToArray(item.formats),
+      }
     })
     .flat()
   return (
@@ -39,9 +34,11 @@ const LightBox: React.FC<ILightBoxProp> = (props) => {
       }}
       animation={{ fade: 300, swipe: 500 }}
       open={open}
+      index={index}
+      // on={{ view: ({ index: currentIndex }) => console.log(currentIndex) }}
       close={() => close(!open)}
       slides={imagesWithSrcSet}
-      // render={{ slide: NextJsImage }}
+      render={{ slide: NextJsImage }}
     />
   )
 }

@@ -6,6 +6,7 @@ import { factories } from "@strapi/strapi";
 
 export default factories.createCoreController("api::calendar.calendar", ({ strapi }) => ({
    async find(ctx) {
+
       const { data } = await super.find(ctx);
       const categoryList = data.map(({ attributes }) => attributes.category);
       const calendarData = await Promise.all(
@@ -67,3 +68,4 @@ function formatLongDate(dateString: string) {
    const formattedDate = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")} ${hour}:${minute}`;
    return formattedDate;
 }
+

@@ -76,6 +76,11 @@ const BlogRendererClient: React.FC<BlogRendererClientProps> = ({ content }) => {
               height={image.height}
               alt={image.alternativeText || 'blog image'}
               className='mx-auto w-1/2'
+              style={{
+                width: 'auto',
+                height: 'auto',
+                objectFit: 'cover',
+              }}
             />
           )
         },

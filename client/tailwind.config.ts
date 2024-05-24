@@ -2,6 +2,7 @@ import type { Config } from 'tailwindcss'
 import colors, { blue } from 'tailwindcss/colors'
 import form from '@tailwindcss/forms'
 const config: Config = {
+  important: true,
   // purge: ['./src/**/*.{js,ts,jsx,tsx}'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -64,7 +65,7 @@ const config: Config = {
         '10': '10px',
       },
       gridTemplateColumns: {
-        // Complex site-specific column configuration
+        '2auto': 'repeat(2, minmax(0, auto))',
         formCol: '400px 240px',
         formRow: '200px minmax(900px, 1fr) 100px',
       },

@@ -52,7 +52,6 @@ export default factories.createCoreController("api::about.about", ({ strapi }) =
                [el.attributes.localizations.data[0].attributes.locale]:
                   el.attributes.localizations.data[0].attributes.description,
             },
-            order: el.order,
             image: image,
          };
          return entry;

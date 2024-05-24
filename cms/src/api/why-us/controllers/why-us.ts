@@ -53,7 +53,6 @@ export default factories.createCoreController("api::why-us.why-us", ({ strapi })
             [secondLang.locale]: {
                title: secondLang.title,
             },
-            order: el.order,
             image: image,
          };
          return entry;

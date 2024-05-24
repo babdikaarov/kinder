@@ -17,19 +17,18 @@ type TData = {
   image: any
 }
 const Parents: React.FC<ParentsProps> = async ({ locale }) => {
-  const t = await getTranslations('parents')
-  const shareT = await getTranslations('shareLink')
+  const t = await getTranslations()
   const data = await getData('/api/blogs?&populate=*')
 
   const shareText = {
-    share: shareT('share'),
-    copy: shareT('copy'),
-    copied: shareT('copied'),
+    share: t('share_link_share'),
+    copy: t('share_link_copy'),
+    copied: t('share_link_copied'),
   }
   return (
     <>
-      <Arrow className='absolute left-0' tomain />
-      <Wrapper header={t('header')} id='parents' className='w-full'>
+      <Arrow className='absolute left-0 top-3' tomain />
+      <Wrapper header={t('parent_header')} id='parents' className='w-full'>
         <div
           className={cn(
             'mt-12 grid grid-cols-3 gap-x-5 gap-y-11',
@@ -47,6 +46,11 @@ const Parents: React.FC<ParentsProps> = async ({ locale }) => {
                 alt={el[locale as myTS.L].title ?? 'image blog'}
                 width={390}
                 height={413}
+                style={{
+                  width: 'auto',
+                  height: 'auto',
+                  objectFit: 'cover',
+                }}
                 // FIX_ME add bluer placeholder https://market.strapi.io/plugins/strapi-plugin-placeholder
                 // placeholder='blur'
                 // blurDataURL={}
@@ -58,7 +62,7 @@ const Parents: React.FC<ParentsProps> = async ({ locale }) => {
               <div className='relative flex items-center justify-between'>
                 <Link href={`/blog/${el.id}`} locale={locale} scroll={false}>
                   <button className='button h-11 w-52 rounded-lg text-fs-base'>
-                    {t('button')}
+                    {t('parents_button')}
                   </button>
                 </Link>
                 <ShareLinks

@@ -59,7 +59,6 @@ export default factories.createCoreController("api::group-category.group-categor
                age: secondLang.age,
                language: secondLang.language,
             },
-            order: el.order,
             image: image,
          };
          return entry;

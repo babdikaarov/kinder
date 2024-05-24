@@ -7,13 +7,13 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = async ({ i }) => {
-  const t = await getTranslations('header.nav')
+  const t = await getTranslations()
   const content = {
-    main: t('main'),
-    about: t('about'),
-    admin: t('admin'),
-    parents: t('parents'),
-    gallery: t('gallery'),
+    main: t('navigation_main'),
+    about: t('navigation_about'),
+    admin: t('navigation_admin'),
+    parents: t('navigation_parents'),
+    gallery: t('navigation_gallery'),
   }
   // console.log(content)
   return (
@@ -25,7 +25,11 @@ const Header: React.FC<HeaderProps> = async ({ i }) => {
           'lg:h-16 lg:justify-end'
         )}
       >
-        <Logo className={cn('size-[75px]', 'lg:size-[54px] ')} />
+        <Logo
+          className={cn('size-[70px]', 'lg:size-[54px] ')}
+          to={`/${i}`}
+          locale={i}
+        />
         <HeaderClient i={i} content={content} />
       </div>
     </header>

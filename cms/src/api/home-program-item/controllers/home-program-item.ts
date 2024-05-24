@@ -47,9 +47,11 @@ export default factories.createCoreController("api::home-program-item.home-progr
             id: el.id,
             [el.attributes.locale]: {
                title: el.attributes.title,
+               description: el.attributes.description,
             },
             [secondLang.locale]: {
                title: secondLang.title,
+               description: secondLang.description,
             },
             image: image,
          };

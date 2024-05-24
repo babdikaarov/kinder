@@ -1,8 +1,8 @@
-// @ts-check
-// import pkg from './next-i18next.config.js'
-// const { i18n } = pkg
 import withNextIntl from 'next-intl/plugin'
-/** @type {import('next').NextConfig} */
+// @ts-check
+/**
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
   output: 'standalone',
   /* config options here */
@@ -14,18 +14,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: '16.170.170.229',
-        port: '1337',
+        hostname: process.env.CMS_HOST | 'localhost',
+        port: process.env.CMS_PORT | '1337',
       },
       {
         protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '3000',
+        hostname: process.env.HOST | 'localhost',
+        port: process.env.PORT | '3000',
       },
     ],
   },

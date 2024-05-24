@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "type_forms",
+  "info": {
+    "singularName": "type-form",
+    "pluralName": "type-forms",
+    "displayName": "typeForm",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "text": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "variants": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "order": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "maxLength": 4,
+      "minLength": 1,
+      "required": true
+    }
+  }
+}

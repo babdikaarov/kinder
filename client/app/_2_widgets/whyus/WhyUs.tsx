@@ -6,18 +6,18 @@ import Image from 'next/image'
 interface WhyUsProps extends myTS.I {}
 
 const WhyUs: React.FC<WhyUsProps> = async ({ i }) => {
-  const t = await getTranslations('homePage.whyus')
+  const t = await getTranslations()
   const data = await getData('/api/why-uses?&populate=*')
 
   return (
-    <Wrapper header={t('header')} id='home_whyus'>
+    <Wrapper header={t('home_why_us_header')} id='home_whyus'>
       <article className='mt-12 flex justify-center gap-5 smExtra:flex-col smExtra:items-center'>
         {data.map((item: any, index: number) => (
           <div
             key={item.id}
-            className=' relative flex h-[395px] w-full max-w-[392px] items-end  sm:h-[370px] '
+            className=' relative flex h-[395px] w-full max-w-[392px] items-end lg:h-[350px]  sm:h-[370px] '
           >
-            <div className='absolute bottom-[95px] left-1/2 aspect-square w-full  -translate-x-1/2 p-5 smExtra:bottom-[35px]    smExtra:p-10'>
+            <div className='absolute bottom-[95px] left-1/2 aspect-square w-full max-w-[300px] -translate-x-1/2 lg:max-w-[260px] lg:p-5 md:bottom-[140px] smExtra:bottom-[80px] '>
               <Image
                 className='object-cover'
                 src={item.image.src}

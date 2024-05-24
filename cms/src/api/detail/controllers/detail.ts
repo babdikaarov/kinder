@@ -8,6 +8,7 @@ export default factories.createCoreController("api::detail.detail", ({ strapi })
    async find(ctx) {
       const { data, meta } = await super.find(ctx);
       const entry = {
+         shareLink: data.attributes.googleMapEmbededLink,
          [data.attributes.locale]: {
             tel1: data.attributes.tel1,
             tel2: data.attributes.tel2,

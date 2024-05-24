@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "list_docs",
+  "info": {
+    "singularName": "list-doc",
+    "pluralName": "list-docs",
+    "displayName": "listDoc",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "text": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "variant": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "multiple": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

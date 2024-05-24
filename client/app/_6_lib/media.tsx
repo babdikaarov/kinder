@@ -21,11 +21,7 @@ const ScreenSizeDisplay = () => {
       window.removeEventListener('resize', updateScreenSize)
     }
   }, [])
-  return (
-    <p className='fixed left-0 top-20 bg-green-500 lg:top-16'>
-      Screen Width: {screenSize.width}px, Height: {screenSize.height}px
-    </p>
-  )
+  return <p>Width: {screenSize.width}px</p>
 }
 
 export default ScreenSizeDisplay

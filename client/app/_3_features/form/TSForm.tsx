@@ -198,7 +198,7 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
           mode='array'
           validators={{
             onChange: ({ value }) => {
-              console.log(value)
+              // console.log(value)
 
               return undefined
             },
@@ -246,7 +246,7 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
                           {(subField) => {
                             return (
                               <DocFileInput
-                                text={text.modal}
+                                text={text.fileInput}
                                 error={subField.state.meta.touchedErrors}
                                 multiple={
                                   opt[
@@ -320,7 +320,7 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
                   field={Field}
                   setIsOpen={setIsOpen}
                   isOpen={isOpen}
-                  text={text.addFile}
+                  text={text.fileInput.addFile}
                   getOption={() => form.getFieldValue('formOption')}
                   pushField={(newField: {
                     name: string
@@ -345,12 +345,17 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
             )
           }}
         </form.Field>
-        <form.Subscribe selector={(state) => [state.isSubmitting]}>
-          {([isSubmitting]) => (
+        <form.Subscribe
+          selector={(state) => [state.isSubmitting, state.canSubmit]}
+        >
+          {([isSubmitting, canSubmit]) => (
             <button
               type='submit'
               // disabled={!canSubmit}
-              className='h-[50px] w-full  rounded bg-blue-500 text-white'
+              className={cn(
+                'h-[50px] w-full  rounded bg-blue-500 text-white',
+                !canSubmit ? 'opacity-65' : 'opacity-100'
+              )}
             >
               {isSubmitting ? text.submit.isSubmitting : text.submit.default}
             </button>

@@ -7,7 +7,7 @@ import { Link } from '@/navigation'
 interface GalleryInfoProps extends myTS.I {}
 
 const GalleryInfo: React.FC<GalleryInfoProps> = async ({ i }) => {
-  const t = await getTranslations('homePage.galleryInfo')
+  const t = await getTranslations()
 
   const data = await getData('/api/home-gallery-info?populate=*')
   return (
@@ -16,12 +16,12 @@ const GalleryInfo: React.FC<GalleryInfoProps> = async ({ i }) => {
         className={cn('flex flex-1 flex-col items-center', 'lg:flex-[1.2]')}
       >
         <h2 className=' text-center font-poppins text-fs-1 font-bold  '>
-          {t('header')}
+          {t('home_galleryInfo_header')}
         </h2>
         <p className='mt-6 text-fs-lg lg:text-center'>{data[i].description}</p>
         <Link href={`/gallery`} locale={i} className='mt-9' prefetch>
           <button className='button h-[62px] w-[269px] text-fs-lg '>
-            {t('button')}
+            {t('home_galleryInfo_button')}
           </button>
         </Link>
       </article>
@@ -33,6 +33,11 @@ const GalleryInfo: React.FC<GalleryInfoProps> = async ({ i }) => {
           alt={data.image.alt ?? 'gallery refference'}
           width={600}
           height={300}
+          style={{
+            width: 'auto',
+            height: 'auto',
+            objectFit: 'cover',
+          }}
         />
       </div>
     </Wrapper>

@@ -69,6 +69,15 @@
       },
       "type": "string",
       "required": true
+    },
+    "googleMapEmbededLink": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "text",
+      "required": true
     }
   }
 }

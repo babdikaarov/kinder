@@ -48,7 +48,7 @@ const FilterArea: React.FC<FilterAreaProps> = ({
           <SelectValue
             defaultValue={originalArray[0]}
             placeholder={text}
-            onChange={(e) => console.log(e.target)}
+            // onChange={(e) => console.log(e.target)}
           />
           <SelectIcon asChild>
             <ChevronDown

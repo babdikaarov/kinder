@@ -6,13 +6,13 @@ import Image from 'next/image'
 interface ProgramsProps extends myTS.I {}
 
 const Programs: React.FC<ProgramsProps> = async ({ i }) => {
-  const t = await getTranslations('homePage.programs')
+  const t = await getTranslations()
 
   // const text = await getData('/api/program-description?populate=*')
   const data = await getData('/api/home-program-items?&populate=*')
 
   return (
-    <Wrapper header={t('header')} id='home_programs'>
+    <Wrapper header={t('home_programs_header')} id='home_programs'>
       <div
         className={cn(
           'lg:before:z-20',
@@ -31,7 +31,7 @@ const Programs: React.FC<ProgramsProps> = async ({ i }) => {
         >
           {data.map((item: any, index: number) => (
             <article
-              about={item.title}
+              about={item[i].title}
               key={index}
               className={cn(' text-center')}
             >
@@ -43,13 +43,16 @@ const Programs: React.FC<ProgramsProps> = async ({ i }) => {
                     alt={item.title ?? 'program icon'}
                     width={200}
                     height={200}
+                    style={{
+                      width: 'auto',
+                      height: 'auto',
+                      objectFit: 'cover',
+                    }}
                   />
                   <p className='text-fs-lg font-semibold'>{item[i].title}</p>
                 </summary>
                 <p className='relative z-10  max-w-[200px]  rounded-10 border border-black bg-blue-500 p-1 text-fs-base  tracking-wide text-white '>
-                  texti.description Lorem ipsum dolor sit amet consectetur,
-                  adipisicing elit. Eos culpa ducimus animi quis odio iure,
-                  ratione libero aliquam vero voluptas deleniti dicta non.
+                  {item[i].description}
                 </p>
               </details>
             </article>

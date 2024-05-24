@@ -18,9 +18,12 @@ interface Options {
 export type TFormType = Record<string, Options>
 
 const FormServer: React.FC<FormServerProps> = async ({ i }) => {
-  const formType: TFormType = await getData('/api/form-type')
-  const docsList: DocsList[] = await getData('/api/docs-lists')
-  const errors = await getData('/api/form-error')
+  const formType: TFormType = await getData('/api/type-forms?populate=*')
+  const docsList: DocsList[] = await getData('/api/list-docs?populate=*')
+  const contentForm: myTS.ContentForm = await getData(
+    `/api/content-form?locale=${i}`
+  ).then(({ data }) => data.attributes)
+  console.log(formType)
 
   Object.entries(formType).forEach(([key, value]) => {
     value.options = (value.options as Array<DocsList | string>)
@@ -30,53 +33,52 @@ const FormServer: React.FC<FormServerProps> = async ({ i }) => {
         return el
       })
       .filter((el): el is DocsList => el !== undefined)
-    value.errorsText = { ...errors }
   })
 
-  // console.log(formType)
-
-  const t = await getTranslations('form')
   const text: Ttext = {
-    inn: t('inn'),
-    lastName: t('lastName'),
-    firstName: t('firstName'),
-    phoneNumber: t('phoneNumber'),
-    email: t('email'),
+    inn: contentForm.form_INN,
+    lastName: contentForm.form_lastName,
+    firstName: contentForm.form_firstName,
+    phoneNumber: contentForm.form_phoneNumber,
+    email: contentForm.form_email,
     submit: {
-      isSubmitting: t('submit.isSubmitting'),
-      default: t('submit.default'),
+      isSubmitting: contentForm.form_submit_isSubmitting,
+      default: contentForm.form_submit_default,
     },
-    addFile: {
-      add: t('addFile.add'),
-      choosen: t('addFile.choosen'),
-      loaded: t('addFile.loaded'),
+    fileInput: {
+      addFile: {
+        add: contentForm.form_addFile_add,
+        choosen: contentForm.form_addFile_chosen,
+        loaded: contentForm.form_addFile_loaded,
+      },
+      modal: {
+        button: contentForm.form_modal_button,
+        title: contentForm.form_modal_title,
+        save: contentForm.form_modal_save,
+        note: contentForm.form_modal_note,
+        clickDrop: {
+          clickAndDrop: contentForm.form_modal_clickDrop_clickDrop,
+          drop: contentForm.form_modal_clickDrop_drop,
+        },
+        upload: contentForm.form_upload,
+        error: {
+          duplicate: contentForm.form_modal_error_limit_duplicate,
+          limit: contentForm.form_modal_error_limit,
+        },
+      },
     },
     errors: {
-      uploadFile: t('error.uploadFile'),
-      addFile: t('error.addFile'),
-      email: t('error.email'),
-      firstName: t('error.firstName'),
-      formType: t('error.formType'),
-      inn: t('error.inn'),
-      lastName: t('error.lastName'),
-      phoneNumber: t('error.phoneNumber'),
-    },
-    modal: {
-      button: t('modal.button'),
-      title: t('modal.title'),
-      save: t('modal.save'),
-      note: t('modal.note'),
-      clickDrop: {
-        clickAndDrop: t('modal.clickDrop.clickAndDrop'),
-        drop: t('modal.clickDrop.drop'),
-      },
-      upload: t('modal.upload'),
-      error: {
-        duplicate: t('modal.error.duplicate'),
-        limit: t('modal.error.limit'),
-      },
+      uploadFile: contentForm.form_error_uploadFile,
+      addFile: contentForm.form_error_addFile,
+      email: contentForm.form_error_email,
+      firstName: contentForm.form_error_firstName,
+      formType: contentForm.form_error_formType,
+      inn: contentForm.form_error_inn,
+      lastName: contentForm.form_error_lastName,
+      phoneNumber: contentForm.form_error_phoneNumber,
     },
   }
+
   /* 
    inn: '',
       lastName: '',

@@ -52,6 +52,13 @@
   border-color: black !important;
 }
 
+.sx__date-input {
+  @apply h-[47px] border-r-4 border-black;
+  border-color: black !important;
+  height: 47px !important;
+  border-radius: 4px !important;
+}
+
 .sx__time-grid-day--is-work-day {
 }
 .sx__time-grid-day--is-not-work-day {

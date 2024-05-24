@@ -96,7 +96,7 @@ const DocFileInput: React.FC<DocFileInputProps> = ({
         </div>
         {multiple ? (
           <DialogDemo
-            text={text}
+            text={text.modal}
             myRef={refDialog}
             forwardInput={onChange}
             className={!fileUrls.length ? ' z-0' : '-z-10'}
@@ -110,7 +110,7 @@ const DocFileInput: React.FC<DocFileInputProps> = ({
               'absolute top-0 flex h-[50px] w-full min-w-[196px] items-center justify-center hover:cursor-pointer'
             )}
           >
-            choose file2
+            {text.addFile.add}
             <input
               ref={refInput}
               multiple={multiple}

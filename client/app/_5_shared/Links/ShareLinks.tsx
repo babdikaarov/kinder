@@ -57,12 +57,14 @@ const ShareLinks: React.FC<ShareLinksProps> = ({ id, title, text, locale }) => {
           <Dialog.Content className='data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-6 rounded-10 border bg-theme-bg  p-6 shadow-lg duration-200 sm:rounded-lg'>
             <div className='flex flex-col gap-6'>
               <div className='relative flex h-[54px] min-w-full items-center justify-end overflow-hidden rounded border-[0.5px] border-dark-600 bg-slate-200 bg-transparent  text-fs-6'>
-                <p className=' absolute left-2  text-nowrap'>{href}</p>
+                <p className=' absolute left-2 text-nowrap text-fs-base'>
+                  {`${href}?${title}`}
+                </p>
                 <button
                   onClick={handleCopy}
                   className='z-10 h-full bg-theme-bg'
                 >
-                  <p className='mx-1 rounded-full bg-blue-500 px-2 text-white'>
+                  <p className='mx-1 rounded-full bg-blue-500 px-2 text-fs-base text-white'>
                     {copied ? text.copied : text.copy}
                   </p>
                 </button>

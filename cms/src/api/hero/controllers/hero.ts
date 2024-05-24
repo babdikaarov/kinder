@@ -47,6 +47,7 @@ export default factories.createCoreController("api::hero.hero", ({ strapi }) => 
                data.attributes.localizations.data[0].attributes.description,
          },
          image: image,
+         link: data.attributes.link,
       };
       return entry;
    },

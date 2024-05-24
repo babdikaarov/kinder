@@ -42,16 +42,17 @@ export const PhoneInput: React.FC<InputProps> = ({
           htmlFor={name}
           className={cn(
             'text-dark-300',
-            'absolute -top-0 left-3 bg-transparent text-fs-sm  opacity-75 transition-all ',
-            'peer-placeholder-shown:top-4 peer-placeholder-shown:text-fs-6 peer-placeholder-shown:opacity-75',
-            'peer-focus:-top-0 peer-focus:text-fs-sm  peer-focus:opacity-75',
-            'peer-focus-visible:text-fs-sm'
+            'absolute -top-0 left-3 bg-transparent text-xs  opacity-75 transition-all ',
+            'peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:opacity-75',
+            'peer-focus:-top-0 peer-focus:text-xs  peer-focus:opacity-75',
+            'peer-focus-visible:text-xs'
           )}
         >
-          {/* fixme add async validation remove asterix */}{name}
+          {/* fixme add async validation remove asterix */}
+          {name}
           {'*'}
         </label>
-        <Warn error={error}  className='' />
+        <Warn error={error} className='' />
       </div>
     </>
   )
