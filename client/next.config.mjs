@@ -15,26 +15,16 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: process.env.CMS_HOST || 'localhost',
-        port: process.env.CMS_PORT || '1337',
+        hostname: '16.170.170.229',
+        port: '1337',
       },
       {
         protocol: 'http',
-        hostname: process.env.HOST || 'localhost',
-        port: process.env.PORT || '3000',
+        hostname: 'localhost',
+        port: '3000',
       },
     ],
   },
-  // async redirects() {
-  //   return [
-  //     // Basic redirect
-  //     {
-  //       source: '/cms',
-  //       destination: 'http://localhost:1337/admin',
-  //       permanent: true,
-  //     },
-  //   ]
-  // },
 }
 
 export default withNextIntl()(nextConfig)

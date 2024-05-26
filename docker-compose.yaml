@@ -28,11 +28,7 @@ services:
          - kindergarten_network
          - strapi
       environment:
-         CMS_API: http://strapi:1337
-         CMS_HOST: strapi
-         CMS_PORT: 1337
-         HOST: localhost
-         PORT: 3000
+         CMS_API: http://16.170.170.229:1337
       depends_on:
          - strapi
 
@@ -47,7 +43,7 @@ services:
          POSTGRES_USER: postgres
          POSTGRES_PASSWORD: beksultan
       volumes:
-         - ./cms_data/cms.sql:/docker-entrypoint-initdb.d/cms.sql
+         - ./cms_data/cms_v2.sql:/docker-entrypoint-initdb.d/cms_v2.sql
          - postgres-data:/var/lib/postgresql/data
       user: "postgres"
       networks:
