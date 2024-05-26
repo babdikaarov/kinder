@@ -38,12 +38,15 @@ export type Ttext = {
       }
       upload: string
       error: {
+        sizeLimit: string
         duplicate: string
         limit: string
+        isNotSameExtention: string
       }
     }
   }
   errors: {
+    sizeLimit: string
     uploadFile: string
     addFile: string
     email: string
@@ -52,6 +55,27 @@ export type Ttext = {
     inn: string
     lastName: string
     phoneNumber: string
+  }
+  alerts: {
+    title: string
+    description: string
+    cancel: string
+    submit: string
+    submitted: {
+      title: string
+      description: string
+      close: string
+    }
+    errors: {
+      failed: {
+        title: string
+        description: string
+      }
+      success: {
+        title: string
+        description: string
+      }
+    }
   }
 }
 export type Inputs = {
@@ -87,8 +111,10 @@ export interface DocFileInputProps {
       }
       upload: string
       error: {
+        sizeLimit: string
         duplicate: string
         limit: string
+        isNotSameExtention: string
       }
     }
     addFile: {
@@ -114,7 +140,7 @@ export interface DocNameInputProps
 export interface FormOptionsProps {
   changeHandler: (updater: Updater<string>) => void
   opt: Record<string, { name: Record<string, string> }>
-  onBlur: () => void
+  onBlur?: () => void
   error: ValidationError[]
   lang: string
 }
@@ -166,6 +192,7 @@ export interface SelectButtonProps
   ) => void
   docArrayLength: () => number
   compare: number
+  validateFields: () => void
 }
 
 export interface InputProps

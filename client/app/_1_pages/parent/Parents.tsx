@@ -6,6 +6,7 @@ import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import { Link } from '@/navigation'
 import ShareLinks from '../../_5_shared/Links/ShareLinks'
+import ArrowAnimated from '@/app/_5_shared/icons/ArrowAnimated'
 
 interface ParentsProps {
   locale: string
@@ -60,10 +61,19 @@ const Parents: React.FC<ParentsProps> = async ({ locale }) => {
                 {el[locale as myTS.L].title}
               </h4>
               <div className='relative flex items-center justify-between'>
-                <Link href={`/blog/${el.id}`} locale={locale} scroll={false}>
-                  <button className='button h-11 w-52 rounded-lg text-fs-base'>
-                    {t('parents_button')}
-                  </button>
+                <Link
+                  href={`/blog/${el.id}`}
+                  locale={locale}
+                  scroll={false}
+                  className='button group flex h-11 w-52 items-center justify-center gap-1 rounded-lg text-fs-base text-fs-lg'
+                >
+                  <button>{t('parents_button')}</button>
+                  <ArrowAnimated
+                    className={cn(
+                      'w-0 transition-all duration-200 ease-linear ',
+                      'group-hover:relative group-hover:w-8'
+                    )}
+                  />
                 </Link>
                 <ShareLinks
                   text={shareText}

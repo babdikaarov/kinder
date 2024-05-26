@@ -2,16 +2,21 @@ import { usePhoneInput } from 'react-international-phone'
 import { InputProps } from './types'
 import Warn from './allerts/warn'
 import { cn } from '@/app/_5_shared'
+import { useEffect } from 'react'
 
 export const PhoneInput: React.FC<InputProps> = ({
   name,
   error,
   onChange,
+  value,
   ...rest
 }) => {
+  
   const { inputValue, handlePhoneValueChange } = usePhoneInput({
+    value: value?.toString(),
     defaultCountry: 'kg',
     onChange: ({ phone }) => {
+      // console.log(phone);
       if (onChange) {
         onChange(phone as unknown as React.ChangeEvent<HTMLInputElement>)
       }

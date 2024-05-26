@@ -1,52 +1,68 @@
-
+import { cn } from '@/app/_5_shared'
 
 interface ErrorProps {
-  
+  text: {
+    title: string
+    description: string
+  }
+  onClick: () => void
+  className?: string
 }
 
-const Error: React.FC<ErrorProps> = ({  }) => {
+const ErrorAlert: React.FC<ErrorProps> = ({
+  text,
+  onClick,
+  className = '',
+}) => {
   return (
-    <div className='flex gap-3 bg-red-100 p-4'>
-      <div className='flex-[0]'>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='24'
-          height='24'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke='currentColor'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          className='stroke-red-500'
-        >
-          <circle cx='12' cy='12' r='10' />
-          <path d='m4.9 4.9 14.2 14.2' />
-        </svg>
-      </div>
-      <div>
-        <h3 className='text-lg font-extrabold'>titel of alert unseccess</h3>
-        <p>description of alert Lorem ipsum dolor sit.</p>
-      </div>
-      <div>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='24'
-          height='24'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke='currentColor'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          className='stroke-red-500'
-        >
-          <path d='M18 6 6 18' />
-          <path d='m6 6 12 12' />
-        </svg>
+    <div
+      className={cn(
+        'grid self-end  bg-red-100  transition-grid-rows duration-300  ease-linear',
+        className
+      )}
+    >
+      <div className={cn('flex max-w-[600px] gap-3 overflow-hidden  ')}>
+        <div className='flex-[0]'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            className='stroke-red-500'
+          >
+            <circle cx='12' cy='12' r='10' />
+            <path d='m4.9 4.9 14.2 14.2' />
+          </svg>
+        </div>
+        <div>
+          <h3 className='text-lg font-extrabold'>{text.title}</h3>
+          <p>{text.description}</p>
+        </div>
+        <div onClick={onClick} className='hover:cursor-pointer'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            className='stroke-red-500'
+          >
+            <path d='M18 6 6 18' />
+            <path d='m6 6 12 12' />
+          </svg>
+        </div>
       </div>
     </div>
   )
 }
 
-export default Error;
+export default ErrorAlert

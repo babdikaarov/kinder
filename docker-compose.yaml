@@ -28,7 +28,8 @@ services:
          - kindergarten_network
          - strapi
       environment:
-         CMS_API: http://16.170.170.229:1337
+         CMS_API: http://strapi:1337
+         FORM_API: http://34.229.95.91:8080/api/form
       depends_on:
          - strapi
 

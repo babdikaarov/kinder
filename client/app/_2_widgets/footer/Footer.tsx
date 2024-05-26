@@ -12,8 +12,8 @@ const Footer: React.FC<FooterProps> = async ({ i }) => {
   if (!response.ok) throw Error('server is not responding')
   const data = await response.json()
   return (
-    <footer className='container bottom-0 mb-5 flex max-w-wrapperLimit items-center justify-between sm:flex-col sm:gap-8'>
-      <article className='flex max-w-[245px] flex-col gap-2.5 sm:order-last sm:self-start'>
+    <footer className='sm500:flex-col container bottom-0 mb-5 flex max-w-wrapperLimit items-center justify-between sm500:gap-8'>
+      <article className='flex max-w-[245px] flex-col gap-2.5 sm500:order-last sm500:self-start'>
         <Logo
           className='size-[108px]'
           title={data[i].orgName}

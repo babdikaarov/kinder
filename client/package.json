@@ -26,6 +26,7 @@
     "@tanstack/zod-form-adapter": "^0.19.4",
     "@types/htmlparser2": "^3.10.7",
     "clsx": "^2.1.0",
+    "copy-to-clipboard": "^3.3.3",
     "htmlparser2": "^9.1.0",
     "i18next": "^23.11.2",
     "lucide-react": "^0.376.0",
@@ -43,6 +44,7 @@
     "react-share": "^5.1.0",
     "rrule": "^2.8.1",
     "sharp": "^0.33.3",
+    "swiper": "^11.1.3",
     "tailwind-merge": "^2.3.0",
     "yet-another-react-lightbox": "^3.17.5",
     "zod": "^3.23.5"
