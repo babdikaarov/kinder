@@ -16,7 +16,7 @@ export const PhoneInput: React.FC<InputProps> = ({
     value: value?.toString(),
     defaultCountry: 'kg',
     onChange: ({ phone }) => {
-      console.log(phone);
+      // console.log(phone);
       if (onChange) {
         onChange(phone as unknown as React.ChangeEvent<HTMLInputElement>)
       }
