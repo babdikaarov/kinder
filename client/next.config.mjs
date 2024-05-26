@@ -1,11 +1,10 @@
-// @ts-ignore
 // @ts-check
 import withNextIntl from 'next-intl/plugin'
 /**
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  // output: 'standalone',
+  output: 'standalone',
   reactStrictMode: false,
   images: {
     deviceSizes: [390, 640, 750, 828, 1080, 1200, 1920],

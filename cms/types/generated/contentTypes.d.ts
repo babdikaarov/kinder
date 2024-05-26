@@ -819,6 +819,13 @@ export interface ApiContentFormContentForm extends Schema.SingleType {
                localized: true;
             };
          }>;
+      form_error_fileSizeLimit: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
       form_error_uploadFile: Attribute.String &
          Attribute.Required &
          Attribute.SetPluginOptions<{
@@ -855,6 +862,13 @@ export interface ApiContentFormContentForm extends Schema.SingleType {
             };
          }>;
       form_modal_error_limit: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_modal_error_notSameExtention: Attribute.String &
          Attribute.Required &
          Attribute.SetPluginOptions<{
             i18n: {
@@ -932,6 +946,83 @@ export interface ApiContentFormContentForm extends Schema.SingleType {
             };
          }>;
       form_phoneNumber: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_alerts_title: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_alerts_description: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_alerts_submit: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_alerts_submitted_title: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_alerts_submitted_description: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_alerts_submitted_close: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_alerts_errors_failed_title: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_alerts_errors_failed_description: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_alerts_success_title: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_alerts_success_description: Attribute.String &
+         Attribute.Required &
+         Attribute.SetPluginOptions<{
+            i18n: {
+               localized: true;
+            };
+         }>;
+      form_alerts_cancel: Attribute.String &
          Attribute.Required &
          Attribute.SetPluginOptions<{
             i18n: {
