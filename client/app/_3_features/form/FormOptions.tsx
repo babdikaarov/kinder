@@ -10,7 +10,7 @@ const FormOptions: React.FC<FormOptionsProps> = ({
   error,
   lang,
 }) => {
-  const handleFormOptionChange = (event: { target: { value: string } }) => {
+  const handleFormOptionChange = (event: any) => {
     changeHandler(event.target.value)
   }
 
@@ -29,7 +29,7 @@ const FormOptions: React.FC<FormOptionsProps> = ({
             type='radio'
             name='options'
             value={key}
-            onChange={handleFormOptionChange}
+            onClick={handleFormOptionChange}
           />
           {/* fixme add async validation remove asterix */}
           {value.name[lang]}

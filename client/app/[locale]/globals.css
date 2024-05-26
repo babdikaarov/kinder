@@ -5,9 +5,8 @@
 @layer base {
   :root {
     --wrapper-padding: 23px;
-    --hover-color-link: red;
-    --active-color-link: green;
-    --text-color-main: #121212;
+    --hover-color-link: #35353581;
+    --text-color-main: #353535;
     --fs-sm: clamp(0.795rem, 0.093vi + 0.773rem, 0.847rem);
     --fs-base: clamp(0.875rem, 0.225vi + 0.82rem, 1rem);
     --fs-lg: clamp(0.963rem, 0.391vi + 0.867rem, 1.18rem);
@@ -48,11 +47,33 @@
     direction: ltr;
   }
 
-  .hoverLink:hover {
-    color: var(--hover-color-link);
+  .hoverLink::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0; /* Start with a width of 0 */
+    height: 2px; /* Border thickness */
+    background-color: var(--hover-color-link); /* Border color */
+    transition: width 0.3s ease; /* Smooth transition for the width change */
   }
+
+  @keyframes slide {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  /* Apply the animation to the border */
+  .hoverLink:hover::after {
+    animation: slide 0.5s forwards;
+  }
+
   .activeLink {
-    color: var(--active-color-link);
+    border-bottom: var(--hover-color-link) solid 2px; /* Border color */
   }
 
   body:has(.buttonOverlay[data-state='open']) {

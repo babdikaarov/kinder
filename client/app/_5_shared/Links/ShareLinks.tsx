@@ -11,6 +11,7 @@ import {
   WhatsappShareButton,
 } from 'react-share'
 import * as Dialog from '@radix-ui/react-dialog'
+import copy from 'copy-to-clipboard'
 
 interface ShareLinksProps {
   locale: string
@@ -28,20 +29,30 @@ const ShareLinks: React.FC<ShareLinksProps> = ({ id, title, text, locale }) => {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(href)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000) // Reset copied state after 2 seconds
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(href)
+        .then(() => {
+          console.log('Text copied to clipboard successfully')
+          setCopied(true)
+          setTimeout(() => setCopied(false), 500) // Reset copied state after 2 seconds
+        })
+        .catch((err) => {
+          console.error('Failed to copy text to clipboard: ', err)
+        })
+    } else {
+      console.error('Clipboard API is not supported in this browser')
+    }
   }
 
   useEffect(() => {
     let url = ''
     if (id) {
-      url = `${window.location.origin}/${locale}/blog/${id}`
+      url = `${window.location.origin}/${locale}/blog/${id}?${title.toLocaleLowerCase().split(' ').join('-')}`
     } else {
       url = window.location.href
     }
     setHref(url)
-    const markdown = `[Video Link](${url})`
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -61,7 +72,14 @@ const ShareLinks: React.FC<ShareLinksProps> = ({ id, title, text, locale }) => {
                   {`${href}?${title}`}
                 </p>
                 <button
-                  onClick={handleCopy}
+                  onClick={() => {
+                    if ('clipboard' in navigator) {
+                      console.log('Clipboard API is supported')
+                      handleCopy()
+                    } else {
+                      copy(href)
+                    }
+                  }}
                   className='z-10 h-full bg-theme-bg'
                 >
                   <p className='mx-1 rounded-full bg-blue-500 px-2 text-fs-base text-white'>

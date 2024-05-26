@@ -22,7 +22,7 @@ const LocaleSwitcherClient: React.FC<LocaleSwitcherClientProps> = ({
     router.replace(pathname, { locale: currentLocale === 'ru' ? 'ky' : 'ru' })
   }
   return (
-    <button onClick={changeLocale} className={cn('hoverLink', className)}>
+    <button onClick={changeLocale} className={cn('', className)}>
       {/* FIX_ME replace svg for animated */}
       <svg
         xmlns='http://www.w3.org/2000/svg'

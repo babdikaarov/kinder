@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useRef, useState, useTransition } from 'react'
 import { useForm } from '@tanstack/react-form'
 import FormOptions from './FormOptions'
 import { TextInput } from './TextInput'
@@ -12,19 +12,31 @@ import { TAlert, TSFormProps } from './types'
 
 import { cn } from '@/app/_5_shared'
 import { PhoneInput } from './PhoneInput'
-import { error } from 'console'
+import Alert from './allerts/Alert'
+import ErrorAlert from './allerts/error'
+import SuccessAlert from './allerts/success'
+import { Loader } from 'lucide-react'
+import AlertSubmited from './allerts/AlertSubmited'
 
 export default function TSForm({ opt, text, lang }: TSFormProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [options, setOptions] = useState(opt)
   const [compare, setCompare] = useState(0)
+  const [postStatus, setPostStatus] = useState({
+    failed: false,
+    success: false,
+    submitted: false,
+  })
+  const refAlert = useRef(null)
+  const refAlertSubmitted = useRef(null)
+  const refForm = useRef(null)
   const form = useForm({
     defaultValues: {
       formOption: '',
       inn: '',
       lastName: '',
       firstName: '',
-      phoneNumber: '',
+      phoneNumber: '+996',
       email: '',
       docs: [] as Array<{
         name: string
@@ -32,24 +44,60 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
       }>,
       docLength: 0,
     },
-    onSubmit({ value }) {
-      return new Promise<void>((resolve) => {
-        setTimeout(() => {
-          console.log(value)
-          resolve() // Call resolve to indicate that the promise has been resolved
-        }, 2000)
-      })
+    onSubmit: async ({ value }) => {
+      // return new Promise((resolve, reject) => {
+      // console.log(value)
 
-      // const data = {}
-      // data.formOption = value.formOption
-      // data.inn = value.inn
-      // data.lastName = value.lastName
-      // data.firstName = value.firstName
-      // data.docs = {}
-      // value.docs.forEach(el => {
-      //   data.docs[el.name] = el.file
-      // })
-      // console.log(data)
+      const formData = new FormData()
+      formData.append('inn', value.inn)
+      formData.append('firstName', value.firstName)
+      formData.append('lastName', value.lastName)
+      formData.append('formSchema', value.formOption)
+      formData.append('phoneNumber', value.phoneNumber)
+      formData.append('email', value.email)
+      value.docs.forEach((doc) => {
+        if (doc.file) {
+          for (let i = 0; i < doc.file.length; i++) {
+            const file = doc.file[i]
+            formData.append(`docs[${doc.name}]`, file)
+            // formData.append(`docs[${doc.name}]`, file, file.name)
+          }
+        }
+      })
+      formData.forEach((value, key) => {
+        if (value instanceof File) {
+          console.log(`${key}: ${value.name} (${value.size / 1024 / 1024} mb)`)
+        } else {
+          console.log(`${key}: ${value}`)
+        }
+      })
+      const requestOptions = {
+        method: 'POST',
+        body: formData,
+      }
+
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 3000)) // set a 3-second delay
+        const response = await fetch(
+          process.env.FORM_API || 'http://comaasdsd.com/api/testFailer',
+          requestOptions
+        )
+        const result = await response.json()
+        if (!response.ok) {
+          console.log(response.statusText)
+          throw new Error(response.statusText)
+        }
+        console.log(result)
+        setPostStatus((prev) => ({ ...prev, success: true }))
+        if (refAlertSubmitted.current) {
+          ;(refAlertSubmitted.current as HTMLButtonElement).click()
+        }
+        return result
+      } catch (error: any) {
+        setPostStatus((prev) => ({ ...prev, failed: true }))
+        console.log(error.message)
+        return error
+      }
     },
 
     validatorAdapter: zodValidator,
@@ -63,10 +111,24 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getFieldValue, options])
-  // FIXME react-share
+
+  useEffect(() => {
+    if (postStatus.failed || postStatus.success) {
+      const timer = setTimeout(() => {
+        setPostStatus((prev) => ({
+          ...prev,
+          failed: false,
+          success: false,
+        }))
+      }, 15000)
+      return () => clearTimeout(timer)
+    }
+  }, [postStatus])
+
   return (
     <>
       <form
+        ref={refForm}
         onSubmit={(e) => {
           e.preventDefault()
           e.stopPropagation()
@@ -82,8 +144,9 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
         <form.Field
           name='formOption'
           validators={{
-            // onSubmit: z.string().min(1, text.errors.formType),
-            onChange: ({ value }) => (value ? undefined : text.errors.formType),
+            onChange: ({ value }) => {
+              return value ? undefined : text.errors.formType
+            },
           }}
         >
           {(field) => {
@@ -92,10 +155,9 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
                 <FormOptions
                   lang={lang}
                   changeHandler={(e) => {
-                    setIsOpen(false)
                     field.handleChange(e)
+                    setIsOpen(false)
                     setOptions(opt)
-
                     form.setFieldValue('docs', [])
                   }}
                   onBlur={field.handleBlur}
@@ -161,7 +223,7 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
           name='phoneNumber'
           validators={{
             onChange: z.string().min(1, text.errors.phoneNumber),
-            onSubmit: z.string().min(5, text.errors.phoneNumber),
+            onSubmit: z.string().min(13, text.errors.phoneNumber),
           }}
         >
           {(field) => {
@@ -241,13 +303,29 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
                               }
                               return text.errors.uploadFile
                             },
+                            onChange: ({ value }) => {
+                              if (value) {
+                                const maxFileSize = 10 * 1024 * 1024 // //file size limit
+                                for (let i = 0; i < value.length; i++) {
+                                  const file = value[i]
+                                  if (file.size > maxFileSize) {
+                                    return `${text.errors.sizeLimit}: ...${file.name.slice(-12)}`
+                                  }
+                                }
+                              }
+
+                              return undefined
+                            },
                           }}
                         >
                           {(subField) => {
                             return (
                               <DocFileInput
                                 text={text.fileInput}
-                                error={subField.state.meta.touchedErrors}
+                                error={
+                                  subField.state.meta.touchedErrors ||
+                                  subField.state.meta.isTouched
+                                }
                                 multiple={
                                   opt[
                                     form.getFieldValue('formOption')
@@ -308,6 +386,7 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
                   )
                 })}
                 <SelectButton
+                  validateFields={() => form.validateAllFields('submit')}
                   lang={lang}
                   docArrayLength={() => form.getFieldValue('docs').length}
                   setFieldValue={setFieldValue as any}
@@ -346,22 +425,80 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
           }}
         </form.Field>
         <form.Subscribe
-          selector={(state) => [state.isSubmitting, state.canSubmit]}
+          selector={(state) => [
+            state.isSubmitting,
+            state.canSubmit,
+            state.isSubmitted,
+          ]}
         >
-          {([isSubmitting, canSubmit]) => (
-            <button
-              type='submit'
-              // disabled={!canSubmit}
-              className={cn(
-                'h-[50px] w-full  rounded bg-blue-500 text-white',
-                !canSubmit ? 'opacity-65' : 'opacity-100'
-              )}
-            >
-              {isSubmitting ? text.submit.isSubmitting : text.submit.default}
-            </button>
-          )}
+          {([isSubmitting, canSubmit, isSubmitted]) => {
+            function openAlert() {
+              // if (!refAlert.current) return
+              // ;(refAlert.current as HTMLButtonElement).click()
+              form.validateAllFields('submit').then((errors) => {
+                if (errors.length === 0) {
+                  if (!refAlert.current) return
+                  if (canSubmit) {
+                    ;(refAlert.current as HTMLButtonElement).click()
+                  }
+                }
+              })
+            }
+            return (
+              <>
+                <button
+                  type='button'
+                  className={cn(
+                    'flex h-[50px]  w-full items-center justify-center gap-2 rounded bg-blue-500 text-white',
+                    !canSubmit && !isSubmitting
+                      ? 'bg-red-100 text-red-600 '
+                      : 'bg-blue-500'
+                  )}
+                  onClick={openAlert}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div>{text.submit.isSubmitting}</div>
+                      <Loader className='animate-spin-slow' />
+                    </>
+                  ) : (
+                    <div>{text.submit.default}</div>
+                  )}
+                </button>
+                <Alert refFrom={refForm} myRef={refAlert} text={text.alerts} />
+              </>
+            )
+          }}
         </form.Subscribe>
       </form>
+
+      <ErrorAlert
+        className={
+          postStatus.failed ? 'grid-rows-[1fr]  p-4 ' : 'grid-rows-[0fr]'
+        }
+        text={text.alerts.errors.failed}
+        onClick={() => {
+          setPostStatus((prev) => ({ ...prev, failed: false }))
+        }}
+      />
+
+      <SuccessAlert
+        className={
+          postStatus.success ? 'grid-rows-[1fr]  p-4 ' : 'grid-rows-[0fr]'
+        }
+        text={text.alerts.errors.success}
+        onClick={() => {
+          setPostStatus((prev) => ({ ...prev, success: false }))
+        }}
+      />
+
+      <AlertSubmited
+        resetForm={() => {
+          form.reset()
+        }}
+        myRef={refAlertSubmitted}
+        text={text.alerts.submitted}
+      />
     </>
   )
 }

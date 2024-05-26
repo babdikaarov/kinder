@@ -19,6 +19,7 @@ export const SelectButton: React.FC<SelectButtonProps> = ({
   field: Field,
   originOpt,
   lang,
+  validateFields,
 }) => {
   const handleOptionClick = (e: DocsList) => {
     // const nameOption = e.target.value
@@ -53,12 +54,13 @@ export const SelectButton: React.FC<SelectButtonProps> = ({
           return (
             <>
               <button
-                type={'submit'}
+                type='button'
                 className={cn(
                   'relative z-20 flex h-[50px] min-w-full items-center gap-4 text-nowrap rounded border-[0.5px] border-solid border-dark-600 bg-white px-2 text-dark-300',
                   isAllDocsChoosen ? 'bg-slate-200' : ''
                 )}
                 onClick={() => {
+                  validateFields()
                   if (getOption()) {
                     setIsOpen(!isOpen)
                   }

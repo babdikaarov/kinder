@@ -35,6 +35,7 @@ const config: Config = {
         },
       },
       animation: {
+        'spin-slow': 'spin 3s linear infinite',
         fadeIn: 'fadeIn 0.5s ease-in-out',
         slideInTop: 'slideInTop 0.5s ease-in-out',
       },
@@ -105,6 +106,7 @@ const config: Config = {
       // tablet
       // tablet
       smExtra: { max: '640px' },
+      sm500: { max: '500px' },
       sm: { max: '430px' },
       xsm: { max: '390px' },
       // mobile

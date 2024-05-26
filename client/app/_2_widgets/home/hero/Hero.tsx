@@ -1,5 +1,6 @@
+import ArrowAnimated from '@/app/_5_shared/icons/ArrowAnimated'
 import { getData } from '@entities/index'
-import { Wrapper } from '@shared/index'
+import { Wrapper, cn } from '@shared/index'
 import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 
@@ -34,11 +35,21 @@ const Hero: React.FC<HeroProps> = async ({ i }) => {
         <div className='text-center'>
           <p className='text-fs-lg'>{description[i]}</p>
         </div>
-        <button className='button mt-4 h-[62px] w-full max-w-[400px]'>
-          <a href={link} target='_blank' className='text-fs-lg  text-white'>
+        <a
+          href={link}
+          target='_blank'
+          className='button group mt-4 flex h-[62px] w-full max-w-[400px] items-center justify-center gap-1'
+        >
+          <button className='text-fs-lg  text-white'>
             {t('home_hero_button')}
-          </a>
-        </button>
+          </button>
+          <ArrowAnimated
+            className={cn(
+              'w-0 transition-all duration-200 ease-linear ',
+              'group-hover:relative group-hover:w-8'
+            )}
+          />
+        </a>
       </article>
     </Wrapper>
   )

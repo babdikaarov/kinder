@@ -30,6 +30,8 @@ interface DialogDemoProps {
     error: {
       duplicate: string
       limit: string
+      sizeLimit: string
+      isNotSameExtention: string
     }
   }
   forwardInput: any
@@ -49,9 +51,13 @@ export default function DialogDemo({
   fileUrls,
 }: DialogDemoProps) {
   const [files, setFiles] = useState<File[]>([])
-  const [isDuplicate, setIsDuplicate] = useState({
+  const [errorState, setErrorState] = useState({
     isDuplicate: false,
+    isNotSameExtention: false,
+    sizeLimit: false,
     name: '',
+    sameFileNames: '',
+    sizeLimitFileNames: '',
   })
   const onDrop = (acceptedFiles: File[]) => {
     setFiles((prev) => [...prev, ...acceptedFiles])
@@ -68,7 +74,7 @@ export default function DialogDemo({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
-    useDropzone({ onDrop, maxFiles: 2 })
+    useDropzone({ onDrop })
 
   const save = () => {
     const dataTransfer = new DataTransfer()
@@ -102,35 +108,64 @@ export default function DialogDemo({
   }
   useEffect(() => {
     let isDuplicate = false
+    let isNotSameExtention = false
+    let sizeLimit = false
+    let sizeLimitFileNames = []
+    const sizeMB = 10 * 1024 * 1024 //file size limit
     for (let i = 0; i < files.length; i++) {
       for (let j = i + 1; j < files.length; j++) {
-        if (files[i].name === files[j].name) {
+        if (files[i].name === files[j].name && files.length <= 2) {
           isDuplicate = true
           break
         }
+        if (files[i].type !== files[j].type && files.length <= 2) {
+          isNotSameExtention = true
+          break
+        }
       }
-      if (isDuplicate) {
+      if (files[i].size > sizeMB && files.length <= 2) {
+        sizeLimit = true
+        sizeLimitFileNames.push(`...${files[i].name.slice(-12)}`)
+      }
+      if (isDuplicate || isNotSameExtention || sizeLimit) {
         break
       }
     }
-    setIsDuplicate({
+    setErrorState({
       isDuplicate: isDuplicate,
-      name: isDuplicate ? files[0].name : '',
+      name: isDuplicate ? `...${files[0].name.slice(-12)}` : '',
+      sizeLimit: sizeLimit,
+      sizeLimitFileNames: sizeLimit ? sizeLimitFileNames.join(', ') : '',
+      isNotSameExtention: isNotSameExtention,
+      sameFileNames: isNotSameExtention
+        ? `...${files[0].name.slice(-12)} , ...${files[1].name.slice(-12)}`
+        : '',
     })
   }, [files])
 
-  const fileRejectionItems = (content: string | number) => {
+  const fileRejectionItems = (
+    content: string | number,
+    option: 'limit' | 'duplicate' | 'sizeLimit' | 'sameExtention'
+  ) => {
     return (
       <div>
         <TriangleAlert className='float-left mr-1 stroke-[#F93232]' />
-        {typeof content === 'number' ? (
+        {option === 'limit' ? (
+          <span className='text-[#f93232ad]'>{text.error.limit}</span>
+        ) : null}
+        {option === 'duplicate' ? (
           <span className='text-[#f93232ad]'>
-            {text.error.limit.replace('--replace--', `${content}`)}
+            {text.error.duplicate}: {content}
           </span>
         ) : null}
-        {typeof content === 'string' ? (
+        {option === 'sameExtention' ? (
           <span className='text-[#f93232ad]'>
-            {text.error.duplicate.replace('--replace--', `${content}`)}
+            {text.error.isNotSameExtention}: {content}
+          </span>
+        ) : null}
+        {option === 'sizeLimit' ? (
+          <span className='text-[#f93232ad]'>
+            {text.error.sizeLimit}: {content}
           </span>
         ) : null}
       </div>
@@ -159,9 +194,9 @@ export default function DialogDemo({
         }}
       >
         <DialogClose asChild>
-          <button className='absolute right-0 top-0' aria-label='Close'>
+          {/* <button className='absolute right-0 top-0' aria-label='Close'>
             <X />
-          </button>
+          </button> */}
         </DialogClose>
         <DialogHeader>
           <DialogTitle className='text-fs-lg text-black'>
@@ -220,12 +255,17 @@ export default function DialogDemo({
                 <Check className='aspect-square  size-[28px] bg-green-200' />
               </li>
             ))}
-            {files.length > 2 ? fileRejectionItems(files.length) : null}
-            {isDuplicate.isDuplicate
-              ? fileRejectionItems(isDuplicate.name)
+            {files.length > 2
+              ? fileRejectionItems(files.length, 'limit')
               : null}
-            {fileRejections.length
-              ? fileRejectionItems(fileRejections.length)
+            {errorState.isDuplicate
+              ? fileRejectionItems(errorState.name, 'duplicate')
+              : null}
+            {errorState.isNotSameExtention
+              ? fileRejectionItems(errorState.sameFileNames, 'sameExtention')
+              : null}
+            {errorState.sizeLimit
+              ? fileRejectionItems(errorState.sizeLimitFileNames, 'sizeLimit')
               : null}
           </ul>
         </div>
@@ -236,15 +276,19 @@ export default function DialogDemo({
               className={cn(
                 'button h-[35px] w-[120px] self-center rounded bg-blue-500 text-white',
                 (files && files.length > 2) ||
-                  isDuplicate.isDuplicate ||
-                  files.length == 0
-                  ? 'bg-slate-200 text-black'
+                  errorState.isDuplicate ||
+                  errorState.isNotSameExtention ||
+                  errorState.sizeLimit
+                  ? // || files.length == 0
+                    'bg-slate-200 text-black'
                   : ''
               )}
               disabled={
                 (files && files.length > 2) ||
-                isDuplicate.isDuplicate ||
-                files.length == 0
+                errorState.isDuplicate ||
+                errorState.isNotSameExtention ||
+                errorState.sizeLimit
+                //  || files.length == 0
               }
               onClick={save}
             >

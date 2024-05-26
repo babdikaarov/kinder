@@ -14,19 +14,19 @@ const ActiveLinkClient: React.FC<ActiveLinkClientProps> = ({
   i,
 }) => {
   const pathname = usePathname()
-  const isActive = href === pathname
-
-  
+  const isActive = href === pathname || `/${i + href}` === pathname
 
   return (
-    <Link
-      prefetch={true}
-      href={href}
-      className={`hoverLink ${isActive ? 'activeLink' : ''}`}
-      locale={i}
-    >
-      {content}
-    </Link>
+    <div className='relative'>
+      <Link
+        prefetch={true}
+        href={href}
+        className={isActive ? 'activeLink' : 'hoverLink'}
+        locale={i}
+      >
+        {content}
+      </Link>
+    </div>
   )
 }
 
