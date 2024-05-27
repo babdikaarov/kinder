@@ -17,7 +17,7 @@ const ActiveLinkClient: React.FC<ActiveLinkClientProps> = ({
   const isActive = href === pathname || `/${i + href}` === pathname
 
   return (
-    <div className='relative'>
+    <div className='relative w-fit'>
       <Link
         prefetch={true}
         href={href}

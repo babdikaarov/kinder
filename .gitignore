@@ -153,3 +153,4 @@ dist
 build
 .strapi-updater.json
 /payload
+/backend

@@ -95,7 +95,7 @@ const FilterArea: React.FC<FilterAreaProps> = ({
                   backgroundColor: `${filterColor ? filterColor[el].lightColors.container : ''}`,
                 }}
                 className={cn(
-                  'z-50 inline size-3 min-h-3 min-w-3 rounded-full bg-red-500'
+                  'z-50 inline size-3 min-h-3 min-w-3 rounded-full '
                 )}
               ></div>
             </SelectItem>
