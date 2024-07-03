@@ -38,7 +38,7 @@ services:
       container_name: "strapiDB"
       restart: unless-stopped
       ports:
-         - "5432:5432"
+         - "5433:5432"
       environment:
          POSTGRES_DB: cms
          POSTGRES_USER: postgres
@@ -60,7 +60,7 @@ services:
       environment:
          STRAPI_ADMIN_BACKEND_URL: http://16.170.170.229:1337
          DATABASE_CLIENT: postgres
-         DATABASE_PORT: 5432
+         DATABASE_PORT: 5433
          DATABASE_NAME: cms
          DATABASE_USERNAME: postgres
          DATABASE_PASSWORD: beksultan

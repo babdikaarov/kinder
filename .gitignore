@@ -154,3 +154,7 @@ build
 .strapi-updater.json
 /payload
 /backend
+/refine
+/radmin
+# /refinedoc
+# /radmindoc
