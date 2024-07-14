@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/[locale]/parent/@modal/default.tsx",
+    "app/[locale]/(landing)/parent/@modal/default.tsx",
     "next-i18next.config.js",
     "next.config.mjs"
   ],

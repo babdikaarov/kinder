@@ -88,7 +88,7 @@ const FilterArea: React.FC<FilterAreaProps> = ({
                   'flex w-full items-center gap-3 '
                 )}
               >
-                {el}
+                {el.split('_').join(' ')}
               </SelectItemText>
               <div
                 style={{

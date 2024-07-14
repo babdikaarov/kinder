@@ -111,7 +111,7 @@ export default function DialogDemo({
     let isNotSameExtention = false
     let sizeLimit = false
     let sizeLimitFileNames = []
-    const sizeMB = 10 * 1024 * 1024 //file size limit
+    const sizeMB = 10 * 1024 * 1024 //file size limit 10mb
     for (let i = 0; i < files.length; i++) {
       for (let j = i + 1; j < files.length; j++) {
         if (files[i].name === files[j].name && files.length <= 2) {

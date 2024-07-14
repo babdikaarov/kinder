@@ -55,6 +55,7 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
       formData.append('formSchema', value.formOption)
       formData.append('phoneNumber', value.phoneNumber)
       formData.append('email', value.email)
+      formData.append('isAdmin', 'false')
       value.docs.forEach((doc) => {
         if (doc.file) {
           for (let i = 0; i < doc.file.length; i++) {
@@ -79,7 +80,8 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
       try {
         await new Promise((resolve) => setTimeout(resolve, 3000)) // set a 3-second delay
         const response = await fetch(
-          process.env.FORM_API || 'http://comaasdsd.com/api/testFailer',
+          `${process.env.BACKEND_URL}/api/form` ||
+            'http://comaasdsd.com/api/testFailer',
           requestOptions
         )
         const result = await response.json()
@@ -171,7 +173,7 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
         <form.Field
           name='inn'
           validators={{
-            onChange: z.string().min(1, text.errors.inn),
+            onChange: z.string().min(14, text.errors.inn),
           }}
         >
           {(field) => {
@@ -179,7 +181,14 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
               <TextInput
                 name={text.inn}
                 value={field.state.value}
-                onChange={(e) => field.handleChange(e.target.value)}
+                onChange={(e) => {
+                  let inputValue = e.target.value.replace(/\D/g, '')
+                  // Limit to 14 digits inn
+                  if (inputValue.length > 14) {
+                    inputValue = inputValue.slice(0, 14)
+                  }
+                  field.handleChange(inputValue)
+                }}
                 error={field.state.meta.touchedErrors}
               />
             )
@@ -305,7 +314,7 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
                             },
                             onChange: ({ value }) => {
                               if (value) {
-                                const maxFileSize = 10 * 1024 * 1024 // //file size limit
+                                const maxFileSize = 10 * 1024 * 1024 // //file size limit 10mb
                                 for (let i = 0; i < value.length; i++) {
                                   const file = value[i]
                                   if (file.size > maxFileSize) {

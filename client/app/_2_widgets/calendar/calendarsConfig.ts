@@ -15,9 +15,8 @@ export interface CalendarsConfig {
 export function generateEventColorTheme(category: string[]) {
   let calendarsConfig: CalendarsConfig = {}
   category.forEach((el, index) => {
-
     calendarsConfig[el] = {
-      colorName: el,
+      colorName: el.split(' ').join('_'),
       lightColors: {
         main: colors[index].main,
         container: colors[index].container,
@@ -30,6 +29,5 @@ export function generateEventColorTheme(category: string[]) {
       },
     }
   })
-
   return calendarsConfig
 }

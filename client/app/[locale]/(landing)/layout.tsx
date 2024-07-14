@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
-import './globals.css'
+import '../globals.css'
 import { Footer, Header } from '@/app/_2_widgets'
 import Link from 'next/link'
-import ScreenSizeDisplay from '../_6_lib/media'
 
 export const metadata: Metadata = {
   title: 'Kindergarten',
@@ -30,13 +29,12 @@ export default function RootLocaleLayout({
       <body className='font-monserat m-auto flex  min-h-svh min-w-full max-w-wrapperLimit flex-col items-center justify-between  gap-32 bg-theme-bg px-5'>
         <div className='fixed left-[30%] top-8 z-[999] flex gap-3 bg-green-500'>
           <Link
-            href='/admin'
-            target='_blank'
+            href='/admin-docs'
+            // target='_blank'
             className='bg-blue-900 text-white'
           >
-            to CMS
+            to admin
           </Link>
-          <ScreenSizeDisplay />
         </div>
         <Header i={locale} />
         {children}

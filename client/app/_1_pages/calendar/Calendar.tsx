@@ -3,6 +3,7 @@ import { Arrow, Wrapper, cn, seedRecurrence } from '@/app/_5_shared'
 import { XScheduler } from '@widgets/index'
 import { getTranslations } from 'next-intl/server'
 import { ClassNameValue } from 'tailwind-merge'
+import { string } from 'zod'
 
 export type TData = {
   id: string
@@ -22,7 +23,6 @@ const Calendar: React.FC<CalendarProps> = async ({ i }) => {
   const response = await fetch(url, { cache: 'no-cache' })
   if (!response.ok) throw Error('server is not responding')
   const { data, category } = await response.json()
-
   const seedData = data
     .map((el: TData) => (el.rrule ? seedRecurrence(el) : el))
     .flat()

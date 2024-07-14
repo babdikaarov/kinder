@@ -5,7 +5,7 @@ import { getTranslations } from 'next-intl/server'
 
 interface AdminPageProps extends myTS.I {}
 
-const AdminPage: React.FC<AdminPageProps> = async ({ i }) => {
+const DocsPage: React.FC<AdminPageProps> = async ({ i }) => {
   const instruction = await getData('/api/instruction?populate=*', {
     cache: 'default',
   })
@@ -23,4 +23,4 @@ const AdminPage: React.FC<AdminPageProps> = async ({ i }) => {
   )
 }
 
-export default AdminPage
+export default DocsPage

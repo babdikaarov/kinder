@@ -19,6 +19,7 @@ interface HeaderClientProps {
 
 const HeaderClient: React.FC<HeaderClientProps> = ({ i, content }) => {
   const [isOpen, setOpen] = useState(false)
+
   return (
     <>
       <button

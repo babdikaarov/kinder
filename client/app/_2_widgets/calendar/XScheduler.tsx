@@ -78,15 +78,10 @@ const XScheduler: React.FC<XSchedulerProps> = ({ data, category, text, i }) => {
       </div>
       <ScheduleXCalendar
         calendarApp={calendar}
-        // customComponents={{ eventModal: CustomModal }}
       />
     </div>
   )
 }
 
-function CustomModal(el: any) {
-  //   console.log(el)
-  return <div>sozdai modalnoe okno</div>
-}
 
 export default XScheduler

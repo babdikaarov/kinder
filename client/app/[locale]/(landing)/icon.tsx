@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import { getData } from '../_4_entities'
+import { getData } from '../../_4_entities'
 
 // Image metadata
 export const size = {
