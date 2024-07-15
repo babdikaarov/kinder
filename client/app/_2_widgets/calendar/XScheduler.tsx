@@ -24,7 +24,12 @@ interface XSchedulerProps extends myTS.I {
   }
 }
 
-const XScheduler: React.FC<XSchedulerProps> = ({ data, category, text, i }) => {
+const XScheduler: React.FC<XSchedulerProps> = ({
+  data,
+  category,
+  text,
+  locale,
+}) => {
   const [checkedFilter, setCheckedFilter] = useState(category)
   const configColor = generateEventColorTheme(category)
 
@@ -33,7 +38,7 @@ const XScheduler: React.FC<XSchedulerProps> = ({ data, category, text, i }) => {
     defaultView: 'month',
     calendars: configColor,
     // locale: 'ky-KG',
-    locale: i === 'ru' ? 'ru-RU' : 'kg-KG',
+    locale: locale === 'ru' ? 'ru-RU' : 'kg-KG',
     workDays: {
       numberDays: [1, 2, 3, 4, 5],
     },
@@ -59,7 +64,7 @@ const XScheduler: React.FC<XSchedulerProps> = ({ data, category, text, i }) => {
   }, [checkedFilter])
 
   return (
-    <div id='calendar'>
+    <div id='calendar' className='mt-6'>
       <div className='mb-2 flex items-center gap-4 smExtra:flex-col smExtra:items-start'>
         <h2
           className={
@@ -76,12 +81,9 @@ const XScheduler: React.FC<XSchedulerProps> = ({ data, category, text, i }) => {
           text={text.filter}
         />
       </div>
-      <ScheduleXCalendar
-        calendarApp={calendar}
-      />
+      <ScheduleXCalendar calendarApp={calendar} />
     </div>
   )
 }
-
 
 export default XScheduler

@@ -138,6 +138,7 @@ export interface DocNameInputProps
 }
 
 export interface FormOptionsProps {
+  fieldValue: string
   changeHandler: (updater: Updater<string>) => void
   opt: Record<string, { name: Record<string, string> }>
   onBlur?: () => void
@@ -161,6 +162,7 @@ export type TFormData = {
 
 export interface SelectButtonProps
   extends React.HTMLAttributes<HTMLButtonElement> {
+  isToPatch: boolean
   errorText: {
     formType: string
     addFile: string
@@ -203,9 +205,8 @@ export interface InputProps
 
 export type Ioptions = 'default' | 'passport' | 'COB'
 
-export interface TSFormProps {
+export interface TSFormProps extends myTS.I {
   opt: TFormType
-  lang: string
   text: Ttext
 }
 

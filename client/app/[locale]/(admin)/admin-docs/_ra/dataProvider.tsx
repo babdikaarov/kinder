@@ -1,6 +1,6 @@
 import { stringify } from 'query-string'
 import { fetchUtils, DataProvider, Identifier } from 'ra-core'
-import { filterData } from './filters/filter'
+import { filterData } from './utils/filter'
 import { combine } from 'rrule/dist/esm/dateutil'
 
 /**
@@ -69,13 +69,6 @@ const dataProvider = (
         : { signal: params?.signal }
 
     return httpClient(url, options).then(({ headers, json }) => {
-      //   if (!headers.has(countHeader)) {
-      //     throw new Error(
-      //       `The ${countHeader} header is missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare ${countHeader} in the Access-Control-Expose-Headers header?`
-      //     )
-      //   }
-      // const data = filterData(params.filter.q, json).slice(rangeStart, rangeEnd)
-      // const tempData = json.map((el: any) => ({ ...el, status: 'DELETED' }))
       const data = filterData(params.filter.q, json)
       const sortField = params.sort!.field
 
@@ -98,9 +91,6 @@ const dataProvider = (
       return {
         data: filteredData.slice(rangeStart, rangeEnd),
         total: filteredData.length,
-        //   countHeader === 'Content-Range'
-        //     ? parseInt(headers.get('content-range')!.split('/').pop() || '', 10)
-        //     : parseInt(headers.get(countHeader.toLowerCase())!),
       }
     })
   },

@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 interface AboutProps extends myTS.I {}
 
-const About: React.FC<AboutProps> = async ({ i }) => {
+const About: React.FC<AboutProps> = async ({ locale }) => {
   const t = await getTranslations()
   const data = await getData('/api/abouts?&populate=*')
 
@@ -41,7 +41,7 @@ const About: React.FC<AboutProps> = async ({ i }) => {
                 'mdExtra:max-w-[500px]'
               )}
             >
-              {item.description[i]}
+              {item.description[locale]}
             </p>
           </div>
         ))}

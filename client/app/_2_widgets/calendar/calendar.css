@@ -4,7 +4,7 @@
 
 #calendar {
   width: 100%;
-  height: 800px;
+  /* height: 800px; */
   max-height: 90vh;
 }
 
@@ -59,28 +59,14 @@
   border-radius: 4px !important;
 }
 
-.sx__time-grid-day--is-work-day {
-}
 .sx__time-grid-day--is-not-work-day {
   @apply z-[1] bg-gray-100;
 }
-.sx__week-grid__date--is-work-day {
-}
-.sx__week-grid__date--is-not-work-day {
-}
-.sx__month-grid-day--is-work-day {
-}
+
 .sx__month-grid-day--is-not-work-day {
   @apply bg-gray-100;
 }
 
-.sx__month-agenda-day--is-work-day {
-}
 .sx__month-agenda-day--is-not-work-day {
   @apply bg-gray-100;
-}
-.sx__month-agenda-day-name--is-work-day {
-}
-.sx__month-agenda-day-name--is-not-work-day {
-  /* @apply bg-gray-100 */
 }

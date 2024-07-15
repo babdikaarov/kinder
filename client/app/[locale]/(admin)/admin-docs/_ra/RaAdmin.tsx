@@ -1,23 +1,15 @@
-'use client' // remove this line if you choose Pages Router
-import {
-  Admin,
-  Layout,
-  Resource,
-  AppBar,
-  LocalesMenuButton,
-  ToggleThemeButton,
-  LoadingIndicator,
-} from 'react-admin'
+'use client'
+import { Admin, Layout, Resource } from 'react-admin'
 import polyglotI18nProvider from 'ra-i18n-polyglot'
-import ruMessages from 'ra-language-russian'
-import enMessages from 'ra-language-english'
-import kyMessages from './kyrgyz'
+import ruMessages from './locale/russian'
+// import enMessages from './locale/english'
+import kyMessages from './locale/kyrgyz'
 import authProvider from './authProvider'
 import dataProvider from './dataProvider'
-import { FormList } from './form/FormList'
-import { FormShow } from './form/show'
-import { FormEdit } from './form/edit'
-const translations = { ky: kyMessages, ru: ruMessages, en: enMessages } as any
+import { FormList } from './resources/FormList'
+import { FormEdit } from './resources/FormEdit'
+const translations = { ky: kyMessages, ru: ruMessages } as any
+// const translations = { ky: kyMessages, ru: ruMessages, en: enMessages } as any
 
 export const i18nProvider = polyglotI18nProvider(
   (locale) => (translations[locale] ? translations[locale] : translations.ru),
@@ -25,7 +17,7 @@ export const i18nProvider = polyglotI18nProvider(
   [
     { locale: 'ky', name: 'Кыргызча' },
     { locale: 'ru', name: 'Русский' },
-    { locale: 'en', name: 'English' },
+    // { locale: 'en', name: 'English' },
   ]
 )
 

@@ -6,8 +6,10 @@ import ArrowAnimated from '@/app/_5_shared/icons/ArrowAnimated'
 
 interface CalendarReferenceProps extends myTS.I {}
 
-const CalendarReference: React.FC<CalendarReferenceProps> = async ({ i }) => {
-  const locale = useLocale()
+const CalendarReference: React.FC<CalendarReferenceProps> = async ({
+  locale,
+}) => {
+  // const locale = useLocale()
   const t = await getTranslations()
   return (
     <Wrapper
@@ -20,7 +22,7 @@ const CalendarReference: React.FC<CalendarReferenceProps> = async ({ i }) => {
       </p>
       <Link
         href={`/calendar`}
-        locale={i}
+        locale={locale}
         className='button group mt-9 flex h-[62px] w-[269px] items-center justify-center gap-1 text-fs-6'
         prefetch
       >

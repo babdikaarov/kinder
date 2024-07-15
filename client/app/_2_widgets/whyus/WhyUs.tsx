@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 interface WhyUsProps extends myTS.I {}
 
-const WhyUs: React.FC<WhyUsProps> = async ({ i }) => {
+const WhyUs: React.FC<WhyUsProps> = async ({ locale }) => {
   const t = await getTranslations()
   const data = await getData('/api/why-uses?&populate=*')
 
@@ -21,7 +21,7 @@ const WhyUs: React.FC<WhyUsProps> = async ({ i }) => {
               <Image
                 className='object-cover'
                 src={item.image.src}
-                alt={item[i].title ?? 'image'}
+                alt={item[locale].title ?? 'image'}
                 width={300}
                 height={300}
               />
@@ -31,7 +31,7 @@ const WhyUs: React.FC<WhyUsProps> = async ({ i }) => {
               style={{ background: bgColor[index] }}
             >
               <p className=' text-center  text-fs-6 font-semibold text-dark-800'>
-                {item[i].title}
+                {item[locale].title}
               </p>
             </div>
           </div>

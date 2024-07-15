@@ -2,11 +2,9 @@ import { Logo, cn } from '@/app/_5_shared'
 import HeaderClient from './HeaderClient'
 import { getTranslations } from 'next-intl/server'
 
-interface HeaderProps {
-  i: string
-}
+interface HeaderProps extends myTS.I {}
 
-const Header: React.FC<HeaderProps> = async ({ i }) => {
+const Header: React.FC<HeaderProps> = async ({ locale }) => {
   const t = await getTranslations()
   const content = {
     main: t('navigation_main'),
@@ -27,10 +25,10 @@ const Header: React.FC<HeaderProps> = async ({ i }) => {
       >
         <Logo
           className={cn('size-[70px]', 'lg:size-[54px] ')}
-          to={`/${i}`}
-          locale={i}
+          to={`/${locale}`}
+          locale={locale}
         />
-        <HeaderClient i={i} content={content} />
+        <HeaderClient locale={locale} content={content} />
       </div>
     </header>
   )

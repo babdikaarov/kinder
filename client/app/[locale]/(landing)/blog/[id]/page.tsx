@@ -22,7 +22,7 @@ const Page: React.FC<PageProps> = async ({ params }) => {
   }
 
   return (
-    <main className='relative mb-32 mt-24 flex w-full max-w-wrapperLimit flex-1 flex-col items-center justify-between gap-32 '>
+    <main className='relative  mt-24 flex w-full max-w-wrapperLimit flex-1 flex-col items-center justify-between gap-32 '>
       <Blog shareText={shareText} content={post} locale={locale} />
     </main>
   )

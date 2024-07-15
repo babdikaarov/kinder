@@ -8,6 +8,7 @@ import AddSVG from './addSVG'
 import { DocsList } from './FormServer'
 
 export const SelectButton: React.FC<SelectButtonProps> = ({
+  isToPatch,
   errorText,
   pushField,
   opt,
@@ -91,7 +92,8 @@ export const SelectButton: React.FC<SelectButtonProps> = ({
             } else {
               if (
                 fieldApi.form.getFieldValue('docs').length !==
-                originOpt[getOption()].options.length
+                  originOpt[getOption()].options.length &&
+                !isToPatch
               ) {
                 return errorText.addFile
               } else {

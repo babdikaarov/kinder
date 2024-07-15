@@ -1,6 +1,45 @@
 import { TranslationMessages } from 'ra-core'
 // өзгөртүү
 const KyrgyzTranslation: TranslationMessages = {
+  myRoot: {
+    TitleEdit: 'Документтер %{name}',
+    TitleList: 'Кашкалдак - документ тапшыргандардын тизмеси',
+    status: {
+      pending: 'Күтүп жатат',
+      accepted: 'Кабыл алынды',
+      declined: 'Четке кагылды',
+      deleted: 'Корзинада',
+    },
+    formSchema: {
+      BOTH_PARENTS: 'Толук үй-бүлө',
+      WIDOW: 'Жесир',
+      DIVORCED: 'Ажырашкан',
+      GUARDIAN: 'Камкорчу',
+    },
+    delete_title: 'ИНН %{inn} менен баланын маалыматтарын өчүрүү',
+    delete_content: 'Бул маалыматты өчүргүңүз келеби?',
+    document: {
+      delete_title: 'Документти өчүрүү "%{name}"',
+      delete_content: 'Бул документти өчүргүңүз келеби?',
+    },
+    bulk_delete_title:
+      'Маалымат жазуусун өчүрүү |||| %{smart_count} маалымат жазууларын өчүрүү',
+    bulk_delete_content:
+      'Бул маалымат жазуусун өчүргүңүз келеби? |||| Бул %{smart_count} маалымат жазууларын өчүргүңүз келеби?',
+    field: {
+      inn: 'ИНН',
+      firstName: 'Аты',
+      lastName: 'Фамилиясы',
+      phoneNumber: 'Телефон номери',
+      email: 'Электрондук почта',
+      createdAt: 'Түзүлгөн датасы',
+      status: 'Статус',
+      formSchema: 'Талапкер группасы',
+      listDocs: 'Документтер тизмеси',
+      downloadAll: 'Бардык документтер',
+      identity: 'Жеке маалыматтар',
+    },
+  },
   ra: {
     action: {
       add_filter: 'Чыпка кошуу',

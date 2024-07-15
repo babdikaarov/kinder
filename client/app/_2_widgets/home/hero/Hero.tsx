@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 interface HeroProps extends myTS.I {}
 
-const Hero: React.FC<HeroProps> = async ({ i }) => {
+const Hero: React.FC<HeroProps> = async ({ locale }) => {
   const { title, description, image, link } = await getData(
     '/api/hero?populate=*'
   )
@@ -33,7 +33,7 @@ const Hero: React.FC<HeroProps> = async ({ i }) => {
           {title}
         </h1>
         <div className='text-center'>
-          <p className='text-fs-lg'>{description[i]}</p>
+          <p className='text-fs-lg'>{description[locale]}</p>
         </div>
         <a
           href={link}

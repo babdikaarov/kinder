@@ -3,7 +3,12 @@ import { InputProps } from './types'
 import Warn from './allerts/warn'
 import { cn } from '@/app/_5_shared'
 
-export const TextInput: React.FC<InputProps> = ({ name, error, ...rest }) => {
+export const TextInput: React.FC<InputProps> = ({
+  name,
+  error,
+  className,
+  ...rest
+}) => {
   return (
     <>
       <div
@@ -16,9 +21,10 @@ export const TextInput: React.FC<InputProps> = ({ name, error, ...rest }) => {
           {...rest}
           id={name}
           type='text'
-          className={
-            ' peer h-[54px] min-w-full rounded border-[0.5px] border-dark-600 bg-transparent pt-5 text-base placeholder-transparent focus:border-dark-600 focus:outline-none'
-          }
+          className={cn(
+            ' peer h-[54px] min-w-full rounded border-[0.5px] border-dark-600 bg-transparent pt-5 text-base placeholder-transparent focus:border-dark-600 focus:outline-none',
+            className
+          )}
           placeholder={name}
           autoComplete='off'
         />

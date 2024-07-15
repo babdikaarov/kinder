@@ -5,6 +5,7 @@ import Warn from './allerts/warn'
 import { FormOptionsProps } from './types'
 
 const FormOptions: React.FC<FormOptionsProps> = ({
+  fieldValue,
   changeHandler,
   opt,
   error,
@@ -30,13 +31,16 @@ const FormOptions: React.FC<FormOptionsProps> = ({
             name='options'
             value={key}
             onClick={handleFormOptionChange}
+            onChange={() => {}}
+            checked={key === fieldValue}
           />
           {/* fixme add async validation remove asterix */}
           {value.name[lang]}
           {'*'}
         </label>
       ))}
-      <Warn error={error} className='-top-[25px] h-4' />
+      <Warn error={error} className='' />
+      {/* <Warn error={error} className='-top-[25px] h-4' /> */}
     </div>
   )
 }

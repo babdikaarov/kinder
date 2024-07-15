@@ -2,7 +2,7 @@ declare interface IntlMessages extends myTS.LocalizationData {}
 
 declare namespace myTS {
   type I = {
-    i: string
+    locale: string
   }
   type L = 'ky' | 'ru'
   interface ContentForm {

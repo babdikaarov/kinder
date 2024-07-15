@@ -19,11 +19,11 @@ interface Options {
 
 export type TFormType = Record<string, Options>
 
-const FormServer: React.FC<FormServerProps> = async ({ i }) => {
+const FormServer: React.FC<FormServerProps> = async ({ locale }) => {
   const formType: TFormType = await getData('/api/type-forms?populate=*')
   const docsList: DocsList[] = await getData('/api/list-docs?populate=*')
   const contentForm: myTS.ContentForm = await getData(
-    `/api/content-form?locale=${i}`
+    `/api/content-form?locale=${locale}`
   ).then(({ data }) => data.attributes)
   // console.log(formType)
 
@@ -133,7 +133,7 @@ const FormServer: React.FC<FormServerProps> = async ({ i }) => {
     },
   }
 
-  return <TSForm opt={formType} text={text} lang={i} />
+  return <TSForm opt={formType} text={text} locale={locale} />
 }
 
 export default FormServer

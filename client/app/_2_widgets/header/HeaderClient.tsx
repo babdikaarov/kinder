@@ -6,8 +6,7 @@ import { useState } from 'react'
 import './header.css'
 import BurgerIcon from './BurgerIcon'
 
-interface HeaderClientProps {
-  i: string
+interface HeaderClientProps extends myTS.I {
   content: {
     main: string
     about: string
@@ -17,7 +16,7 @@ interface HeaderClientProps {
   }
 }
 
-const HeaderClient: React.FC<HeaderClientProps> = ({ i, content }) => {
+const HeaderClient: React.FC<HeaderClientProps> = ({ locale, content }) => {
   const [isOpen, setOpen] = useState(false)
 
   return (
@@ -55,14 +54,30 @@ const HeaderClient: React.FC<HeaderClientProps> = ({ i, content }) => {
           isOpen ? 'lg:-left-0' : 'lg:-left-1/2 smExtra:-left-[70%]'
         )}
       >
-        <ActiveLinkClient href={`/`} content={content.main} i={i} />
-        <ActiveLinkClient href={`/#about`} content={content.about} i={i} />
-        <ActiveLinkClient href={`/send-docs`} content={content.admin} i={i} />
-        <ActiveLinkClient href={`/parent`} content={content.parents} i={i} />
-        <ActiveLinkClient href={`/gallery`} content={content.gallery} i={i} />
+        <ActiveLinkClient href={`/`} content={content.main} locale={locale} />
+        <ActiveLinkClient
+          href={`/#about`}
+          content={content.about}
+          locale={locale}
+        />
+        <ActiveLinkClient
+          href={`/send-docs`}
+          content={content.admin}
+          locale={locale}
+        />
+        <ActiveLinkClient
+          href={`/parent`}
+          content={content.parents}
+          locale={locale}
+        />
+        <ActiveLinkClient
+          href={`/gallery`}
+          content={content.gallery}
+          locale={locale}
+        />
         <LocaleSwitcherClient
           className='lg:absolute lg:right-9 lg:top-5'
-          currentLocale={i}
+          currentLocale={locale}
         />
       </nav>
     </>

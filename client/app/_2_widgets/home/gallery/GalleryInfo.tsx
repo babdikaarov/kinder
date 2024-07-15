@@ -7,7 +7,7 @@ import ArrowAnimated from '@/app/_5_shared/icons/ArrowAnimated'
 
 interface GalleryInfoProps extends myTS.I {}
 
-const GalleryInfo: React.FC<GalleryInfoProps> = async ({ i }) => {
+const GalleryInfo: React.FC<GalleryInfoProps> = async ({ locale }) => {
   const t = await getTranslations()
 
   const data = await getData('/api/home-gallery-info?populate=*')
@@ -19,10 +19,12 @@ const GalleryInfo: React.FC<GalleryInfoProps> = async ({ i }) => {
         <h2 className=' text-center font-poppins text-fs-1 font-bold  '>
           {t('home_galleryInfo_header')}
         </h2>
-        <p className='mt-6 text-fs-lg lg:text-center'>{data[i].description}</p>
+        <p className='mt-6 text-fs-lg lg:text-center'>
+          {data[locale].description}
+        </p>
         <Link
           href={`/gallery`}
-          locale={i}
+          locale={locale}
           className='button group mt-9 flex h-[62px] w-[269px] items-center justify-center gap-1 text-fs-lg'
           prefetch
         >

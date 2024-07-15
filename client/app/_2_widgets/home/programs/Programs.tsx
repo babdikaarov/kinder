@@ -5,7 +5,7 @@ import SwiperPrograms from './Swiper'
 
 interface ProgramsProps extends myTS.I {}
 
-const Programs: React.FC<ProgramsProps> = async ({ i }) => {
+const Programs: React.FC<ProgramsProps> = async ({ locale }) => {
   const t = await getTranslations()
   const data = await getData('/api/home-program-items?&populate=*')
   return (
@@ -14,7 +14,7 @@ const Programs: React.FC<ProgramsProps> = async ({ i }) => {
       id='home_programs'
       className='relative'
     >
-      <SwiperPrograms data={data} locale={i} />
+      <SwiperPrograms data={data} locale={locale} />
     </Wrapper>
   )
 }

@@ -18,7 +18,8 @@ import SuccessAlert from './allerts/success'
 import { Loader } from 'lucide-react'
 import AlertSubmited from './allerts/AlertSubmited'
 
-export default function TSForm({ opt, text, lang }: TSFormProps) {
+export default function TSForm({ opt, text, locale }: TSFormProps) {
+  const [isToPatch, setIsToPatch] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [options, setOptions] = useState(opt)
   const [compare, setCompare] = useState(0)
@@ -30,6 +31,9 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
   const refAlert = useRef(null)
   const refAlertSubmitted = useRef(null)
   const refForm = useRef(null)
+
+  // FORM CONFIG start
+
   const form = useForm({
     defaultValues: {
       formOption: '',
@@ -49,13 +53,16 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
       // console.log(value)
 
       const formData = new FormData()
-      formData.append('inn', value.inn)
-      formData.append('firstName', value.firstName)
-      formData.append('lastName', value.lastName)
+      if (!isToPatch) {
+        formData.append('inn', value.inn)
+      }
+      formData.append('firstName', value.firstName.trim())
+      formData.append('lastName', value.lastName.trim())
       formData.append('formSchema', value.formOption)
       formData.append('phoneNumber', value.phoneNumber)
-      formData.append('email', value.email)
+      formData.append('email', value.email.trim())
       formData.append('isAdmin', 'false')
+      // fix me
       value.docs.forEach((doc) => {
         if (doc.file) {
           for (let i = 0; i < doc.file.length; i++) {
@@ -73,28 +80,29 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
         }
       })
       const requestOptions = {
-        method: 'POST',
+        method: isToPatch ? 'PATCH' : 'POST',
         body: formData,
       }
 
       try {
         await new Promise((resolve) => setTimeout(resolve, 3000)) // set a 3-second delay
         const response = await fetch(
-          `${process.env.BACKEND_URL}/api/form` ||
-            'http://comaasdsd.com/api/testFailer',
+          isToPatch
+            ? `${process.env.BACKEND_URL}/api/form/${value.inn}`
+            : `${process.env.BACKEND_URL}/api/form`,
           requestOptions
         )
-        const result = await response.json()
+        // const result = await response.json()
         if (!response.ok) {
           console.log(response.statusText)
           throw new Error(response.statusText)
         }
-        console.log(result)
+        console.log(response)
         setPostStatus((prev) => ({ ...prev, success: true }))
         if (refAlertSubmitted.current) {
           ;(refAlertSubmitted.current as HTMLButtonElement).click()
         }
-        return result
+        return response
       } catch (error: any) {
         setPostStatus((prev) => ({ ...prev, failed: true }))
         console.log(error.message)
@@ -104,6 +112,8 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
 
     validatorAdapter: zodValidator,
   })
+
+  // FORM CONFIG end
 
   const { Subscribe, Field, setFieldValue, getFieldValue } = form
 
@@ -127,6 +137,8 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
     }
   }, [postStatus])
 
+  // JSX render start
+
   return (
     <>
       <form
@@ -144,41 +156,44 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
         )}
       >
         <form.Field
-          name='formOption'
+          name='inn'
           validators={{
-            onChange: ({ value }) => {
-              return value ? undefined : text.errors.formType
+            onChange: z.string().min(14, text.errors.inn),
+            onChangeAsyncDebounceMs: 1000,
+            onChangeAsync: async ({ value }) => {
+              // console.log(isToPatch);
+
+              if (value.length === 14) {
+                try {
+                  const response = await fetch(
+                    `${process.env.BACKEND_URL}/api/form/byInn/${value}`
+                  )
+                  setIsToPatch(response.ok)
+
+                  if (response.ok) {
+                    const data = await response.json()
+                    // console.log(data)
+                    setFieldValue('firstName', data.firstName)
+                    setFieldValue('lastName', data.lastName)
+                    setFieldValue('email', data.email)
+                    setFieldValue('phoneNumber', data.phoneNumber)
+                    setFieldValue('formOption', data.formSchema)
+                    // console.log(getFieldValue('formOption'))
+                    // console.log(options)
+                  }
+                } catch (error) {
+                  console.log(error)
+                }
+              }
+              return undefined
             },
           }}
         >
           {(field) => {
             return (
-              <>
-                <FormOptions
-                  lang={lang}
-                  changeHandler={(e) => {
-                    field.handleChange(e)
-                    setIsOpen(false)
-                    setOptions(opt)
-                    form.setFieldValue('docs', [])
-                  }}
-                  onBlur={field.handleBlur}
-                  opt={options}
-                  error={field.state.meta.touchedErrors}
-                />
-              </>
-            )
-          }}
-        </form.Field>
-        <form.Field
-          name='inn'
-          validators={{
-            onChange: z.string().min(14, text.errors.inn),
-          }}
-        >
-          {(field) => {
-            return (
               <TextInput
+                // className={isToPatch ? 'text-dark-300' : ''}
+                // disabled={isToPatch}
                 name={text.inn}
                 value={field.state.value}
                 onChange={(e) => {
@@ -265,6 +280,35 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
         </form.Field>
 
         <form.Field
+          name='formOption'
+          validators={{
+            onChange: ({ value }) => {
+              return value ? undefined : text.errors.formType
+            },
+          }}
+        >
+          {(field) => {
+            return (
+              <>
+                <FormOptions
+                  fieldValue={field.getValue()}
+                  lang={locale}
+                  changeHandler={(e) => {
+                    field.handleChange(e)
+                    setIsOpen(false)
+                    setOptions(opt)
+                    form.setFieldValue('docs', [])
+                  }}
+                  onBlur={field.handleBlur}
+                  opt={options}
+                  error={field.state.meta.touchedErrors}
+                />
+              </>
+            )
+          }}
+        </form.Field>
+
+        <form.Field
           name='docs'
           mode='array'
           validators={{
@@ -294,7 +338,7 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
                                     (el) => {
                                       return el.option === subField.state.value
                                     }
-                                  )?.text[lang]
+                                  )?.text[locale]
                                 }
                                 onChange={(e) =>
                                   subField.handleChange(e.target.value)
@@ -310,6 +354,7 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
                               if (value?.length) {
                                 return undefined
                               }
+                              // patch logic
                               return text.errors.uploadFile
                             },
                             onChange: ({ value }) => {
@@ -395,8 +440,9 @@ export default function TSForm({ opt, text, lang }: TSFormProps) {
                   )
                 })}
                 <SelectButton
+                  isToPatch={isToPatch}
                   validateFields={() => form.validateAllFields('submit')}
-                  lang={lang}
+                  lang={locale}
                   docArrayLength={() => form.getFieldValue('docs').length}
                   setFieldValue={setFieldValue as any}
                   error={field.state.meta.errors}
