@@ -114,3 +114,24 @@ html {
     background: hsl(120 100% 10% / 1);
   }
 }
+
+@layer utilities {
+  /* Act as a border */
+  .animationWrapper {
+    @apply relative flex items-center justify-center overflow-hidden rounded-full;
+  }
+  .animationContent {
+    @apply relative z-[60] m-[3px] rounded-full  p-[4px];
+  }
+  /* Gradient */
+  .animationLine::before {
+    background: conic-gradient(
+      rgba(1, 1, 1, 1) 0deg,
+      rgba(1, 1, 2, 1) 0deg,
+      transparent 120deg
+    );
+    @apply animate-borderSpin absolute left-0 top-[-50%] -z-10 h-[100%] w-[100%] origin-bottom content-[''];
+  }
+
+  /* Body */
+}

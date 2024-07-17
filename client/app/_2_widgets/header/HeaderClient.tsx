@@ -5,6 +5,8 @@ import { ActiveLinkClient, Logo, cn } from '@shared/index'
 import { useState } from 'react'
 import BurgerIcon from './BurgerIcon'
 import './header.css'
+import { CalendarDays } from 'lucide-react'
+import Link from 'next/link'
 
 interface HeaderClientProps extends myTS.I {
   content: {
@@ -48,8 +50,10 @@ const HeaderClient: React.FC<HeaderClientProps> = ({ locale, content }) => {
       <nav
         className={cn(
           'smExtra:w-[70%]',
-          'z-[52] flex flex-1 justify-end gap-5',
-          ' transition-all duration-300 lg:absolute lg:top-0 lg:h-[832px] lg:w-1/2 lg:flex-col lg:justify-start lg:rounded-br-10 lg:rounded-tr-10 lg:bg-theme-bg lg:px-9 lg:py-5 ',
+          'z-[52] flex flex-1 items-center justify-end gap-5',
+          'transition-all duration-300',
+          'lg:absolute lg:top-0 lg:h-[832px] lg:w-1/2 lg:flex-col lg:justify-start lg:rounded-br-10 lg:rounded-tr-10 lg:bg-theme-bg lg:px-9 lg:py-5',
+          'lg:items-start',
 
           isOpen ? 'lg:-left-0' : 'lg:-left-1/2 smExtra:-left-[70%]'
         )}
@@ -75,8 +79,17 @@ const HeaderClient: React.FC<HeaderClientProps> = ({ locale, content }) => {
           content={content.gallery}
           locale={locale}
         />
+        <Link
+          locale={locale}
+          href={'/calendar'}
+          className='animationWrapper *:hover:animationLine   lg:absolute lg:right-9 lg:top-16 '
+        >
+          <div className='animationContent '>
+            <CalendarDays />
+          </div>
+        </Link>
         <LocaleSwitcherClient
-          className='lg:absolute lg:right-9 lg:top-5'
+          className='animationWrapper *:hover:animationLine lg:absolute lg:right-9 lg:top-5'
           currentLocale={locale}
         />
       </nav>

@@ -24,6 +24,11 @@ const config: Config = {
         'grid-rows': 'grid-template-rows',
       },
       keyframes: {
+        borderSpin: {
+          '100%': {
+            transform: 'rotate(-360deg)',
+          },
+        },
         slideInTop: {
           '0%': { transform: 'translateY(-100%)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
@@ -43,6 +48,7 @@ const config: Config = {
         },
       },
       animation: {
+        borderSpin: 'borderSpin 1.7s linear  infinite',
         spinSlow: 'spin 3s linear infinite',
         fadeIn: 'fadeIn 0.5s ease-in-out',
         slideInTop: 'slideInTop 0.5s ease-in-out',
