@@ -210,17 +210,42 @@ const dataProvider = (
   },
 
   // simple-rest doesn't handle provide an updateMany route, so we fallback to calling update n times instead
-  updateMany: (resource, params) =>
-    Promise.all(
-      params.ids.map((id) =>
-        httpClient(`${apiUrl}/${resource}/${id}`, {
-          method: 'PUT',
-          body: JSON.stringify(params.data),
-        })
-      )
-    ).then((responses) => ({
-      data: responses.map(({ json }) => json.id),
-    })),
+  updateMany: (resource, params) => {
+    const { ids, data } = params
+    const authHeaders = new Headers({
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}`,
+    })
+    const getRecordById = (id: Identifier) => {
+      const url = `${apiUrl}/${resource}/${id}`
+      const options = {
+        headers: authHeaders,
+      }
+      return httpClient(url, options).then(({ json }) => json)
+    }
+
+    const updateRecord = (
+      record: any,
+      data: Partial<any> | ArrayLike<unknown>
+    ) => {
+      const formData = new FormData()
+      Object.entries(data).forEach(([key, value]) => {
+        formData.append(key, value)
+      })
+      return httpClient(`${apiUrl}/${resource}/${record.inn}`, {
+        method: 'PATCH',
+        headers: authHeaders,
+        body: formData,
+      }).then(({ json }) => json)
+    }
+
+    const updatePromises = ids.map((id) =>
+      getRecordById(id).then((record) => updateRecord(record, data))
+    )
+
+    return Promise.all(updatePromises).then((updatedRecords) => ({
+      data: updatedRecords,
+    }))
+  },
 
   create: (resource, params) =>
     httpClient(`${apiUrl}/${resource}`, {

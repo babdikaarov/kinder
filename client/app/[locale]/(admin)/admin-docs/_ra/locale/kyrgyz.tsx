@@ -10,12 +10,18 @@ const KyrgyzTranslation: TranslationMessages = {
       declined: 'Четке кагылды',
       deleted: 'Корзинада',
     },
+    action: {
+      accept: 'Кабыл алуу',
+      decline: 'Четке кагуу',
+      to_delete: 'Корзинага',
+    },
     formSchema: {
       BOTH_PARENTS: 'Толук үй-бүлө',
       WIDOW: 'Жесир',
       DIVORCED: 'Ажырашкан',
       GUARDIAN: 'Камкорчу',
     },
+
     delete_title: 'ИНН %{inn} менен баланын маалыматтарын өчүрүү',
     delete_content: 'Бул маалыматты өчүргүңүз келеби?',
     document: {

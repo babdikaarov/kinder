@@ -11,14 +11,14 @@ const nextConfig = {
     // CMS_API: 'http://localhost:1337',
 
     //  // local dev //
-    // BASE_URL: 'http://localhost:3000',
-    // BACKEND_URL: 'https://kashkaldak.edu.kg',
-    // CMS_API: 'http://localhost:1337',
+    BASE_URL: 'http://localhost:3000',
+    BACKEND_URL: 'https://kashkaldak.edu.kg',
+    CMS_API: 'http://localhost:1337',
 
     // docker dev //
-    BASE_URL: 'http://localhost',
-    BACKEND_URL: 'https://kashkaldak.edu.kg',
-    CMS_API: 'http://strapi:1337',
+    // BASE_URL: 'http://localhost',
+    // BACKEND_URL: 'https://kashkaldak.edu.kg',
+    // CMS_API: 'http://strapi:1337',
   },
   output: 'standalone',
   reactStrictMode: false,
@@ -27,7 +27,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: 'strapi', // production
+        hostname: 'strapi',
         // hostname: 'host.docker.internal', // docker development, cms running locally
         port: '1337',
       },

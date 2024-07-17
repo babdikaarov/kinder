@@ -10,12 +10,18 @@ const RussianTranslation: TranslationMessages = {
       declined: 'Отклонено',
       deleted: 'В Корзине',
     },
+    action: {
+      accept: 'Принять',
+      decline: 'Отклонить',
+      to_delete: 'В корзину',
+    },
     formSchema: {
       BOTH_PARENTS: 'Полная семья',
       WIDOW: 'Вдова',
       DIVORCED: 'Разведён(а)',
       GUARDIAN: 'Опекун',
     },
+
     delete_title: 'Удаление данных о ребёнке с ИНН %{inn}',
     delete_content: 'Вы уверены, что хотите удалить эту запись?',
     document: {

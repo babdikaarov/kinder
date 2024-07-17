@@ -14,6 +14,8 @@ import {
   useListController,
   useTranslate,
   Pagination,
+  BulkUpdateWithConfirmButton,
+  BulkDeleteWithConfirmButton,
 } from 'react-admin'
 import { useMediaQuery, Theme } from '@mui/material'
 
@@ -49,7 +51,22 @@ export const FormList = () => {
           rowClick='edit'
           bulkActionButtons={
             <>
-              <BulkDeleteButton
+              <BulkUpdateWithConfirmButton
+                label='myRoot.action.accept'
+                data={{ status: 'ACCEPTED', admin: 'true' }}
+                icon={<Pin size={18} />}
+              />
+              <BulkUpdateWithConfirmButton
+                label='myRoot.action.decline'
+                data={{ status: 'DECLINED', admin: 'true' }}
+                icon={<Pin size={18} />}
+              />
+              <BulkUpdateWithConfirmButton
+                label='myRoot.action.to_delete'
+                data={{ status: 'DELETED', admin: 'true' }}
+                icon={<Pin size={18} />}
+              />
+              <BulkDeleteWithConfirmButton
                 confirmTitle='myRoot.bulk_delete_title'
                 confirmContent='myRoot.bulk_delete_content'
                 mutationMode='pessimistic'

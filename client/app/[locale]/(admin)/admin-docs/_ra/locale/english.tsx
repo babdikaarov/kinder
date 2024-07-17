@@ -10,13 +10,17 @@ const englishMessages: TranslationMessages = {
       declined: 'Declined',
       deleted: 'Trash',
     },
+    action: {
+      accept: 'Accept',
+      decline: 'To decline',
+      to_delete: 'To trash',
+    },
     formSchema: {
       BOTH_PARENTS: 'Complete family',
       WIDOW: 'Widow',
       DIVORCED: 'Divorced',
       GUARDIAN: 'Guardian',
     },
-
     delete_title: 'Deleting data about child with inn %{inn}',
     delete_content: 'Are you sure you want to delete this data record?',
     document: {

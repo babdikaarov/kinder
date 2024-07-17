@@ -28,11 +28,13 @@ import {
   LoaderCircle,
   Pin,
   TimerReset,
+  Trash2,
 } from 'lucide-react'
 
 export const FormEdit = () => {
-  const [open, setOpen] = useState(false)
   const [openSpinner, setOpenSpinner] = useState(false)
+
+  const [open, setOpen] = useState(false)
   const isMobile = useMediaQuery<Theme>((theme) => theme.breakpoints.down('sm'))
   const notify = useNotify()
   const t = useTranslate()
@@ -86,9 +88,7 @@ export const FormEdit = () => {
         </TopToolbar>
       }
     >
-      <SimpleForm
-        toolbar={<MyToolbar setOpenSpinner={setOpenSpinner} notify={notify} />}
-      >
+      <SimpleForm toolbar={<MyToolbar />}>
         <p className='text-fs-base'>{t('myRoot.field.identity')}</p>
 
         <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
@@ -232,8 +232,8 @@ export const FormEdit = () => {
                     variant='text'
                     className='text-blue-400 active:text-red-300'
                     onClick={async () => {
+                      setOpenSpinner(true)
                       try {
-                        setOpenSpinner(true)
                         const response = await fetch(
                           `${process.env.BACKEND_URL}${render.url}`,
                           {
@@ -291,10 +291,9 @@ export const FormEdit = () => {
   )
 }
 
-const MyToolbar: (setOpenSpinner: any, notify: any) => JSX.Element = (
-  setOpenSpinner,
-  notify
-) => {
+const MyToolbar: (notify: any) => JSX.Element = () => {
+  const [openSpinner, setOpenSpinner] = useState(false)
+  const notify = useNotify()
   const record = useRecordContext()
   const t = useTranslate()
   // console.log({record!.status === 'DELETED'} );
@@ -310,22 +309,19 @@ const MyToolbar: (setOpenSpinner: any, notify: any) => JSX.Element = (
         >
           <span className='flex gap-2'>
             <Button
-              // type='button'
-              label='PENDING'
-              // data={{ status: 'ACCEPTED', admin: true }}
-              // startIcon={<TimerReset size={18} />}
+              type='button'
+              label='myRoot.status.pending'
               disabled
               className={
                 record!.status === 'PENDING'
                   ? 'outline-double outline-4 outline-offset-1 outline-[#1976d2]'
                   : ''
               }
-              // variant={record!.status === 'PENDING' ? 'outlined' : 'text'}
             >
               <TimerReset size={18} />
             </Button>
             <UpdateButton
-              label='ACCEPTED'
+              label='myRoot.action.accept'
               data={{ status: 'ACCEPTED', admin: 'true' }}
               icon={<Pin size={18} />}
               disabled={record!.status === 'ACCEPTED'}
@@ -336,7 +332,7 @@ const MyToolbar: (setOpenSpinner: any, notify: any) => JSX.Element = (
               }
             />
             <UpdateButton
-              label='DECLINED'
+              label='myRoot.action.decline'
               data={{ status: 'DECLINED', admin: 'true' }}
               icon={<Ban size={18} />}
               disabled={record!.status === 'DECLINED'}
@@ -346,13 +342,25 @@ const MyToolbar: (setOpenSpinner: any, notify: any) => JSX.Element = (
                   : ''
               }
             />
-            <DeleteWithConfirmButton
+            <UpdateButton
+              label={'myRoot.action.to_delete'}
+              data={{ status: 'DELETED', admin: 'true' }}
+              icon={<Trash2 size={18} />}
+              disabled={record!.status === 'DELETED'}
+              className={
+                record!.status === 'DELETED'
+                  ? 'outline-double outline-4 outline-offset-1 outline-[#1976d2]'
+                  : ''
+              }
+            />
+            {/* <DeleteWithConfirmButton
               confirmContent={t('myRoot.delete_content')}
               confirmTitle={t('myRoot.delete_title', { inn: record!.inn })}
               disabled={record!.status !== 'DELETED'}
-            />
+            /> */}
           </span>
           <Button
+            type='button'
             className=' text-blue-400 active:text-red-300'
             onClick={async () => {
               try {
@@ -391,6 +399,17 @@ const MyToolbar: (setOpenSpinner: any, notify: any) => JSX.Element = (
           </Button>
         </Stack>
       </Labeled>
+      <Dialog
+        open={openSpinner}
+        sx={{
+          '& .MuiDialog-paper': {
+            backgroundColor: 'transparent',
+            boxShadow: 'none',
+          },
+        }}
+      >
+        <LoaderCircle className='size-28 animate-spin bg-transparent stroke-white' />
+      </Dialog>
     </Toolbar>
   )
 }
