@@ -1,30 +1,15 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
-import '../globals.css'
 
 export const metadata: Metadata = {
-  title: 'Kindergarten',
-  description: 'on development',
+  title: 'Админ',
+  description:
+    'Детский Сад Кашкалдак - административная панель для обработки документов одобренных заявлений',
 }
 
-const poppins = Poppins({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-poppins',
-  style: 'normal',
-  display: 'swap',
-})
-
-export default function RootLocaleLayout({
+export default function RootAdminLayout({
   children,
-  params: { locale },
 }: {
   children: React.ReactNode
-  params: { locale: string }
 }) {
-  return (
-    <html lang={locale} className={poppins.variable}>
-      <body className='m-0'>{children}</body>
-    </html>
-  )
+  return <div className='m-0'>{children}</div>
 }

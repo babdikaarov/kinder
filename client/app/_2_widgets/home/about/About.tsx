@@ -31,7 +31,6 @@ const About: React.FC<AboutProps> = async ({ locale }) => {
               )}
               style={{
                 width: 'auto',
-                // height: 'auto',
                 objectFit: 'cover',
               }}
             />

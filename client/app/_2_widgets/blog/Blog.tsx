@@ -1,24 +1,8 @@
-import { Arrow } from '@/app/_5_shared'
-import BlogRendererClient from './BlogRendererClient'
+import { Arrow, ShareLinks } from '@shared/index'
+import BlogRendererClient from '@lib/strapi/BlogRendererClient'
 import { type BlocksContent } from '@strapi/blocks-react-renderer'
-import ShareLinks from '@/app/_5_shared/Links/ShareLinks'
 
-interface BlogProps {
-  content: {
-    [key: string]: {
-      title: string
-      readonly post: BlocksContent
-    }
-  }
-  locale: string
-  shareText: {
-    share: string
-    copy: string
-    copied: string
-  }
-}
-
-const Blog: React.FC<BlogProps> = ({ shareText, content, locale }) => {
+const Blog: React.FC<myTS.BlogProps> = ({ shareText, content, locale }) => {
   return (
     <section className='max-w-[90%]'>
       <Arrow className='absolute left-0 top-3' tomain />

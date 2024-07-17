@@ -1,6 +1,5 @@
-import ArrowAnimated from '@/app/_5_shared/icons/ArrowAnimated'
 import { getData } from '@entities/index'
-import { Wrapper, cn } from '@shared/index'
+import { Wrapper, cn, ArrowAnimated } from '@shared/index'
 import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 

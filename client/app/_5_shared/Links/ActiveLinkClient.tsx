@@ -11,10 +11,10 @@ interface ActiveLinkClientProps extends myTS.I {
 const ActiveLinkClient: React.FC<ActiveLinkClientProps> = ({
   content,
   href,
-  i,
+  locale,
 }) => {
   const pathname = usePathname()
-  const isActive = href === pathname || `/${i + href}` === pathname
+  const isActive = href === pathname || `/${locale + href}` === pathname
 
   return (
     <div className='relative w-fit'>
@@ -22,7 +22,7 @@ const ActiveLinkClient: React.FC<ActiveLinkClientProps> = ({
         prefetch={true}
         href={href}
         className={isActive ? 'activeLink' : 'hoverLink'}
-        locale={i}
+        locale={locale}
       >
         {content}
       </Link>

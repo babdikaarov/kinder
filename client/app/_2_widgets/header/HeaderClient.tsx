@@ -1,10 +1,10 @@
 'use client'
 
-import { LocaleSwitcherClient } from '@/app/_3_features'
-import { ActiveLinkClient, Logo, cn } from '@/app/_5_shared'
+import { LocaleSwitcherClient } from '@entities/index'
+import { ActiveLinkClient, Logo, cn } from '@shared/index'
 import { useState } from 'react'
-import './header.css'
 import BurgerIcon from './BurgerIcon'
+import './header.css'
 
 interface HeaderClientProps extends myTS.I {
   content: {

@@ -312,7 +312,7 @@ const MyToolbar: (setOpenSpinner: any, notify: any) => JSX.Element = (
             <Button
               // type='button'
               label='PENDING'
-              // data={{ status: 'ACCEPTED', isAdmin: true }}
+              // data={{ status: 'ACCEPTED', admin: true }}
               // startIcon={<TimerReset size={18} />}
               disabled
               className={
@@ -326,7 +326,7 @@ const MyToolbar: (setOpenSpinner: any, notify: any) => JSX.Element = (
             </Button>
             <UpdateButton
               label='ACCEPTED'
-              data={{ status: 'ACCEPTED', isAdmin: true }}
+              data={{ status: 'ACCEPTED', admin: 'true' }}
               icon={<Pin size={18} />}
               disabled={record!.status === 'ACCEPTED'}
               className={
@@ -337,7 +337,7 @@ const MyToolbar: (setOpenSpinner: any, notify: any) => JSX.Element = (
             />
             <UpdateButton
               label='DECLINED'
-              data={{ status: 'DECLINED', isAdmin: true }}
+              data={{ status: 'DECLINED', admin: 'true' }}
               icon={<Ban size={18} />}
               disabled={record!.status === 'DECLINED'}
               className={

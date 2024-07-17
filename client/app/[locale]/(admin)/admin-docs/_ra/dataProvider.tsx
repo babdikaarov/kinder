@@ -2,6 +2,7 @@ import { stringify } from 'query-string'
 import { fetchUtils, DataProvider, Identifier } from 'ra-core'
 import { filterData } from './utils/filter'
 import { combine } from 'rrule/dist/esm/dateutil'
+import { join } from 'path'
 
 /**
  * Maps react-admin queries to a simple REST API
@@ -54,45 +55,57 @@ const dataProvider = (
       filter: JSON.stringify(params.filter),
     }
     const url = `${apiUrl}/${resource}?${stringify(query)}`
+    const JWT = JSON.parse(localStorage.getItem('auth')!)
+    try {
+      const options =
+        countHeader === 'Content-Range'
+          ? {
+              // Chrome doesn't return `Content-Range` header if no `Range` is provided in the request.
+              headers: new Headers({
+                Range: `${resource}=${rangeStart}-${rangeEnd}`,
+                'Access-Control-Expose-Headers': 'Content-Range',
+                Authorization: `Bearer ${JWT.token}`,
+              }),
+              signal: params?.signal,
+            }
+          : { signal: params?.signal }
 
-    const options =
-      countHeader === 'Content-Range'
-        ? {
-            // Chrome doesn't return `Content-Range` header if no `Range` is provided in the request.
-            headers: new Headers({
-              Range: `${resource}=${rangeStart}-${rangeEnd}`,
-              'Access-Control-Expose-Headers': 'Content-Range',
-              Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}`,
-            }),
-            signal: params?.signal,
-          }
-        : { signal: params?.signal }
+      return httpClient(url, options).then(({ headers, json }) => {
+        const data = filterData(params.filter.q, json)
+        const sortField = params.sort!.field
 
-    return httpClient(url, options).then(({ headers, json }) => {
-      const data = filterData(params.filter.q, json)
-      const sortField = params.sort!.field
-
-      if (params.sort?.order === 'ASC') {
-        data.sort((a: any, b: any) =>
-          a[sortField] < b[sortField] ? 1 : a[sortField] > b[sortField] ? -1 : 0
-        )
-      } else {
-        data.sort((a: any, b: any) =>
-          a[sortField] < b[sortField] ? -1 : a[sortField] > b[sortField] ? 1 : 0
-        )
-      }
-
-      const filteredData = !params.filter.status
-        ? data
-        : data.filter(
-            (item: { status: any }) => item.status == params.filter.status
+        if (params.sort?.order === 'ASC') {
+          data.sort((a: any, b: any) =>
+            a[sortField] < b[sortField]
+              ? 1
+              : a[sortField] > b[sortField]
+                ? -1
+                : 0
           )
+        } else {
+          data.sort((a: any, b: any) =>
+            a[sortField] < b[sortField]
+              ? -1
+              : a[sortField] > b[sortField]
+                ? 1
+                : 0
+          )
+        }
 
-      return {
-        data: filteredData.slice(rangeStart, rangeEnd),
-        total: filteredData.length,
-      }
-    })
+        const filteredData = !params.filter.status
+          ? data
+          : data.filter(
+              (item: { status: any }) => item.status == params.filter.status
+            )
+
+        return {
+          data: filteredData.slice(rangeStart, rangeEnd),
+          total: filteredData.length,
+        }
+      })
+    } catch (error) {
+      return Promise.reject()
+    }
   },
 
   getOne: async (resource, params) => {
@@ -216,7 +229,7 @@ const dataProvider = (
     }).then(({ json }) => ({ data: json })),
 
   delete: (resource, params) => {
-    console.log('deleteone')
+    // console.log('deleteone')
 
     return httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'DELETE',
@@ -229,8 +242,8 @@ const dataProvider = (
 
   // simple-rest doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
   deleteMany: (resource, params) => {
-    console.log('deletemany')
-    console.log(params)
+    // console.log('deletemany')
+    // console.log(params)
 
     return Promise.all(
       params.ids.map((id) =>

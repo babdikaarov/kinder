@@ -1,4 +1,4 @@
-import { getData } from '@/app/_4_entities'
+import { getData } from '@entities/index'
 import Image from 'next/image'
 import Link from 'next/link'
 interface LogoProps extends React.HTMLAttributes<HTMLImageElement> {

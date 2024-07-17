@@ -1,6 +1,91 @@
 declare interface IntlMessages extends myTS.LocalizationData {}
 
 declare namespace myTS {
+  interface DialogProps {
+    myRef: React.MutableRefObject<null>
+    text: {
+      button: string
+      title: string
+      save: string
+      note: string
+      clickDrop: {
+        clickAndDrop: string
+        drop: string
+      }
+      upload: string
+      error: {
+        duplicate: string
+        limit: string
+        sizeLimit: string
+        isNotSameExtention: string
+      }
+    }
+    forwardInput: any
+    className: string
+    setFileUrls: React.Dispatch<React.SetStateAction<fileUrls[]>>
+    fileUrls: fileUrls[]
+  }
+  interface DocsList {
+    text: Record<string, string>
+    option: string
+    multiple: boolean
+  }
+  interface Options {
+    options: DocsList[]
+    name: Record<string, string>
+    errorsText: Record<string, string>
+  }
+
+  type TFormType = Record<string, Options>
+  interface BlogProps {
+    locale: string
+    content: {
+      [key: string]: {
+        title: string
+        readonly post: BlocksContent
+      }
+    }
+    shareText: {
+      share: string
+      copy: string
+      copied: string
+    }
+  }
+  type TData = {
+    id: string
+    title?: string
+    start: string
+    end: string
+    calendarId: string
+    description?: string
+    location?: string
+    rrule: string
+  }
+  interface GalleryProps {
+    data: ImageData[]
+    header: string
+  }
+  interface ImageFormat {
+    src: string
+    width: number
+    height: number
+  }
+
+  interface ImageData {
+    id: number
+    alt: string | null
+    src: string
+    formats: {
+      large?: ImageFormat
+      small?: ImageFormat
+      medium?: ImageFormat
+      thumbnail?: ImageFormat
+    }
+  }
+
+  type DataEntry = {
+    data: ImageData[]
+  }
   type I = {
     locale: string
   }

@@ -1,9 +1,8 @@
-import { Wrapper, cn } from '@shared/index'
+import { Wrapper, cn, ArrowAnimated } from '@shared/index'
 import { getData } from '@entities/index'
 import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import { Link } from '@/navigation'
-import ArrowAnimated from '@/app/_5_shared/icons/ArrowAnimated'
 
 interface GalleryInfoProps extends myTS.I {}
 
@@ -40,7 +39,6 @@ const GalleryInfo: React.FC<GalleryInfoProps> = async ({ locale }) => {
       <div className='flex-1'>
         <Image
           className='object-cover'
-          // className='lg:h-[210px] lg:w-[400px]'
           src={data.image.src}
           alt={data.image.alt ?? 'gallery refference'}
           width={600}

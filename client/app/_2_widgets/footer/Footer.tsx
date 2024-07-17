@@ -1,9 +1,7 @@
 import { ActiveLinkClient, Logo } from '@shared/index'
 import { getTranslations } from 'next-intl/server'
 
-interface FooterProps extends myTS.I {
- 
-}
+interface FooterProps extends myTS.I {}
 
 const Footer: React.FC<FooterProps> = async ({ locale }) => {
   const t = await getTranslations()

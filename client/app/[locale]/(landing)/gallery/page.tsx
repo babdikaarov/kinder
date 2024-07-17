@@ -2,6 +2,7 @@ interface pageProps {}
 import { getTranslations } from 'next-intl/server'
 import GalleryClient from './GalleryClient'
 import { Arrow } from '@shared/index'
+import { Metadata } from 'next'
 export interface ImageFormat {
   src: string
   width: number
@@ -23,6 +24,12 @@ export interface ImageData {
 export interface DataEntry {
   data: ImageData[]
 }
+
+export const metadata: Metadata = {
+  title: 'Галерея',
+  description: 'Галерея фотографий Кашкалдак',
+}
+
 const page: React.FC<pageProps> = async ({}) => {
   const t = await getTranslations()
   const url = process.env.CMS_API + '/api/galleries?&populate=*'

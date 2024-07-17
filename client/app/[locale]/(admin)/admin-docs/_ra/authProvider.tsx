@@ -9,15 +9,14 @@ export const authProvider: AuthProvider = {
     })
     try {
       const response = await fetch(request)
-
+      const second_response = await fetch(`/ru/admin-docs/api/get-avatar`)
+      const avatar = await second_response.json()
       if (response.status < 200 || response.status >= 300) {
         throw new Error(response.statusText)
       }
       const auth = await response.json()
-      const img = await fetch(`${process.env.CMS_API}/api/logo?&populate=*`)
-      const avatar = await img.json()
-      auth.avatar = avatar.url
 
+      auth.avatar = avatar
       localStorage.setItem('auth', JSON.stringify(auth))
       return Promise.resolve()
     } catch {
@@ -39,7 +38,7 @@ export const authProvider: AuthProvider = {
     localStorage.removeItem('auth')
     return Promise.resolve()
   },
-  getIdentity: () => {
+  getIdentity: async () => {
     const identityString = localStorage.getItem('auth')
     if (!identityString) {
       return Promise.reject(new Error('Identity not found in localStorage'))

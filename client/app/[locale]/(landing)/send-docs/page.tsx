@@ -1,9 +1,16 @@
-import { FormServer } from '@/app/_3_features'
-import { getData } from '@/app/_4_entities'
+import { FormServer } from '@features/index'
+import { getData } from '@entities/index'
 import { Wrapper } from '@shared/index'
+import { Metadata } from 'next'
 interface pageProps {
   params: { locale: string; id: string }
 }
+
+export const metadata: Metadata = {
+  title: 'Отправка документов',
+  description: 'Страница отправки документов для администрации Кашкалдак',
+}
+
 const page: React.FC<pageProps> = async ({ params }) => {
   const instruction = await getData('/api/instruction?populate=*', {
     cache: 'default',

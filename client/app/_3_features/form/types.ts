@@ -4,10 +4,8 @@ import {
   FieldComponent,
   FormState,
   Updater,
-  ValidationCause,
   ValidationError,
 } from '@tanstack/react-form'
-import { TFormType } from './FormServer'
 
 type NoInfer<T> = any
 
@@ -175,8 +173,8 @@ export interface SelectButtonProps
   }
   getOption: () => string
   pushField: (name: { name: string; text: Record<string, string> }) => void
-  opt: TFormType
-  originOpt: TFormType
+  opt: myTS.TFormType
+  originOpt: myTS.TFormType
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   wrapper: <TSelected = FormState<TFormData>>(props: {
@@ -206,7 +204,7 @@ export interface InputProps
 export type Ioptions = 'default' | 'passport' | 'COB'
 
 export interface TSFormProps extends myTS.I {
-  opt: TFormType
+  opt: myTS.TFormType
   text: Ttext
 }
 

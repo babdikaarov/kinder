@@ -8,14 +8,13 @@ import {
   viewMonthAgenda,
 } from '@babdikaarov/calendar'
 import { createEventModalPlugin } from '@babdikaarov/event-modal'
-import '@babdikaarov/theme-default/dist/index.css'
 import { generateEventColorTheme } from './calendarsConfig'
 import { useEffect, useState } from 'react'
-import { TData } from '../../_1_pages/calendar/Calendar'
 import FilterArea from './FilterArea'
+import '@babdikaarov/theme-default/dist/index.css'
 import './calendar.css'
 interface XSchedulerProps extends myTS.I {
-  data: TData[]
+  data: myTS.TData[]
   category: string[]
   text: {
     header: string
@@ -37,7 +36,6 @@ const XScheduler: React.FC<XSchedulerProps> = ({
     views: [viewMonthGrid, viewMonthAgenda, viewWeek, viewDay],
     defaultView: 'month',
     calendars: configColor,
-    // locale: 'ky-KG',
     locale: locale === 'ru' ? 'ru-RU' : 'kg-KG',
     workDays: {
       numberDays: [1, 2, 3, 4, 5],
@@ -49,7 +47,6 @@ const XScheduler: React.FC<XSchedulerProps> = ({
   )
 
   const handleCheckboxChange = (e: string) => {
-    // Add the feature to the array if it's checked
     setCheckedFilter(e === 'all' ? [...category] : [e])
   }
 

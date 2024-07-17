@@ -1,6 +1,7 @@
-import BlogModal from '@/app/_2_widgets/blog/BlogModal'
-import { getData } from '@/app/_4_entities'
+import { BlogModal } from '@widgets/index'
+import { getData } from '@entities/index'
 import { getTranslations } from 'next-intl/server'
+import { notFound } from 'next/navigation'
 
 interface PageProps {
   params: { locale: string; id: string }
@@ -9,8 +10,14 @@ interface PageProps {
 const Page: React.FC<PageProps> = async ({ params }) => {
   const { id, locale } = params
   const data = await getData('/api/blogs?&populate=*')
+  if (!data) {
+    notFound()
+  }
+
   const index = data.findIndex((post: { id: number }) => post.id === Number(id))
-  if (!data[index][locale].post) return null
+  if (!data[index]) {
+    notFound()
+  }
   const post = data[index]
   const shareT = await getTranslations()
   const shareText = {

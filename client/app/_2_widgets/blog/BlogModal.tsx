@@ -1,27 +1,9 @@
 'use client'
-import BlockRendererClient from './BlogRendererClient'
-import { type BlocksContent } from '@strapi/blocks-react-renderer'
-import { Arrow } from '@shared/index'
-import Modal from './Modal'
-import Blog from './Blog'
-import BlogRendererClient from './BlogRendererClient'
-import ShareLinks from '@/app/_5_shared/Links/ShareLinks'
-interface BlogModalProps {
-  locale: string
-  content: {
-    [key: string]: {
-      title: string
-      readonly post: BlocksContent
-    }
-  }
-  shareText: {
-    share: string
-    copy: string
-    copied: string
-  }
-}
+import { Arrow, ShareLinks } from '@shared/index'
+import Modal from '@lib/radixui/Modal'
+import BlogRendererClient from '@lib/strapi/BlogRendererClient'
 
-const BlogModal: React.FC<BlogModalProps> = ({
+const BlogModal: React.FC<myTS.BlogProps> = ({
   shareText,
   content,
   locale,

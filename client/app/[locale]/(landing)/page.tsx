@@ -1,4 +1,4 @@
-import { cn } from '@/app/_5_shared'
+import { cn } from '@shared/index'
 import {
   About,
   CalendarReference,
@@ -14,7 +14,7 @@ interface PageProps {
 }
 
 const Page: React.FC<PageProps> = ({ params }) => {
-  const {locale} = params 
+  const { locale } = params
   return (
     <main
       className={cn(

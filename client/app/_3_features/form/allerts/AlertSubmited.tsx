@@ -1,22 +1,20 @@
 'use client'
 
-import ArrowAnimated from '@/app/_5_shared/icons/ArrowAnimated'
+import { ArrowAnimated, cn } from '@shared/index'
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from './AlertLib'
-import { cn } from '@/app/_5_shared'
+} from '@lib/radixui/AlertLib'
 
 interface AlertProps {
   myRef: React.MutableRefObject<null>
-  resetForm: ()=> void
+  resetForm: () => void
   text: {
     title: string
     description: string

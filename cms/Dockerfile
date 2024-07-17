@@ -4,27 +4,6 @@ RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev l
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
-# Set environment variables
-# ENV HOST=0.0.0.0 \
-#     PORT=1337 \
-#     APP_KEYS=RD5i9SbFHgRU5fFAF4O89g==,0K9bkUDI2KDdlvDbf2Ybtw==,sDRo9OG0LVrd3p4dTKHcGg==,mi8PrTm+hxI29GmpQY9bGA== \
-#     API_TOKEN_SALT=aMqqi4260qfhHxg3C8XXbw== \
-#     ADMIN_JWT_SECRET=elLC1QV1E8EKS4cXasbJnA== \
-#     TRANSFER_TOKEN_SALT=2Mm2TehHXvdhoMUEc9XPaA== \
-#     DATABASE_CLIENT=postgres \
-#     DATABASE_PORT=5432 \
-#     DATABASE_HOST=0.0.0.0 \
-#     DATABASE_NAME=cms \
-#     DATABASE_USERNAME=postgres \
-#     DATABASE_PASSWORD=postgres \
-#     DATABASE_SSL=false \
-#     JWT_SECRET=oS2MxDtE+rso+P7/eOc9fQ== \
-#     UNSECURE_CON=http:// \
-#     SECURE_CON=https:// \
-#     NODE_ENV=production
-
-
-
 WORKDIR /opt/
 COPY package.json package-lock.json ./
 RUN npm install -g node-gyp

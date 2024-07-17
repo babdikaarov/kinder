@@ -19,11 +19,10 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@shared/*": ["app/_5_shared/*"],
-      "@entities/*": ["app/_4_entities/*"],
-      "@features/*": ["app/_3_features/*"],
       "@widgets/*": ["app/_2_widgets/*"],
-      "@pages/*": ["app/_1_pages/*"],
+      "@features/*": ["app/_3_features/*"],
+      "@entities/*": ["app/_4_entities/*"],
+      "@shared/*": ["app/_5_shared/*"],
       "@lib/*": ["app/_6_lib/*"]
     },
     "baseUrl": "./"

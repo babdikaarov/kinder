@@ -6,7 +6,6 @@ const config: Config = {
   // purge: ['./src/**/*.{js,ts,jsx,tsx}'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './_1_pages/**/*.{js,ts,jsx,tsx,mdx}',
     './_2_widgets/**/*.{js,ts,jsx,tsx,mdx}',
     './_3_features/**/*.{js,ts,jsx,tsx,mdx}',
     './_4_entities/**/*.{js,ts,jsx,tsx,mdx}',
@@ -33,11 +32,21 @@ const config: Config = {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        bounceLeft: {
+          '70%': { transform: 'translateX(0%)' },
+          '80%': { transform: 'translateX(-15%)' },
+          '90%': { transform: 'translateX(0%)' },
+          '95%': { transform: 'translateX(-7%)' },
+          '97%': { transform: 'translateX(0%)' },
+          '99%': { transform: 'translateX(-3%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
       },
       animation: {
-        'spin-slow': 'spin 3s linear infinite',
+        spinSlow: 'spin 3s linear infinite',
         fadeIn: 'fadeIn 0.5s ease-in-out',
         slideInTop: 'slideInTop 0.5s ease-in-out',
+        bounceLeft: 'bounceLeft 2s ease infinite',
       },
       fontSize: {
         'fs-sm': 'var(--fs-sm)',

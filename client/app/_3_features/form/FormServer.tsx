@@ -1,40 +1,24 @@
-import { getTranslations } from 'next-intl/server'
 import { Ttext } from './types'
-import TSForm from './TSForm'
-import { getData } from '@/app/_4_entities'
-import { error } from 'console'
-import { string } from 'zod'
+import FormClient from './FormClient'
+import { getData } from '@entities/index'
 
 interface FormServerProps extends myTS.I {}
-export interface DocsList {
-  text: Record<string, string>
-  option: string
-  multiple: boolean
-}
-interface Options {
-  options: DocsList[]
-  name: Record<string, string>
-  errorsText: Record<string, string>
-}
-
-export type TFormType = Record<string, Options>
 
 const FormServer: React.FC<FormServerProps> = async ({ locale }) => {
-  const formType: TFormType = await getData('/api/type-forms?populate=*')
-  const docsList: DocsList[] = await getData('/api/list-docs?populate=*')
+  const formType: myTS.TFormType = await getData('/api/type-forms?populate=*')
+  const docsList: myTS.DocsList[] = await getData('/api/list-docs?populate=*')
   const contentForm: myTS.ContentForm = await getData(
     `/api/content-form?locale=${locale}`
   ).then(({ data }) => data.attributes)
-  // console.log(formType)
 
   Object.entries(formType).forEach(([key, value]) => {
-    value.options = (value.options as Array<DocsList | string>)
+    value.options = (value.options as Array<myTS.DocsList | string>)
       .map((el) => {
         const matchingDoc = docsList.find((doc) => doc.option === el)
         if (matchingDoc) return matchingDoc
         return el
       })
-      .filter((el): el is DocsList => el !== undefined)
+      .filter((el): el is myTS.DocsList => el !== undefined)
   })
 
   const text: Ttext = {
@@ -133,7 +117,7 @@ const FormServer: React.FC<FormServerProps> = async ({ locale }) => {
     },
   }
 
-  return <TSForm opt={formType} text={text} locale={locale} />
+  return <FormClient opt={formType} text={text} locale={locale} />
 }
 
 export default FormServer

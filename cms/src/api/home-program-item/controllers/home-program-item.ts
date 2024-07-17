@@ -22,7 +22,8 @@ interface ImageObject {
 }
 export default factories.createCoreController("api::home-program-item.home-program-item", ({ strapi }) => ({
    async find(ctx) {
-      const host = `${process.env.UNSECURE_CON}` + ctx.request.header.host;
+      const baseURL = process.env.DOMAIN_NAME || ctx.request.header.host;
+      const host = `${process.env.PROTOCOL}` + baseURL;
       const { data, meta } = await super.find(ctx);
 
       const sortedEntry = data.map((el) => {

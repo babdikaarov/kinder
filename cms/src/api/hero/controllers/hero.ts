@@ -22,7 +22,8 @@ interface ImageObject {
 }
 export default factories.createCoreController("api::hero.hero", ({ strapi }) => ({
    async find(ctx) {
-      const host = `${process.env.UNSECURE_CON}` + ctx.request.header.host;
+      const baseURL = process.env.DOMAIN_NAME || ctx.request.header.host;
+      const host = `${process.env.PROTOCOL}` + baseURL;
       const { data, meta } = await super.find(ctx);
       const obj: Record<string, ImageObject> = data.attributes.image.data.attributes.formats;
       const modifiedObject: Record<string, ModifiedImageObject> = {};

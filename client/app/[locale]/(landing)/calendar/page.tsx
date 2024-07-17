@@ -1,23 +1,15 @@
-import { Calendar } from '@/app/_1_pages'
-// import CalendarClient from './CalendarClient'
-import { Arrow, Wrapper, cn, seedRecurrence } from '@/app/_5_shared'
+import { Arrow, Wrapper, seedRecurrence } from '@shared/index'
 import { XScheduler } from '@widgets/index'
+import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import { ClassNameValue } from 'tailwind-merge'
-import { string } from 'zod'
 
-export type TData = {
-  id: string
-  title?: string
-  start: string
-  end: string
-  calendarId: string
-  description?: string
-  location?: string
-  rrule: string
-}
 interface pageProps {
   params: { locale: string }
+}
+
+export const metadata: Metadata = {
+  title: 'Календарь',
+  description: 'Календарь событий мероприятий Кашкалдак',
 }
 
 const page: React.FC<pageProps> = async ({ params }) => {
@@ -27,7 +19,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
   if (!response.ok) throw Error('server is not responding')
   const { data, category } = await response.json()
   const seedData = data
-    .map((el: TData) => (el.rrule ? seedRecurrence(el) : el))
+    .map((el: myTS.TData) => (el.rrule ? seedRecurrence(el) : el))
     .flat()
 
   const t = await getTranslations()

@@ -54,8 +54,6 @@ export default function NextJsImage({ slide, offset, rect }: RenderSlideProps) {
         style={{
           objectFit: cover ? 'cover' : 'contain',
           cursor: click ? 'pointer' : undefined,
-          // width: 'auto',
-          // height: 'auto',
         }}
         sizes={`${Math.ceil((width / window.innerWidth) * 100)}vw`}
         onClick={

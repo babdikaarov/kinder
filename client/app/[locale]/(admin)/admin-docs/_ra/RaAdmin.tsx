@@ -32,6 +32,8 @@ const RaAdmin: React.FC<RaAdminProps> = ({}) => {
       defaultTheme='light'
       title='My Custom Admin'
       layout={MyLayout}
+      requireAuth
+      disableTelemetry
     >
       <Resource
         name='form'

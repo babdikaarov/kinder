@@ -23,7 +23,8 @@ import { factories } from "@strapi/strapi";
 export default factories.createCoreController("api::about.about", ({ strapi }) => ({
    async find(ctx) {
       //   console.log(ctx);
-      const host = `${process.env.UNSECURE_CON}` + ctx.request.header.host;
+      const baseURL = process.env.DOMAIN_NAME || ctx.request.header.host;
+      const host = `${process.env.PROTOCOL}` + baseURL;
       const { data, meta } = await super.find(ctx);
       const sorted = data.sort(
          (a: { attributes: { order: number } }, b: { attributes: { order: number } }) =>

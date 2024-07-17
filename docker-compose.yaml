@@ -1,7 +1,6 @@
-version: "3.8"
-
 services:
    devops_nginx:
+      container_name: "devops_nginx"
       build:
          context: ./nginx
          dockerfile: Dockerfile
@@ -10,32 +9,28 @@ services:
          - "80:80"
       volumes:
          - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      depends_on:
-         - client
-         - strapi
       networks:
-         - kindergarten_network
-
+         - main_network
+      depends_on:
+         - strapi
+         - client
    client:
+      container_name: "client"
       build:
          context: ./client
          dockerfile: Dockerfile
-      container_name: "client"
       restart: unless-stopped
       ports:
          - "3000:3000"
       networks:
-         - kindergarten_network
-         - strapi
-      environment:
-         CMS_API: http://strapi:1337
-         FORM_API: http://34.229.95.91:8080/api/form
+         - main_network
+         - strapi_network
       depends_on:
-         - strapi
-
+         strapi:
+            condition: service_started
    strapiDB:
-      image: postgres:16-alpine
       container_name: "strapiDB"
+      image: postgres:16-alpine
       restart: unless-stopped
       ports:
          - "5433:5432"
@@ -44,56 +39,59 @@ services:
          POSTGRES_USER: postgres
          POSTGRES_PASSWORD: beksultan
       volumes:
-         - ./cms_data/cms_v2.sql:/docker-entrypoint-initdb.d/cms_v2.sql
-         - postgres-data:/var/lib/postgresql/data
+         - ./cms_data/cms_prod.sql:/docker-entrypoint-initdb.d/cms_prod.sql
+         - strapiDB_data:/var/lib/postgresql/data
       user: "postgres"
       networks:
-         - strapi
-
+         - strapi_network
    strapi:
       container_name: strapi
       build:
          context: ./cms
          dockerfile: Dockerfile
       restart: unless-stopped
-      env_file: ./cms/.env
       environment:
-         STRAPI_ADMIN_BACKEND_URL: http://16.170.170.229:1337
+         # no change
+         PORT: 1337
+         APP_KEYS: RD5i9SbFHgRU5fFAF4O89g==,0K9bkUDI2KDdlvDbf2Ybtw==,sDRo9OG0LVrd3p4dTKHcGg==,mi8PrTm+hxI29GmpQY9bGA==
+         API_TOKEN_SALT: aMqqi4260qfhHxg3C8XXbw==
+         ADMIN_JWT_SECRET: elLC1QV1E8EKS4cXasbJnA==
+         TRANSFER_TOKEN_SALT: 2Mm2TehHXvdhoMUEc9XPaA==
+         JWT_SECRET: oS2MxDtE+rso+P7/eOc9fQ==
          DATABASE_CLIENT: postgres
-         DATABASE_PORT: 5433
+         DATABASE_PORT: 5432
          DATABASE_NAME: cms
          DATABASE_USERNAME: postgres
          DATABASE_PASSWORD: beksultan
-         DATABASE_HOST: strapiDB
-         API_TOKEN_SALT: aMqqi4260qfhHxg3C8XXbw==
-         TRANSFER_TOKEN_SALT: 2Mm2TehHXvdhoMUEc9XPaA==
-         JWT_SECRET: oS2MxDtE+rso+P7/eOc9fQ==
-         ADMIN_JWT_SECRET: elLC1QV1E8EKS4cXasbJnA==
-         APP_KEYS: RD5i9SbFHgRU5fFAF4O89g==,0K9bkUDI2KDdlvDbf2Ybtw==,sDRo9OG0LVrd3p4dTKHcGg==,mi8PrTm+hxI29GmpQY9bGA==
          NODE_ENV: production
+         # change
+         STRAPI_ADMIN_BACKEND_URL: http://strapi:1337
          HOST: strapi
-         PORT: 1337
+         DATABASE_HOST: strapiDB
+         PROTOCOL: http://
+         # DOMAIN_NAME: localhost
       volumes:
          - ./cms/config:/opt/app/config
          - ./cms/src:/opt/app/src
          - ./cms/package.json:/opt/package.json
          - ./cms/yarn.lock:/opt/yarn.lock
-         - ./cms/.env:/opt/app/.env
          - ./cms/public/uploads:/opt/app/public/uploads
-         - strapi-data:/data
+         - strapi_data:/data
       ports:
          - "1337:1337"
       networks:
-         - kindergarten_network
-         - strapi
+         - main_network
+         - strapi_network
       depends_on:
-         - strapiDB
+         strapiDB:
+            condition: service_started
+
 volumes:
-   strapi-data:
-   postgres-data:
+   strapi_data:
+   strapiDB_data:
 
 networks:
-   kindergarten_network:
+   main_network:
       driver: bridge
-   strapi:
+   strapi_network:
       driver: bridge

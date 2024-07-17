@@ -1,11 +1,10 @@
-import { getData } from '@/app/_4_entities'
-import { Arrow, Wrapper, cn } from '@shared/index'
+import { getData } from '@entities/index'
+import { Arrow, Wrapper, cn, ShareLinks, ArrowAnimated } from '@shared/index'
 import { BlocksContent } from '@strapi/blocks-react-renderer'
 import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import { Link } from '@/navigation'
-import ShareLinks from '@/app/_5_shared/Links/ShareLinks'
-import ArrowAnimated from '@/app/_5_shared/icons/ArrowAnimated'
+import { Metadata } from 'next'
 
 type TData = {
   id: number
@@ -15,6 +14,11 @@ type TData = {
 }
 interface pageProps {
   params: { locale: string; req: any }
+}
+
+export const metadata: Metadata = {
+  title: 'Статьи для родителей',
+  description: 'Информация и полезные статьи для родителей',
 }
 
 const page: React.FC<pageProps> = async ({ params }) => {

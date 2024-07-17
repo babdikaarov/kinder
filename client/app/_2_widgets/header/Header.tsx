@@ -1,4 +1,4 @@
-import { Logo, cn } from '@/app/_5_shared'
+import { Logo, cn } from '@shared/index'
 import HeaderClient from './HeaderClient'
 import { getTranslations } from 'next-intl/server'
 
@@ -13,7 +13,6 @@ const Header: React.FC<HeaderProps> = async ({ locale }) => {
     parents: t('navigation_parents'),
     gallery: t('navigation_gallery'),
   }
-  // console.log(content)
   return (
     <header className='fixed z-50 w-full  bg-theme-bg/40 backdrop-blur'>
       <div

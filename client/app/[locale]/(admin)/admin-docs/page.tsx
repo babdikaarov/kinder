@@ -1,3 +1,4 @@
+import { getData } from '@/app/_4_entities'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 const RaAdmin = dynamic(() => import('./_ra/RaAdmin'), {

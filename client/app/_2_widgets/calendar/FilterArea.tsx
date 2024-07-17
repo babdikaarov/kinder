@@ -2,9 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { CalendarsConfig } from './calendarsConfig'
-import { ChevronDown, ChevronUp } from 'lucide-react'
-import { cn } from '@/app/_5_shared'
-// import Select from 'react-select'
+import { ChevronDown } from 'lucide-react'
+import { cn } from '@shared/index'
 import {
   Select,
   SelectContent,
@@ -13,8 +12,7 @@ import {
   SelectValue,
   SelectIcon,
   SelectItemText,
-} from './Select'
-import { SelectLabel } from '@radix-ui/react-select'
+} from '@lib/radixui/Select'
 interface FilterAreaProps {
   handleCheckboxChange: (e: string) => void
   checkedFilter: string[]
@@ -45,11 +43,7 @@ const FilterArea: React.FC<FilterAreaProps> = ({
           onClick={() => setIsOpen(!isOpen)}
           className='h-full min-w-[180px] rounded-lg border border-solid border-dark-600 bg-white '
         >
-          <SelectValue
-            defaultValue={originalArray[0]}
-            placeholder={text}
-            // onChange={(e) => console.log(e.target)}
-          />
+          <SelectValue defaultValue={originalArray[0]} placeholder={text} />
           <SelectIcon asChild>
             <ChevronDown
               className={cn(
@@ -104,6 +98,10 @@ const FilterArea: React.FC<FilterAreaProps> = ({
       </Select>
 
       {/* 
+
+
+        // old version of filter
+
       <fieldset className='relative mb-2 rounded-10 border border-black bg-white p-4'>
         <legend>Категории:</legend>
         <div className='flex gap-2 '>

@@ -1,15 +1,12 @@
-import { Wrapper, cn } from '@shared/index'
-import { useLocale } from 'next-intl'
+import { Wrapper, cn, ArrowAnimated } from '@shared/index'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/navigation'
-import ArrowAnimated from '@/app/_5_shared/icons/ArrowAnimated'
 
 interface CalendarReferenceProps extends myTS.I {}
 
 const CalendarReference: React.FC<CalendarReferenceProps> = async ({
   locale,
 }) => {
-  // const locale = useLocale()
   const t = await getTranslations()
   return (
     <Wrapper

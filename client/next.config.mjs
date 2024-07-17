@@ -5,19 +5,34 @@ import withNextIntl from 'next-intl/plugin'
  */
 const nextConfig = {
   env: {
-    // production fix env rules
+    // // prod //
+    // BASE_URL: 'https://kashkaldak.edu.kg',
+    // BACKEND_URL: 'https://kashkaldak.edu.kg',
+    // CMS_API: 'http://localhost:1337',
+
+    //  // local dev //
+    // BASE_URL: 'http://localhost:3000',
+    // BACKEND_URL: 'https://kashkaldak.edu.kg',
+    // CMS_API: 'http://localhost:1337',
+
+    // docker dev //
+    BASE_URL: 'http://localhost',
     BACKEND_URL: 'https://kashkaldak.edu.kg',
-    CMS_API: 'http://localhost:1337',
+    CMS_API: 'http://strapi:1337',
   },
-  // production: uncomment below
-  // output: 'standalone',
+  output: 'standalone',
   reactStrictMode: false,
   images: {
     deviceSizes: [390, 640, 750, 828, 1080, 1200, 1920],
     remotePatterns: [
       {
         protocol: 'http',
-        // production: change it on production to cms
+        hostname: 'strapi', // production
+        // hostname: 'host.docker.internal', // docker development, cms running locally
+        port: '1337',
+      },
+      {
+        protocol: 'http',
         hostname: 'localhost',
         port: '1337',
       },
@@ -25,11 +40,6 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         port: '3000',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '8080',
       },
     ],
   },

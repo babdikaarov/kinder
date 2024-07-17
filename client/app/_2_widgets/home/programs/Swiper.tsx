@@ -1,13 +1,11 @@
 'use client'
 
-// swiper.js
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Mousewheel, Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
-// import './swiperPrograms.css'
 
 interface SwiperProgramsProps {
   locale: string
@@ -27,7 +25,6 @@ const SwiperPrograms: React.FC<SwiperProgramsProps> = ({ locale, data }) => {
         }}
         modules={[Mousewheel, Navigation, FreeMode]}
         navigation={{ nextEl: '#nextSlide', prevEl: '#prevSlide' }}
-        // className='first:bg-red-300'
       >
         {data.map((item: any, index: number) => (
           <SwiperSlide key={index} className='mt-12 w-[222px]'>
@@ -59,18 +56,10 @@ const SwiperPrograms: React.FC<SwiperProgramsProps> = ({ locale, data }) => {
         ))}
       </Swiper>
       <div className='absolute right-[0px] w-fit'>
-        <button
-          aria-label='navigation'
-          id='prevSlide'
-          // className='absolute left-0 top-1/2 -translate-y-1/2'
-        >
+        <button aria-label='navigation' id='prevSlide'>
           <ChevronLeft className='mr-1 size-[40px]' />
         </button>
-        <button
-          aria-label='navigation'
-          id='nextSlide'
-          // className='absolute right-0 top-1/2 -translate-y-1/2'
-        >
+        <button aria-label='navigation' id='nextSlide'>
           <ChevronRight className='size-[40px]' />
         </button>
       </div>
