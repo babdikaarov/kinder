@@ -2,11 +2,13 @@
 
 import { LocaleSwitcherClient } from '@entities/index'
 import { ActiveLinkClient, Logo, cn } from '@shared/index'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BurgerIcon from './BurgerIcon'
 import './header.css'
 import { CalendarDays } from 'lucide-react'
 import Link from 'next/link'
+import useToAdmin from '@/app/_3_features/useToAdmin'
+import { useRouter } from 'next/navigation'
 
 interface HeaderClientProps extends myTS.I {
   content: {
@@ -20,6 +22,16 @@ interface HeaderClientProps extends myTS.I {
 
 const HeaderClient: React.FC<HeaderClientProps> = ({ locale, content }) => {
   const [isOpen, setOpen] = useState(false)
+  const toAdmin = useToAdmin({
+    admin: {
+      secretKey: 'admin',
+      url: `${process.env.BASE_URL}/admin-docs`,
+    },
+    cms: {
+      secretKey: 'cms',
+      url: `${process.env.BASE_URL}/admin`,
+    },
+  })
 
   return (
     <>

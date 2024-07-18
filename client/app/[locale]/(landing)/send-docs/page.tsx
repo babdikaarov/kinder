@@ -2,6 +2,9 @@ import { FormServer } from '@features/index'
 import { getData } from '@entities/index'
 import { Wrapper } from '@shared/index'
 import { Metadata } from 'next'
+import { Minicon } from '@/app/_5_shared/skeletons/Minicon'
+import { Headercon } from '@/app/_5_shared/skeletons/Headercon'
+import { Skeleton } from '@/app/_5_shared/skeletons/Skeleton'
 interface pageProps {
   params: { locale: string; id: string }
 }

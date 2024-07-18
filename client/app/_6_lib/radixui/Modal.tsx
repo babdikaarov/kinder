@@ -1,7 +1,7 @@
 'use client'
 
 import * as Dialog from '@radix-ui/react-dialog'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 interface ModalProps {
@@ -9,35 +9,24 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ children }) => {
-  const [close, setClose] = useState(false)
   const router = useRouter()
-
-  useEffect(() => {
-    document.documentElement.style.overflow = 'hidden'
-    return () => {
-      document.documentElement.style.overflow = 'auto'
-    }
-  }, [])
+  const [open, setOpen] = useState(false)
 
   return (
-    <>
-      <Dialog.Root open={!close}>
-        <Dialog.Portal>
-          <div className='modalContainer fixed z-20 size-full  '>
-            <Dialog.DialogContent
-              onInteractOutside={(e) => {
-                e.preventDefault()
-                setClose(true)
-                router.back()
-              }}
-              className='fixed left-1/2 top-1/2 w-full max-w-[900px] -translate-x-1/2  -translate-y-1/2 '
-            >
-              {children}
-            </Dialog.DialogContent>
-          </div>
-        </Dialog.Portal>
-      </Dialog.Root>
-    </>
+    <Dialog.Root open={!open} onOpenChange={setOpen}>
+      <Dialog.Portal>
+        <Dialog.Overlay className='absolute bottom-0 left-0 right-0 top-0 z-50 h-svh bg-theme-bg/40 backdrop-blur-sm'>
+          <Dialog.DialogContent
+            onInteractOutside={(e) => {
+              router.back()
+            }}
+            className='fixed left-1/2 top-1/2 z-30 w-full max-w-[900px] -translate-x-1/2  -translate-y-1/2 '
+          >
+            {children}
+          </Dialog.DialogContent>
+        </Dialog.Overlay>
+      </Dialog.Portal>
+    </Dialog.Root>
   )
 }
 

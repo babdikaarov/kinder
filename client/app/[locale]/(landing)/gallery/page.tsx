@@ -1,4 +1,3 @@
-interface pageProps {}
 import { getTranslations } from 'next-intl/server'
 import GalleryClient from './GalleryClient'
 import { Arrow } from '@shared/index'
@@ -29,8 +28,11 @@ export const metadata: Metadata = {
   title: 'Галерея',
   description: 'Галерея фотографий Кашкалдак',
 }
+interface pageProps {
+  params: { locale: string }
+}
 
-const page: React.FC<pageProps> = async ({}) => {
+const page: React.FC<pageProps> = async ({ params }) => {
   const t = await getTranslations()
   const url = process.env.CMS_API + '/api/galleries?&populate=*'
   const response = await fetch(url, { cache: 'no-cache' })
@@ -39,7 +41,11 @@ const page: React.FC<pageProps> = async ({}) => {
   const flatData: ImageData[] = data.map((el) => el.data).flat()
   return (
     <main className='relative  mt-24 flex w-full max-w-wrapperLimit flex-1 flex-col items-center justify-between gap-32 font-poppins'>
-      <Arrow className='absolute left-0 top-3' tomain />
+      <Arrow
+        className='absolute left-0 top-3'
+        href='/'
+        locale={params.locale}
+      />
       <GalleryClient data={flatData} header={t('gallery_header')} />
     </main>
   )

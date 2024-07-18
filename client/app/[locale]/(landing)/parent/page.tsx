@@ -33,7 +33,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
   }
   return (
     <>
-      <Arrow className='absolute left-0 top-3' tomain />
+      <Arrow className='absolute left-0 top-3' href='/' locale={locale} />
       <Wrapper header={t('parent_header')} id='parents' className='w-full'>
         <div
           className={cn(

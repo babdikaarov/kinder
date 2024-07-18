@@ -2,16 +2,28 @@
 import { Arrow, ShareLinks } from '@shared/index'
 import Modal from '@lib/radixui/Modal'
 import BlogRendererClient from '@lib/strapi/BlogRendererClient'
+import { useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { ChevronLeft } from 'lucide-react'
 
 const BlogModal: React.FC<myTS.BlogProps> = ({
   shareText,
   content,
   locale,
 }) => {
+  const router = useRouter()
   return (
     <Modal>
-      <section className='boxShadow max-h-[400px] max-w-[900px] overflow-auto rounded-16 bg-white'>
-        <Arrow className='fixed mt-5' />
+      <section className='boxShadow max-h-[600px] max-w-[900px] overflow-auto rounded-16 bg-white'>
+        <button
+          className='fixed mt-5'
+          onClick={() => {
+            router.back()
+          }}
+        >
+          <ChevronLeft className='size-[40px]' />
+        </button>
+
         <div className='fixed right-0 mr-2 mt-10'>
           <ShareLinks
             locale={locale}

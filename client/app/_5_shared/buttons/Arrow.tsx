@@ -1,31 +1,29 @@
 'use client'
 
 import { ChevronLeft } from 'lucide-react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 interface ArrowProps {
-  tomain?: boolean
+  locale?: string
+  href: string
 }
 
-const Arrow: React.FC<
-  ArrowProps & React.HtmlHTMLAttributes<HTMLButtonElement>
-> = ({ className = '', tomain = false, ...rest }) => {
-  const router = useRouter()
-  const handleNavigatoin = () => {
-    if (tomain) {
-      router.push('/', { scroll: true })
-    } else {
-      router.back()
-    }
-  }
+const Arrow: React.FC<ArrowProps & React.HTMLAttributes<HTMLAnchorElement>> = ({
+  className = '',
+  locale,
+  href,
+  ...rest
+}) => {
   return (
-    <button
-      className={`${className} z-20`}
+    <Link
+      href={href}
+      locale={locale}
+      className={`${className} z-[15]`}
       {...rest}
-      onClick={handleNavigatoin}
     >
       <ChevronLeft className='size-[40px]' />
-    </button>
+    </Link>
   )
 }
 

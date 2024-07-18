@@ -1,3 +1,8 @@
+import { Duocon } from '@/app/_5_shared/skeletons/Duocon'
+import { Headercon } from '@/app/_5_shared/skeletons/Headercon'
+import { Minicon } from '@/app/_5_shared/skeletons/Minicon'
+import { Skeleton } from '@/app/_5_shared/skeletons/Skeleton'
+import { Trigocon } from '@/app/_5_shared/skeletons/Trigocon'
 import { cn } from '@shared/index'
 import {
   About,
@@ -16,11 +21,7 @@ interface PageProps {
 const Page: React.FC<PageProps> = ({ params }) => {
   const { locale } = params
   return (
-    <main
-      className={cn(
-        'mt-24 flex w-full flex-1 flex-col items-center justify-between gap-32 lg:gap-24'
-      )}
-    >
+    <main className='mt-24 flex w-full flex-1 flex-col items-center justify-between gap-32 lg:gap-24'>
       <Hero locale={locale} />
       <Groups locale={locale} />
       <About locale={locale} />

@@ -1,3 +1,6 @@
+import { Headercon } from '@/app/_5_shared/skeletons/Headercon'
+import { Minicon } from '@/app/_5_shared/skeletons/Minicon'
+import { Skeleton } from '@/app/_5_shared/skeletons/Skeleton'
 import { Arrow, Wrapper, seedRecurrence } from '@shared/index'
 import { XScheduler } from '@widgets/index'
 import { Metadata } from 'next'
@@ -32,7 +35,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
   return (
     <main className=' mt-24 flex w-full flex-1 items-center justify-center font-poppins'>
       <Wrapper className='relative w-full' header={text.header}>
-        <Arrow tomain className='absolute top-0' />
+        <Arrow href='/' className='absolute top-0' locale={locale} />
         <XScheduler
           data={seedData}
           category={category}
