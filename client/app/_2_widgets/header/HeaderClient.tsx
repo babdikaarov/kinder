@@ -25,11 +25,11 @@ const HeaderClient: React.FC<HeaderClientProps> = ({ locale, content }) => {
   const toAdmin = useToAdmin({
     admin: {
       secretKey: 'admin',
-      url: `${process.env.BASE_URL}/admin-docs`,
+      url: `${process.env.BASE_URL}/admin`,
     },
     cms: {
       secretKey: 'cms',
-      url: `${process.env.BASE_URL}/admin`,
+      url: `${process.env.BASE_URL}/cms`,
     },
   })
 

@@ -8,17 +8,17 @@ const nextConfig = {
     // // prod //
     // BASE_URL: 'https://kashkaldak.edu.kg',
     // BACKEND_URL: 'https://kashkaldak.edu.kg',
-    // CMS_API: 'http://localhost:1337',
+    // CMS_API: 'http://localhost:1337/cms',
 
     //  // local dev //
-    // BASE_URL: 'http://localhost:3000',
-    // BACKEND_URL: 'https://kashkaldak.edu.kg',
-    // CMS_API: 'http://localhost:1337',
+    BASE_URL: 'http://localhost:3000',
+    BACKEND_URL: 'https://kashkaldak.edu.kg',
+    CMS_API: 'http://localhost:1337/cms',
 
     // docker dev //
-    BASE_URL: 'http://localhost',
-    BACKEND_URL: 'https://kashkaldak.edu.kg',
-    CMS_API: 'http://strapi:1337',
+    // BASE_URL: 'http://localhost',
+    // BACKEND_URL: 'https://kashkaldak.edu.kg',
+    // CMS_API: 'http://strapi:1337/cms',
   },
   output: 'standalone',
   reactStrictMode: false,

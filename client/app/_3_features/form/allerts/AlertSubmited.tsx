@@ -25,7 +25,7 @@ interface AlertProps {
 const Alert: React.FC<AlertProps> = ({ myRef, resetForm, text }) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger ref={myRef}></AlertDialogTrigger>
+      <AlertDialogTrigger ref={myRef} className='absolute'></AlertDialogTrigger>
       <AlertDialogContent className='rounded-10 bg-white'>
         <AlertDialogHeader>
           <AlertDialogTitle>{text.title}</AlertDialogTitle>

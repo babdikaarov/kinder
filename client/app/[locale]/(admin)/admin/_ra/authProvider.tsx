@@ -9,7 +9,6 @@ export const authProvider: AuthProvider = {
     })
     try {
       const response = await fetch(request)
-      // const second_response = await fetch(`/ru/admin-docs/api/get-avatar`)
       const second_response = await fetch(
         `${process.env.CMS_API}/api/logo?&populate=*`,
         { cache: 'no-cache' }

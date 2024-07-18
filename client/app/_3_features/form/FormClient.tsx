@@ -529,7 +529,9 @@ export default function FormClient({ opt, text, locale }: TSFormProps) {
 
       <ErrorAlert
         className={
-          postStatus.failed ? 'grid-rows-[1fr]  p-4 ' : 'grid-rows-[0fr]'
+          postStatus.failed
+            ? 'absolute  grid-rows-[1fr] p-4'
+            : 'absolute grid-rows-[0fr]'
         }
         text={text.alerts.errors.failed}
         onClick={() => {
@@ -539,7 +541,9 @@ export default function FormClient({ opt, text, locale }: TSFormProps) {
 
       <SuccessAlert
         className={
-          postStatus.success ? 'grid-rows-[1fr]  p-4 ' : 'grid-rows-[0fr]'
+          postStatus.success
+            ? 'absolute  grid-rows-[1fr] p-4'
+            : 'absolute grid-rows-[0fr]'
         }
         text={text.alerts.errors.success}
         onClick={() => {
