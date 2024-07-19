@@ -29,7 +29,7 @@ const HeaderClient: React.FC<HeaderClientProps> = ({ locale, content }) => {
     },
     cms: {
       secretKey: 'cms',
-      url: `${process.env.BASE_URL}/cms/admin`,
+      url: `${process.env.BASE_URL}/admin`,
     },
   })
 
