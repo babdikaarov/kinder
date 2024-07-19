@@ -69,7 +69,6 @@ services:
          HOST: strapi
          DATABASE_HOST: strapiDB
          PROTOCOL: http://
-         # DOMAIN_NAME: localhost
       volumes:
          - ./cms/config:/opt/app/config
          - ./cms/src:/opt/app/src
