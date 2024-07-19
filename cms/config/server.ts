@@ -1,3 +1,4 @@
+import admin from "./admin";
 import cronTasks from "./cron-task";
 
 export default ({ env }) => ({

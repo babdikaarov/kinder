@@ -1,5 +1,5 @@
 'use client'
-import { Admin, Layout, Resource } from 'react-admin'
+import { Admin, Layout, resolveBrowserLocale, Resource } from 'react-admin'
 import polyglotI18nProvider from 'ra-i18n-polyglot'
 import ruMessages from './locale/russian'
 // import enMessages from './locale/english'
@@ -12,8 +12,10 @@ const translations = { ky: kyMessages, ru: ruMessages } as any
 // const translations = { ky: kyMessages, ru: ruMessages, en: enMessages } as any
 
 export const i18nProvider = polyglotI18nProvider(
-  (locale) => (translations[locale] ? translations[locale] : translations.ru),
-  translations.ru,
+  (locale) => {
+    return translations[locale]
+  },
+  'ru',
   [
     { locale: 'ky', name: 'Кыргызча' },
     { locale: 'ru', name: 'Русский' },

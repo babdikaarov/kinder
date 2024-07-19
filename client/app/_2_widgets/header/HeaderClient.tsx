@@ -22,14 +22,14 @@ interface HeaderClientProps extends myTS.I {
 
 const HeaderClient: React.FC<HeaderClientProps> = ({ locale, content }) => {
   const [isOpen, setOpen] = useState(false)
-  const toAdmin = useToAdmin({
+  useToAdmin({
     admin: {
       secretKey: 'admin',
-      url: `${process.env.BASE_URL}/admin`,
+      url: `${process.env.BASE_URL}/admin-docs`,
     },
     cms: {
       secretKey: 'cms',
-      url: `${process.env.BASE_URL}/cms`,
+      url: `${process.env.BASE_URL}/cms/admin`,
     },
   })
 

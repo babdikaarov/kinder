@@ -9,10 +9,5 @@ export default createMiddleware({
 
 // only applies this middleware to files in the app directory
 export const config = {
-  matcher: [
-    '/((?!api|_next|.*\\..*).*)',
-    // '/([\\w-]+)?/admin-docs/(.+)',
-    '/([\\w-]+)?/admin/(.+)',
-    '/([\\w-]+)?/opengraph-image(.+)',
-  ],
+  matcher: ['/((?!api|cms|_next|.*\\..*).*)', '/([\\w-]+)?/admin-docs/(.+)'],
 }

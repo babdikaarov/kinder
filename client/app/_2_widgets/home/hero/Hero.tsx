@@ -10,6 +10,7 @@ const Hero: React.FC<HeroProps> = async ({ locale }) => {
     '/api/hero?populate=*'
   )
   const t = await getTranslations()
+
   return (
     <Wrapper
       className={`relative flex  w-full max-w-wrapperLimit items-center justify-center gap-5 px-4 py-20 smExtra:h-[390px] smExtra:w-svw smExtra:py-10`}

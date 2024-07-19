@@ -1,6 +1,6 @@
 services:
-   devops_nginx:
-      container_name: "devops_nginx"
+   nginx:
+      container_name: "nginx"
       build:
          context: ./nginx
          dockerfile: Dockerfile
@@ -65,7 +65,7 @@ services:
          DATABASE_PASSWORD: beksultan
          NODE_ENV: production
          # change
-         STRAPI_ADMIN_BACKEND_URL: http://strapi:1337
+         STRAPI_ADMIN_BACKEND_URL: http://nginx
          HOST: strapi
          DATABASE_HOST: strapiDB
          PROTOCOL: http://
