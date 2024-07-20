@@ -8,17 +8,17 @@ const nextConfig = {
     // // prod //
     // BASE_URL: 'https://kashkaldak.edu.kg',
     // BACKEND_URL: 'https://kashkaldak.edu.kg',
-    // CMS_API: 'http://kashkaldak.edu.kg/cms',
+    // CMS_API: 'http://kashkaldak.edu.kg:1337/cms',
 
     //  // local dev //
     // BASE_URL: 'http://localhost:3001',
     // BACKEND_URL: 'https://kashkaldak.edu.kg',
-    // CMS_API: 'http://localhost:1337/cms',
+    // CMS_API: 'http://localhost/cms',
 
-    // docker dev //
+    // // docker dev //
     BASE_URL: 'http://localhost',
     BACKEND_URL: 'https://kashkaldak.edu.kg',
-    CMS_API: 'http://strapi:1337/cms',
+    CMS_API: 'http://nginx/cms',
   },
   output: 'standalone',
   reactStrictMode: false,
@@ -28,7 +28,6 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'strapi',
-        // hostname: 'host.docker.internal', // docker development, cms running locally
         port: '1337',
       },
       {
@@ -44,6 +43,15 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
+      },
+      {
+        protocol: 'http',
+        hostname: 'nginx',
+        port: '80',
+      },
+      {
+        protocol: 'http',
+        hostname: 'nginx',
       },
     ],
   },

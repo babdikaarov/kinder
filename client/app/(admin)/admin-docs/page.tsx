@@ -1,3 +1,5 @@
+import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -6,10 +8,14 @@ export const metadata: Metadata = {
     'Детский Сад Кашкалдак - административная панель для обработки документов одобренных заявлений',
 }
 
-export default function RootAdminLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return <div className='m-0'>{children}</div>
-}
+const RaAdmin = dynamic(() => import('./_ra/RaAdmin'), {
+  ssr: false,
+})
+
+const Home: NextPage = async () => (
+  <div className='m-0'>
+    <RaAdmin />
+  </div>
+)
+
+export default Home

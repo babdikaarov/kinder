@@ -13,6 +13,8 @@ const translations = { ky: kyMessages, ru: ruMessages } as any
 
 export const i18nProvider = polyglotI18nProvider(
   (locale) => {
+    console.log(locale);
+    
     return translations[locale]
   },
   'ru',

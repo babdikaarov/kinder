@@ -12,9 +12,9 @@ volumes:
 
 // /client/next.config.mjs
      env: {
-    BASE_URL: 'http://localhost', // this to prepend static assets path
+    BASE_URL: 'http://localhost', // this to prepend static assets path for metadata
     BACKEND_URL: 'https://kashkaldak.edu.kg', // backend API
-    CMS_API: 'http://strapi:1337/cms', // content API always append /cms
+    CMS_API: 'http://strapi/cms', // content API always append /cms
   },
   ....
 
@@ -26,21 +26,7 @@ volumes:
             protocol: 'http',
             hostname: 'strapi',
             port: '1337',
-        },
-        {
-            protocol: 'http',
-            hostname: 'localhost',
-        },
-        {
-            protocol: 'http',
-            hostname: 'localhost',
-            port: '1337',
-        },
-        {
-            protocol: 'http',
-            hostname: 'localhost',
-            port: '3000',
-        },
+        }, // include CMS_API address
         ],
     },
 
@@ -77,6 +63,7 @@ volumes:
 ```
 
 ```txt
+
 Dockeer related files
 
 <!-- client -->
