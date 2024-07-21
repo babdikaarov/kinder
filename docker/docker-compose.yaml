@@ -1,4 +1,5 @@
 version: "3.9"
+
 services:
    # nginx
    nginx:
@@ -29,8 +30,8 @@ services:
       ports:
          - "8080:8080"
       networks:
-         - java_network
          - nginx_network
+         - java_network
       depends_on:
          - java-db
    # java-db

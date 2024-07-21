@@ -16,9 +16,9 @@ const nextConfig = {
     // CMS_API: 'http://localhost/cms',
 
     // // docker dev //
-    BASE_URL: 'http://localhost',
-    BACKEND_URL: 'http://nginx',
-    CMS_API: 'http://nginx/cms',
+    BASE_URL: 'http://localhost', //client env
+    BACKEND_URL: 'http://localhost', //client env
+    CMS_API: 'http://nginx/cms', //server env
   },
   output: 'standalone',
   reactStrictMode: false,
