@@ -17,7 +17,7 @@ const nextConfig = {
 
     // // docker dev //
     BASE_URL: 'http://localhost',
-    BACKEND_URL: 'https://kashkaldak.edu.kg',
+    BACKEND_URL: 'http://nginx',
     CMS_API: 'http://nginx/cms',
   },
   output: 'standalone',
@@ -25,16 +25,16 @@ const nextConfig = {
   images: {
     deviceSizes: [390, 640, 750, 828, 1080, 1200, 1920],
     remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'strapi',
-        port: '1337',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
-      },
+      // {
+      //   protocol: 'http',
+      //   hostname: 'strapi',
+      //   port: '1337',
+      // },
+      // {
+      //   protocol: 'http',
+      //   hostname: 'localhost',
+      //   port: '1337',
+      // },
       {
         protocol: 'http',
         hostname: 'localhost',

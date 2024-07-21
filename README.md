@@ -42,22 +42,22 @@ volumes:
      environment:
          # no change
          PORT: 1337
-         APP_KEYS: RD5i9SbFHgRU5fFAF4O89g==,0K9bkUDI2KDdlvDbf2Ybtw==,sDRo9OG0LVrd3p4dTKHcGg==,mi8PrTm+hxI29GmpQY9bGA==
-         API_TOKEN_SALT: aMqqi4260qfhHxg3C8XXbw==
-         ADMIN_JWT_SECRET: elLC1QV1E8EKS4cXasbJnA==
-         TRANSFER_TOKEN_SALT: 2Mm2TehHXvdhoMUEc9XPaA==
-         JWT_SECRET: oS2MxDtE+rso+P7/eOc9fQ==
-         DATABASE_CLIENT: postgres
-         DATABASE_PORT: 5432
-         DATABASE_NAME: cms
-         DATABASE_USERNAME: postgres
-         DATABASE_PASSWORD: beksultan
-         NODE_ENV: production
+         APP_KEYS:
+         API_TOKEN_SALT:
+         ADMIN_JWT_SECRET:
+         TRANSFER_TOKEN_SALT:
+         JWT_SECRET:
+         DATABASE_CLIENT:
+         DATABASE_PORT:
+         DATABASE_NAME:
+         DATABASE_USERNAME:
+         DATABASE_PASSWORD:
+         NODE_ENV:
          # change if services names are changed test with http or https protocols
-         STRAPI_ADMIN_BACKEND_URL: http://nginx
-         HOST: strapi
-         DATABASE_HOST: strapiDB
-         PROTOCOL: http://
+         STRAPI_ADMIN_BACKEND_URL:
+         HOST:
+         DATABASE_HOST:
+         PROTOCOL:
     ......
 
 ```

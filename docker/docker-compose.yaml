@@ -1,0 +1,114 @@
+version: "3.9"
+services:
+   # nginx
+   nginx:
+      image: "nginx:1.13-alpine"
+      restart: unless-stopped
+      ports:
+         - "80:80"
+         # - '443:443'
+      volumes:
+         - ../nginx/main.config/nginx.conf:/etc/nginx/nginx.conf
+         - ../nginx/conf.prod:/etc/nginx/conf.d
+         # - '/etc/letsencrypt:/etc/letsencrypt'
+      networks:
+         - nginx_network
+      depends_on:
+         - strapi
+         - client
+         - java-back
+   # java-back
+   java-back:
+      build:
+         context: ../backend
+         dockerfile: Dockerfile
+      container_name: java_back
+      volumes:
+         - "..:/opt/services"
+         - "../java_media:/app/java_docs"
+      ports:
+         - "8080:8080"
+      networks:
+         - java_network
+         - nginx_network
+      depends_on:
+         - java-db
+   # java-db
+   java-db:
+      image: "postgres:15-alpine"
+      container_name: java-db
+      restart: unless-stopped
+      volumes:
+         - "../backend/storage:/var/lib/postgresql/data"
+         - "java_db_data:/var/lib/postgresql/data"
+      ports:
+         - "5432:5432"
+      networks:
+         - java_network
+      env_file:
+         - ./envs/javadb/.env
+   # client
+   client:
+      container_name: client
+      build:
+         context: ../client
+         dockerfile: Dockerfile
+      restart: unless-stopped
+      ports:
+         - "3000:3000"
+      networks:
+         - nginx_network
+      depends_on:
+         strapi:
+            condition: service_started
+   # cms(strapi)-db
+   strapi-db:
+      container_name: strapi_db
+      image: "postgres:16-alpine"
+      restart: unless-stopped
+      ports:
+         - "5433:5432"
+      env_file:
+         - ./envs/cmsdb/.env
+      volumes:
+         - "../cms_data/cms_prod.sql:/docker-entrypoint-initdb.d/cms_prod.sql"
+         - "strapi_db_data:/var/lib/postgresql/data"
+      user: postgres
+      networks:
+         - strapi_network
+   # cms(strapi)
+   strapi:
+      container_name: strapi
+      build:
+         context: ../cms
+         dockerfile: Dockerfile
+      restart: unless-stopped
+      env_file:
+         - ./envs/cms/.env
+      volumes:
+         - "../cms/config:/opt/app/config"
+         - "../cms/src:/opt/app/src"
+         - "../cms/package.json:/opt/package.json"
+         - "../cms/yarn.lock:/opt/yarn.lock"
+         - "../cms/public/uploads:/opt/app/public/uploads"
+         - "strapi_data:/data"
+      ports:
+         - "1337:1337"
+      networks:
+         - nginx_network
+         - strapi_network
+      depends_on:
+         strapi-db:
+            condition: service_started
+volumes:
+   strapi_data:
+   strapi_db_data:
+   java_db_data:
+
+networks:
+   java_network:
+      driver: bridge
+   strapi_network:
+      driver: bridge
+   nginx_network:
+      driver: bridge
