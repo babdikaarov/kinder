@@ -8,7 +8,7 @@ const nextConfig = {
     // // prod //
     // BASE_URL: 'https://kashkaldak.edu.kg',
     // BACKEND_URL: 'https://kashkaldak.edu.kg',
-    // CMS_API: 'http://kashkaldak.edu.kg:1337/cms',
+    // CMS_API: 'http://nginx/cms',
 
     //  // local dev //
     // BASE_URL: 'http://localhost:3001',

@@ -37,7 +37,6 @@ public class MainController {
 
     @PatchMapping("/{inn}")
     public ResponseEntity<?> updateForm(@PathVariable String inn, FormRequest formRequest) {
-        System.out.println(formRequest);
         formService.updatePartialForm(inn, formRequest);
         return ResponseEntity.ok("Alles gut !");
     }

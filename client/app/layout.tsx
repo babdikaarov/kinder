@@ -26,10 +26,16 @@ export const metadata: Metadata = {
     'Дети',
   ],
   authors: [
-    { name: 'Akylbek' },
-    { name: 'Kanykei' },
-    { name: 'Aiperi' },
-    { name: '@babdikaarov', url: 'https://github.com/babdikaarov' },
+    {
+      name: 'Aiperi Akylbekova',
+      url: 'linkedin.com/in/aiperi-akylbekova-7316ab286',
+    },
+    { name: 'Kanykei Amatova', url: 'www.linkedin.com/in/kanykei-amatova' },
+    {
+      name: 'Akylbek Bolsunbekov',
+      url: 'www.linkedin.com/in/akylbek-bolsunbekov',
+    },
+    { name: 'Beksultan Abdikaarov', url: 'www.linkedin.com/in/babdikaarov' },
   ],
   creator: 'Kanykei',
   publisher: '@babdikaarov',

@@ -63,7 +63,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = User.builder()
                 .firstName("admin")
                 .username("admin")
-                .password(passwordEncoder.encode("admin"))
+                .password("$2a$10$NtpCjCTzjFAMcF/OdMJve.NWAHTsfAIJCt9G2oEN7ZPmVqIKBW1BC")
                 .role(Role.ADMIN)
                 .build();
         if (!userRepository.existsByUsername(user.getUsername())) {
