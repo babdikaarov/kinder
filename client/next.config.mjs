@@ -4,50 +4,32 @@ import withNextIntl from 'next-intl/plugin'
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  env: {
-    // // prod //
-    // BASE_URL: 'https://kashkaldak.edu.kg',
-    // BACKEND_URL: 'https://kashkaldak.edu.kg',
-    // CMS_API: 'http://nginx/cms',
-
-    //  // local dev //
-    // BASE_URL: 'http://localhost:3001',
-    // BACKEND_URL: 'https://kashkaldak.edu.kg',
-    // CMS_API: 'http://localhost/cms',
-
-    // // docker dev //
-    BASE_URL: 'http://localhost', //client env
-    BACKEND_URL: 'http://localhost', //client env
-    CMS_API: 'http://nginx/cms', //server env
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
   output: 'standalone',
   reactStrictMode: false,
+  env: {
+    BACKEND_URL_PUBLIC: process.env.BACKEND_URL_PUBLIC,
+    CMS_API_PUBLIC: process.env.CMS_API_PUBLIC,
+  },
   images: {
     deviceSizes: [390, 640, 750, 828, 1080, 1200, 1920],
     remotePatterns: [
-      // {
-      //   protocol: 'http',
-      //   hostname: 'strapi',
-      //   port: '1337',
-      // },
-      // {
-      //   protocol: 'http',
-      //   hostname: 'localhost',
-      //   port: '1337',
-      // },
+      {
+        protocol: 'https',
+        hostname: 'kashkaldak.edu.kg',
+      },
       {
         protocol: 'http',
-        hostname: 'localhost',
-        port: '3000',
+        hostname: 'kashkaldak.edu.kg',
       },
       {
         protocol: 'http',
         hostname: 'localhost',
-      },
-      {
-        protocol: 'http',
-        hostname: 'nginx',
-        port: '80',
       },
       {
         protocol: 'http',

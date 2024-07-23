@@ -42,7 +42,7 @@ export const FormEdit = () => {
   const handleConfirm = async (id: any) => {
     try {
       const response = await fetch(
-        `${process.env.BACKEND_URL}/api/docs/${id}`,
+        `${process.env.BACKEND_URL_PUBLIC}/api/docs/${id}`,
         {
           method: 'DELETE',
           headers: {
@@ -235,7 +235,7 @@ export const FormEdit = () => {
                       setOpenSpinner(true)
                       try {
                         const response = await fetch(
-                          `${process.env.BACKEND_URL}${render.url}`,
+                          `${process.env.BACKEND_URL_PUBLIC}${render.url}`,
                           {
                             headers: {
                               Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}`,
@@ -366,7 +366,7 @@ const MyToolbar: (notify: any) => JSX.Element = () => {
               try {
                 setOpenSpinner(true)
                 const response = await fetch(
-                  `${process.env.BACKEND_URL}/api/docs/downloadAll/${record!.id}`,
+                  `${process.env.BACKEND_URL_PUBLIC}/api/docs/downloadAll/${record!.id}`,
                   {
                     headers: {
                       'Content-Type': 'application/zip',

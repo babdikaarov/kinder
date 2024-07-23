@@ -2,13 +2,12 @@
 
 import { LocaleSwitcherClient } from '@entities/index'
 import { ActiveLinkClient, Logo, cn } from '@shared/index'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import BurgerIcon from './BurgerIcon'
 import './header.css'
 import { CalendarDays } from 'lucide-react'
 import Link from 'next/link'
 import useToAdmin from '@/app/_3_features/useToAdmin'
-import { useRouter } from 'next/navigation'
 
 interface HeaderClientProps extends myTS.I {
   content: {

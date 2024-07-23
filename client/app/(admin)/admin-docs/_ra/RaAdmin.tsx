@@ -13,8 +13,8 @@ const translations = { ky: kyMessages, ru: ruMessages } as any
 
 export const i18nProvider = polyglotI18nProvider(
   (locale) => {
-    console.log(locale);
-    
+    console.log(locale)
+
     return translations[locale]
   },
   'ru',
@@ -30,7 +30,7 @@ interface RaAdminProps {}
 const RaAdmin: React.FC<RaAdminProps> = ({}) => {
   return (
     <Admin
-      dataProvider={dataProvider(`${process.env.BACKEND_URL}/api`)}
+      dataProvider={dataProvider(`${process.env.BACKEND_URL_PUBLIC}/api`)}
       i18nProvider={i18nProvider}
       authProvider={authProvider}
       defaultTheme='light'

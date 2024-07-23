@@ -88,8 +88,8 @@ export default function FormClient({ opt, text, locale }: TSFormProps) {
         await new Promise((resolve) => setTimeout(resolve, 3000)) // set a 3-second delay
         const response = await fetch(
           isToPatch
-            ? `${process.env.BACKEND_URL}/api/form/${value.inn}`
-            : `${process.env.BACKEND_URL}/api/form`,
+            ? `${process.env.BACKEND_URL_PUBLIC}/api/form/${value.inn}`
+            : `${process.env.BACKEND_URL_PUBLIC}/api/form`,
           requestOptions
         )
         // const result = await response.json()
@@ -166,7 +166,7 @@ export default function FormClient({ opt, text, locale }: TSFormProps) {
               if (value.length === 14) {
                 try {
                   const response = await fetch(
-                    `${process.env.BACKEND_URL}/api/form/byInn/${value}`
+                    `${process.env.BACKEND_URL_PUBLIC}/api/form/byInn/${value}`
                   )
                   setIsToPatch(response.ok)
 

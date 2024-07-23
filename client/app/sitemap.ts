@@ -55,37 +55,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  const url = process.env.CMS_API + '/api/blogs?&populate=*'
+  const url = `${process.env.CMS_API}/api/blogs?&populate=*`
 
-  let post = []
+  let posts: any[] = []
+
   try {
     const response = await fetch(url, { next: { revalidate: 86400 } })
-    if (response.ok) {
-      const data = await response.json()
-      post = data
-    } else {
-      console.error('Fetch failed with status:', response.status)
-    }
+    const data = await response.json()
+    posts = data ?? []
   } catch (error) {
-    console.error('Fetch failed with error:', error)
+    console.error('Failed to fetch blog posts:', error)
+    posts = []
   }
 
-  return [
-    ...staticMap,
-    ...post
-      .map((blog: { id: any }) => {
-        if (!blog.id) return undefined
-        return {
-          url: `${process.env.BASE_URL}/blog/${blog.id}`,
-          lastModified: new Date(),
-          alternates: {
-            languages: {
-              ky: `${process.env.BASE_URL}/ky/blog/${blog.id}`,
-              ru: `${process.env.BASE_URL}/ru/blog/${blog.id}`,
-            },
-          },
-        }
-      })
-      .filter((el: undefined) => el !== undefined),
-  ]
+  const dynamicMap = posts.map((blog) => ({
+    url: `${process.env.BASE_URL}/blog/${blog.id}`,
+    lastModified: new Date(),
+    alternates: {
+      languages: {
+        ky: `${process.env.BASE_URL}/ky/blog/${blog.id}`,
+        ru: `${process.env.BASE_URL}/ru/blog/${blog.id}`,
+      },
+    },
+  }))
+
+  return [...staticMap, ...dynamicMap]
 }

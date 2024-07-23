@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     },
     { name: 'Beksultan Abdikaarov', url: 'www.linkedin.com/in/babdikaarov' },
   ],
-  creator: 'Kanykei',
+  creator: 'kashkaldak.edu.kg',
   publisher: '@babdikaarov',
   formatDetection: {
     email: false,

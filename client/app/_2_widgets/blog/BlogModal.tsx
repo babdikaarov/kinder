@@ -1,9 +1,8 @@
 'use client'
-import { Arrow, ShareLinks } from '@shared/index'
+import { ShareLinks } from '@shared/index'
 import Modal from '@lib/radixui/Modal'
 import BlogRendererClient from '@lib/strapi/BlogRendererClient'
-import { useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { ChevronLeft } from 'lucide-react'
 
 const BlogModal: React.FC<myTS.BlogProps> = ({

@@ -1,6 +1,5 @@
 import { Arrow, ShareLinks } from '@shared/index'
 import BlogRendererClient from '@lib/strapi/BlogRendererClient'
-import { type BlocksContent } from '@strapi/blocks-react-renderer'
 
 const Blog: React.FC<myTS.BlogProps> = ({ shareText, content, locale }) => {
   return (

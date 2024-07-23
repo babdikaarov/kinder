@@ -2,20 +2,24 @@ import { AuthProvider } from 'react-admin'
 
 export const authProvider: AuthProvider = {
   login: async ({ username, password }) => {
-    const request = new Request(`${process.env.BACKEND_URL}/api/auth/signIn`, {
-      method: 'POST',
-      body: JSON.stringify({ username, password }),
-      headers: new Headers({ 'Content-Type': 'application/json' }),
-    })
+    const request = new Request(
+      `${process.env.BACKEND_URL_PUBLIC}/api/auth/signIn`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+      }
+    )
     try {
       const response = await fetch(request)
       const second_response = await fetch(
-        `${process.env.CMS_API}/api/logo?&populate=*`,
+        `${process.env.CMS_API_PUBLIC}/api/logo?&populate=*`,
         { cache: 'no-cache' }
       )
         .then((res) => res.json())
         .then((data) => data.url)
         .catch(() => '')
+
       const avatar = second_response
       if (response.status < 200 || response.status >= 300) {
         throw new Error(response.statusText)
