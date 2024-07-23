@@ -49,10 +49,11 @@ services:
          - "3000:3000"
       networks:
          - nginx_network
+         - strapi_network
       environment:
          HOSTNAME: "client"
-         BASE_URL: "http://kashkaldak.edu.kg"
-         CMS_API: "http://nginx/cms"
+         BASE_URL: "https://kashkaldak.edu.kg"
+         CMS_API: "http://strapi:1337/cms"
    strapi-db:
       container_name: strapi_db
       image: "postgres:16-alpine"

@@ -18,12 +18,12 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 # editable in compose file
-ENV CMS_API="http://kashkaldak.edu.kg/cms"
-ENV BASE_URL="http://kashkaldak.edu.kg" 
+ENV CMS_API="https://kashkaldak.edu.kg/cms"
+ENV BASE_URL="https://kashkaldak.edu.kg" 
 # edit env below change tp host name !!!
-ENV BASE_URL_PUBLIC="http://kashkaldak.edu.kg"
-ENV BACKEND_URL_PUBLIC="http://kashkaldak.edu.kg"
-ENV CMS_API_PUBLIC="http://kashkaldak.edu.kg/cms"
+ENV BASE_URL_PUBLIC="https://kashkaldak.edu.kg"
+ENV BACKEND_URL_PUBLIC="https://kashkaldak.edu.kg"
+ENV CMS_API_PUBLIC="https://kashkaldak.edu.kg/cms"
 
 
 

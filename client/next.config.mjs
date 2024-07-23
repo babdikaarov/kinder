@@ -4,6 +4,7 @@ import withNextIntl from 'next-intl/plugin'
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  productionBrowserSourceMaps: false,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -30,10 +31,19 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
+	port: '1337',
       },
       {
         protocol: 'http',
-        hostname: 'nginx',
+        hostname: 'strapi',
+	port: '1337',
+      },
+      {
+	protocol: 'http',
+	hostname: 'nginx',
+      },
+	protocol: 'http',
+	hostname: 'localhost',
       },
     ],
   },
