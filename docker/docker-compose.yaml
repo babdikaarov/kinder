@@ -1,27 +1,22 @@
 services:
-   # nginx
    nginx:
+      container_name: nginx
       image: "nginx:1.13-alpine"
       restart: unless-stopped
       ports:
          - "80:80"
-         # - '443:443'
+         - '443:443'
       volumes:
          - ../nginx/main.config/nginx.conf:/etc/nginx/nginx.conf
          - ../nginx/conf.prod:/etc/nginx/conf.d
-         # - '/etc/letsencrypt:/etc/letsencrypt'
+         - '/etc/letsencrypt:/etc/letsencrypt'
       networks:
          - nginx_network
-      depends_on:
-         - strapi
-         - client
-         - java-back
-   # java-back
-   java-back:
+   java-backend:
+      container_name: java_backend
       build:
          context: ../backend
          dockerfile: Dockerfile
-      container_name: java_back
       volumes:
          - "..:/opt/services"
          - "java_media:/app/java_docs"
@@ -32,7 +27,6 @@ services:
          - java_network
       depends_on:
          - java-db
-   # java-db
    java-db:
       image: "postgres:15-alpine"
       container_name: java-db
@@ -45,7 +39,6 @@ services:
          - java_network
       env_file:
          - ./envs/javadb/.env
-   # client
    client:
       container_name: client
       build:
@@ -56,10 +49,10 @@ services:
          - "3000:3000"
       networks:
          - nginx_network
-      depends_on:
-         strapi:
-            condition: service_started
-   # cms(strapi)-db
+      environment:
+         HOSTNAME: "client"
+         BASE_URL: "http://kashkaldak.edu.kg"
+         CMS_API: "http://nginx/cms"
    strapi-db:
       container_name: strapi_db
       image: "postgres:16-alpine"
@@ -74,7 +67,6 @@ services:
       user: postgres
       networks:
          - strapi_network
-   # cms(strapi)
    strapi:
       container_name: strapi
       build:
@@ -84,7 +76,7 @@ services:
       env_file:
          - ./envs/cms/.env
       volumes:
-         - "../cms/public/uploads:/opt/app/public/uploads"
+         - "strapi_media:/opt/app/public/uploads"
          - "../cms/config:/opt/app/config"
          - "../cms/src:/opt/app/src"
          - "../cms/package.json:/opt/package.json"
@@ -98,7 +90,7 @@ services:
          strapi-db:
             condition: service_started
 volumes:
-   strapi_data:
+   strapi_media:
    strapi_db_data:
    java_db_data:
    java_media:
