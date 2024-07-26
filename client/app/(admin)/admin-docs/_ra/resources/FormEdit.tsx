@@ -19,6 +19,7 @@ import {
   useRefresh,
   Confirm,
   useTranslate,
+  Loading,
 } from 'react-admin'
 import { Box, useMediaQuery, Theme, Dialog, Stack } from '@mui/material'
 import {
@@ -83,8 +84,8 @@ export const FormEdit = () => {
       mutationMode='pessimistic'
       actions={
         <TopToolbar>
-          <PrevNextButtons />
           <ListButton resource='form' />
+          <PrevNextButtons />
         </TopToolbar>
       }
     >
@@ -208,15 +209,26 @@ export const FormEdit = () => {
             open={openSpinner}
             sx={{
               '& .MuiDialog-paper': {
+                backgroundImage: 'none',
                 backgroundColor: 'transparent',
                 boxShadow: 'none',
               },
             }}
           >
-            <LoaderCircle className='size-28 animate-spin bg-transparent stroke-white' />
+            <Loading
+              className='*:bg-transparent *:text-fs-3 *:text-white'
+              sx={{
+                background: 'transparent',
+                color: 'white',
+                '& h5': {
+                  color: 'white',
+                },
+              }}
+            />
           </Dialog>
         </div>
         <FunctionField
+          className='w-full'
           render={(field) => (
             <ArrayInput source='docs' label=''>
               <SimpleFormIterator
@@ -228,6 +240,7 @@ export const FormEdit = () => {
                 // removeButton={<Button>Remove</Button>}
               >
                 <FunctionField
+                  className='w-full'
                   render={(render) => (
                     <div className='flex justify-between'>
                       <Button
