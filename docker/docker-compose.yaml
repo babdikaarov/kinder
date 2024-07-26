@@ -19,7 +19,6 @@ services:
          dockerfile: Dockerfile
       volumes:
          - "..:/opt/services"
-         - "java_media:/app/java_docs"
       ports:
          - "8080:8080"
       networks:
@@ -93,7 +92,6 @@ services:
 volumes:
    strapi_db_data:
    java_db_data:
-   java_media:
 
 networks:
    java_network:
