@@ -7,7 +7,7 @@ interface HeroProps extends myTS.I {}
 
 const Hero: React.FC<HeroProps> = async ({ locale }) => {
   const { title, description, image, link } = await getData(
-    '/api/hero?populate=*'
+    '/cms/api/hero?populate=*'
   )
   const t = await getTranslations()
 

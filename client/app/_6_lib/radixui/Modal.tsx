@@ -15,7 +15,7 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
   return (
     <Dialog.Root open={!open} onOpenChange={setOpen}>
       <Dialog.Portal>
-        <Dialog.Overlay className='absolute bottom-0 left-0 right-0 top-0 z-50 h-svh bg-theme-bg/40 backdrop-blur-sm'>
+        <Dialog.Overlay className='fixed bottom-0 left-0 right-0 top-0 z-50 h-svh bg-theme-bg/40 backdrop-blur-sm'>
           <Dialog.DialogContent
             onInteractOutside={(e) => {
               router.back()

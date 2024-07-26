@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 const page: React.FC<pageProps> = async ({ params }) => {
   const { locale } = params
   const t = await getTranslations()
-  const data = await getData('/api/blogs?&populate=*')
+  const data = await getData('/cms/api/blogs?&populate=*')
 
   const shareText = {
     share: t('share_link_share'),

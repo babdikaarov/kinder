@@ -16,7 +16,7 @@ export async function generateMetadata({
     locale: string
   }
 }): Promise<Metadata | undefined> {
-  const data = await getData('/api/blogs?&populate=*', { cache: 'default' })
+  const data = await getData('/cms/api/blogs?&populate=*', { cache: 'default' })
 
   if (!data) {
     return
@@ -57,7 +57,7 @@ export async function generateMetadata({
 
 const Page: React.FC<PageProps> = async ({ params }) => {
   const { id, locale } = params
-  const data = await getData('/api/blogs?&populate=*')
+  const data = await getData('/cms/api/blogs?&populate=*')
 
   if (!data) {
     notFound()

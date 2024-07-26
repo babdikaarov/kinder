@@ -8,7 +8,7 @@ interface GroupsProps extends myTS.I {}
 const Groups: React.FC<GroupsProps> = async ({ locale }) => {
   const t = await getTranslations()
 
-  const data = await getData('/api/group-categories?&populate=*')
+  const data = await getData('/cms/api/group-categories?&populate=*')
 
   return (
     <Wrapper header={t('home_ourGroups_header')} id='home_our_groups'>

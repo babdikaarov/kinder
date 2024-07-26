@@ -7,7 +7,7 @@ interface MapProps extends myTS.I {}
 
 const Map: React.FC<MapProps> = async ({ locale }) => {
   const t = await getTranslations()
-  const data = await getData('/api/detail?populate=*')
+  const data = await getData('/cms/api/detail?populate=*')
 
   return (
     <Wrapper className='flex  w-full flex-wrap gap-5'>

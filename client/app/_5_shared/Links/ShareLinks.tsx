@@ -61,7 +61,7 @@ const ShareLinks: React.FC<ShareLinksProps> = ({ id, title, text, locale }) => {
     <>
       <Dialog.Root>
         <Dialog.Trigger>
-          <Share2 className='relative'></Share2>
+          <Share2 size={26} className='relative'></Share2>
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className='data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0  z-50 bg-theme-bg/10 backdrop-blur-sm ' />

@@ -5,7 +5,7 @@ const Blog: React.FC<myTS.BlogProps> = ({ shareText, content, locale }) => {
   return (
     <section className='max-w-[90%]'>
       <Arrow className='absolute left-0 top-3' href='/' locale={locale} />
-      <div className='absolute right-0 mr-2 mt-3'>
+      <div className='absolute right-0 top-3 flex size-10 justify-center'>
         <ShareLinks
           locale={locale}
           text={shareText}

@@ -55,7 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  const url = `${process.env.CMS_API}/api/blogs?&populate=*`
+  const url = `${process.env.CMS_API}/cms/api/blogs?&populate=*`
 
   let posts: any[] = []
 

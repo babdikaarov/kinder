@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 const page: React.FC<pageProps> = async ({ params }) => {
   const { locale } = params
-  const url = process.env.CMS_API + `/api/calendars?locale=${locale}`
+  const url = process.env.CMS_API + `/cms/api/calendars?locale=${locale}`
   const response = await fetch(url, { cache: 'no-cache' })
   if (!response.ok) throw Error('server is not responding')
   const { data, category } = await response.json()
@@ -35,7 +35,7 @@ const page: React.FC<pageProps> = async ({ params }) => {
   return (
     <main className=' mt-24 flex w-full flex-1 items-center justify-center font-poppins'>
       <Wrapper className='relative w-full' header={text.header}>
-        <Arrow href='/' className='absolute top-0' locale={locale} />
+        <Arrow href='/' className='absolute top-[10px]' locale={locale} />
         <XScheduler
           data={seedData}
           category={category}

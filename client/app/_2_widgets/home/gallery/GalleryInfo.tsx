@@ -9,7 +9,7 @@ interface GalleryInfoProps extends myTS.I {}
 const GalleryInfo: React.FC<GalleryInfoProps> = async ({ locale }) => {
   const t = await getTranslations()
 
-  const data = await getData('/api/home-gallery-info?populate=*')
+  const data = await getData('/cms/api/home-gallery-info?populate=*')
   return (
     <Wrapper className='flex items-center justify-center gap-5 smExtra:flex-col'>
       <article

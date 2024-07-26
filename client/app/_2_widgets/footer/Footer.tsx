@@ -5,7 +5,7 @@ interface FooterProps extends myTS.I {}
 
 const Footer: React.FC<FooterProps> = async ({ locale }) => {
   const t = await getTranslations()
-  const url = process.env.CMS_API + '/api/detail?populate=*'
+  const url = process.env.CMS_API + '/cms/api/detail?populate=*'
   const response = await fetch(url)
   if (!response.ok) throw Error('server is not responding')
   const data = await response.json()

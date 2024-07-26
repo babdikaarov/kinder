@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/app/_5_shared'
 import Image, { StaticImageData } from 'next/image'
 import {
   RenderSlideProps,
@@ -43,7 +44,10 @@ export default function NextJsImage({ slide, offset, rect }: RenderSlideProps) {
     : rect.height
 
   return (
-    <div style={{ position: 'relative', width, height }}>
+    <div
+      style={{ position: 'relative', width, height }}
+      className='lg:h-5/6 lg:w-5/6 smExtra:h-full smExtra:w-full landscape:lg:h-full'
+    >
       <Image
         fill
         alt='slide image view'
@@ -51,10 +55,9 @@ export default function NextJsImage({ slide, offset, rect }: RenderSlideProps) {
         loading='eager'
         draggable={false}
         placeholder={slide.blurDataURL ? 'blur' : undefined}
-        style={{
-          objectFit: cover ? 'cover' : 'contain',
-          cursor: click ? 'pointer' : undefined,
-        }}
+        className={cn(cover ? 'object-cover' : 'object-contain', {
+          'cursor-pointer': click,
+        })}
         sizes={`${Math.ceil((width / window.innerWidth) * 100)}vw`}
         onClick={
           offset === 0 ? () => click?.({ index: currentIndex }) : undefined

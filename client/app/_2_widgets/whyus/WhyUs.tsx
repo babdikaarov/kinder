@@ -7,7 +7,7 @@ interface WhyUsProps extends myTS.I {}
 
 const WhyUs: React.FC<WhyUsProps> = async ({ locale }) => {
   const t = await getTranslations()
-  const data = await getData('/api/why-uses?&populate=*')
+  const data = await getData('/cms/api/why-uses?&populate=*')
 
   return (
     <Wrapper header={t('home_why_us_header')} id='home_whyus'>

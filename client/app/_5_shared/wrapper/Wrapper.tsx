@@ -22,7 +22,7 @@ const Wrapper: React.FC<WrapperProps> = ({
       {header ? (
         <h2
           className={cn(
-            'flex h-[62px] items-center justify-center font-poppins text-fs-1 font-bold'
+            'mx-8 flex h-[62px] items-center justify-center text-center font-poppins text-fs-1 font-bold'
           )}
         >
           {header}

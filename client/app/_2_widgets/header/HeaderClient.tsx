@@ -53,7 +53,7 @@ const HeaderClient: React.FC<HeaderClientProps> = ({ locale, content }) => {
         data-state={isOpen ? 'open' : 'closed'}
         className={cn(
           'data-[state=open]:absolute data-[state=open]:left-0 data-[state=open]:right-0  data-[state=open]:z-[51]',
-          ' data-[state=open]:min-h-svh data-[state=open]:w-full data-[state=open]:bg-black ',
+          ' data-[state=open]:min-h-lvh  data-[state=open]:w-full data-[state=open]:bg-black ',
           'burgerOverlay absolute top-0 hidden opacity-0 transition-opacity duration-300 data-[state=open]:opacity-35 lg:block'
         )}
       ></div>

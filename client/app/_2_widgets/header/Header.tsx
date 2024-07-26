@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = async ({ locale }) => {
     gallery: t('navigation_gallery'),
   }
   return (
-    <header className='fixed z-50 w-full  bg-theme-bg/40 backdrop-blur'>
+    <header className='grainyEffect fixed z-50 w-full  bg-theme-bg/40 backdrop-blur'>
       <div
         className={cn(
           ' m-auto flex h-[80px] w-full max-w-wrapperLimit items-center justify-around gap-9 ',

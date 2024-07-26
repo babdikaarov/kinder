@@ -11,7 +11,7 @@ interface PageProps {
 
 const Page: React.FC<PageProps> = async ({ params }) => {
   const { id, locale } = params
-  const data = await getData('/api/blogs?&populate=*')
+  const data = await getData('/cms/api/blogs?&populate=*')
   if (!data) {
     notFound()
   }

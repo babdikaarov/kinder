@@ -7,7 +7,7 @@ interface LogoProps extends React.HTMLAttributes<HTMLImageElement> {
 }
 
 const Logo: React.FC<LogoProps> = async ({ to, locale, ...rest }) => {
-  const img = await getData('/api/logo?&populate=*')
+  const img = await getData('/cms/api/logo?&populate=*')
 
   return (
     <Link href={to} locale={locale}>

@@ -4,8 +4,8 @@ interface LoadingProps {}
 
 const Loading: React.FC<LoadingProps> = ({}) => {
   return (
-    <div className='absolute bottom-0 left-0 right-0 top-0 z-20  flex  items-center justify-center bg-theme-bg/40 backdrop-blur-sm'>
-      <Skeleton className='size-full max-h-[600px] max-w-[900px]' />
+    <div className='fixed bottom-0 left-0 right-0 top-0 z-20  flex  items-center justify-center bg-theme-bg/40 backdrop-blur-sm'>
+      <Skeleton className='size-full max-h-[70dvh] max-w-[900px]' />
     </div>
   )
 }

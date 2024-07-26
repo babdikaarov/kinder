@@ -30,7 +30,7 @@ const SwiperPrograms: React.FC<SwiperProgramsProps> = ({ locale, data }) => {
           <SwiperSlide key={index} className='mt-12 w-[222px]'>
             <article about={item[locale].title} className={'text-center'}>
               <details>
-                <summary>
+                <summary className='group hover:cursor-pointer'>
                   <Image
                     className='aspect-square min-w-[200px] max-w-[200px]'
                     src={item.image.src}
@@ -43,11 +43,11 @@ const SwiperPrograms: React.FC<SwiperProgramsProps> = ({ locale, data }) => {
                       objectFit: 'cover',
                     }}
                   />
-                  <p className='text-fs-lg font-semibold'>
+                  <p className='text-fs-lg font-semibold group-hover:rounded-10  group-hover:border group-hover:bg-blue-500 group-hover:text-white'>
                     {item[locale].title}
                   </p>
                 </summary>
-                <p className='relative z-10  max-w-[200px]  rounded-10 border border-black bg-blue-500 p-1 text-fs-base  tracking-wide text-white '>
+                <p className='relative z-10  min-w-full max-w-[200px] rounded-10 border  bg-blue-500 p-1 text-fs-base  tracking-wide text-white '>
                   {item[locale].description}
                 </p>
               </details>

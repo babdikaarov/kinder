@@ -13,7 +13,7 @@ const BlogModal: React.FC<myTS.BlogProps> = ({
   const router = useRouter()
   return (
     <Modal>
-      <section className='boxShadow max-h-[600px] max-w-[900px] overflow-auto rounded-16 bg-white'>
+      <section className='boxShadow max-h-[70dvh] max-w-[900px] overflow-auto rounded-16 bg-white'>
         <button
           className='fixed mt-5'
           onClick={() => {
@@ -23,7 +23,7 @@ const BlogModal: React.FC<myTS.BlogProps> = ({
           <ChevronLeft className='size-[40px]' />
         </button>
 
-        <div className='fixed right-0 mr-2 mt-10'>
+        <div className='fixed right-0 mr-2 mt-6'>
           <ShareLinks
             locale={locale}
             text={shareText}

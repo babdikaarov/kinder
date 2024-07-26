@@ -34,7 +34,7 @@ interface pageProps {
 
 const page: React.FC<pageProps> = async ({ params }) => {
   const t = await getTranslations()
-  const url = process.env.CMS_API + '/api/galleries?&populate=*'
+  const url = process.env.CMS_API + '/cms/api/galleries?&populate=*'
   const response = await fetch(url, { cache: 'no-cache' })
   if (!response.ok) throw Error('server is not responding')
   const data = (await response.json()) as DataEntry[]

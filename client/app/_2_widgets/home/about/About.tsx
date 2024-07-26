@@ -7,7 +7,7 @@ interface AboutProps extends myTS.I {}
 
 const About: React.FC<AboutProps> = async ({ locale }) => {
   const t = await getTranslations()
-  const data = await getData('/api/abouts?&populate=*')
+  const data = await getData('/cms/api/abouts?&populate=*')
 
   return (
     <Wrapper header={t('home_about_header')} id='about'>

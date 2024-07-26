@@ -5,10 +5,10 @@ import { getData } from '@entities/index'
 interface FormServerProps extends myTS.I {}
 
 const FormServer: React.FC<FormServerProps> = async ({ locale }) => {
-  const formType: myTS.TFormType = await getData('/api/type-forms?populate=*')
-  const docsList: myTS.DocsList[] = await getData('/api/list-docs?populate=*')
+  const formType: myTS.TFormType = await getData('/cms/api/type-forms?populate=*')
+  const docsList: myTS.DocsList[] = await getData('/cms/api/list-docs?populate=*')
   const contentForm: myTS.ContentForm = await getData(
-    `/api/content-form?locale=${locale}`
+    `/cms/api/content-form?locale=${locale}`
   ).then(({ data }) => data.attributes)
 
   Object.entries(formType).forEach(([key, value]) => {

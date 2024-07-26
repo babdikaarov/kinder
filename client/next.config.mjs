@@ -16,6 +16,11 @@ const nextConfig = {
   env: {
     BACKEND_URL_PUBLIC: process.env.BACKEND_URL_PUBLIC,
     CMS_API_PUBLIC: process.env.CMS_API_PUBLIC,
+    // CMS_API: 'https://kashkaldak.edu.kg',
+    // BASE_URL: 'https://kashkaldak.edu.kg',
+    // BASE_URL_PUBLIC: 'https://kashkaldak.edu.kg',
+    // BACKEND_URL_PUBLIC: 'https://kashkaldak.edu.kg',
+    // CMS_API_PUBLIC: 'https://kashkaldak.edu.kg',
   },
   images: {
     deviceSizes: [390, 640, 750, 828, 1080, 1200, 1920],
@@ -31,19 +36,20 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
-	port: '1337',
+        port: '1337',
       },
       {
         protocol: 'http',
         hostname: 'strapi',
-	port: '1337',
+        port: '1337',
       },
       {
-	protocol: 'http',
-	hostname: 'nginx',
+        protocol: 'http',
+        hostname: 'nginx',
       },
-	protocol: 'http',
-	hostname: 'localhost',
+      {
+        protocol: 'http',
+        hostname: 'localhost',
       },
     ],
   },

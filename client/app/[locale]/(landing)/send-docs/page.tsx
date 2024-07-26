@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 }
 
 const page: React.FC<pageProps> = async ({ params }) => {
-  const instruction = await getData('/api/instruction?populate=*', {
-    cache: 'default',
+  const instruction = await getData('/cms/api/instruction?populate=*', {
+    cache: 'no-cache',
   })
   const { locale } = params
   return (

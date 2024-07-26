@@ -5,11 +5,11 @@ services:
       restart: unless-stopped
       ports:
          - "80:80"
-         - '443:443'
+         - "443:443"
       volumes:
          - ../nginx/main.config/nginx.conf:/etc/nginx/nginx.conf
          - ../nginx/conf.prod:/etc/nginx/conf.d
-         - '/etc/letsencrypt:/etc/letsencrypt'
+         - "/etc/letsencrypt:/etc/letsencrypt"
       networks:
          - nginx_network
    java-backend:
@@ -53,7 +53,7 @@ services:
       environment:
          HOSTNAME: "client"
          BASE_URL: "https://kashkaldak.edu.kg"
-         CMS_API: "http://strapi:1337/cms"
+         CMS_API: "http://strapi:1337"
    strapi-db:
       container_name: strapi_db
       image: "postgres:16-alpine"
@@ -77,7 +77,7 @@ services:
       env_file:
          - ./envs/cms/.env
       volumes:
-         - "strapi_media:/opt/app/public/uploads"
+         - "../cms/public/uploads:/opt/app/public/uploads"
          - "../cms/config:/opt/app/config"
          - "../cms/src:/opt/app/src"
          - "../cms/package.json:/opt/package.json"
@@ -91,7 +91,6 @@ services:
          strapi-db:
             condition: service_started
 volumes:
-   strapi_media:
    strapi_db_data:
    java_db_data:
    java_media:
