@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Edit,
   SimpleForm,
@@ -33,12 +33,12 @@ import {
 
 export const FormEdit = () => {
   const [openSpinner, setOpenSpinner] = useState(false)
-
   const [open, setOpen] = useState(false)
   const isMobile = useMediaQuery<Theme>((theme) => theme.breakpoints.down('sm'))
   const notify = useNotify()
   const t = useTranslate()
   const refresh = useRefresh()
+
   const handleConfirm = async (id: any) => {
     try {
       const response = await fetch(
@@ -216,76 +216,115 @@ export const FormEdit = () => {
             <LoaderCircle className='size-28 animate-spin bg-transparent stroke-white' />
           </Dialog>
         </div>
-        <ArrayInput source='docs' label=''>
-          <SimpleFormIterator
-            disableAdd
-            disableRemove
-            disableClear
-            disableReordering
-            getItemLabel={(index) => `#${index + 1}`}
-            // removeButton={<Button>Remove</Button>}
-          >
-            <FunctionField
-              render={(render) => (
-                <div className='flex justify-between'>
-                  <Button
-                    variant='text'
-                    className='text-blue-400 active:text-red-300'
-                    onClick={async () => {
-                      setOpenSpinner(true)
-                      try {
-                        const response = await fetch(
-                          `${process.env.BACKEND_URL_PUBLIC}${render.url}`,
-                          {
-                            headers: {
-                              Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}`,
-                            },
-                          }
-                        )
-                        if (!response.ok) {
-                          throw new Error('Failed to open document')
-                        }
-                        const blob = await response.blob()
-                        const url = URL.createObjectURL(blob)
-                        window.open(url, '_blank')
-                        if (url) {
-                          setOpenSpinner(false)
-                        }
-                      } catch (error) {
-                        setOpenSpinner(false)
-                        notify(`cant open document ${error}}`)
-                      }
-                    }}
-                  >
-                    <span className='mt-[3px] text-fs-base'>
-                      {render.documentTypes}
-                      {isMobile ? '' : ` - ${render.name}`}
-                    </span>
-                  </Button>
+        <FunctionField
+          render={(field) => (
+            <ArrayInput source='docs' label=''>
+              <SimpleFormIterator
+                disableAdd
+                disableRemove
+                disableClear
+                disableReordering
+                getItemLabel={(index) => `#${index + 1}`}
+                // removeButton={<Button>Remove</Button>}
+              >
+                <FunctionField
+                  render={(render) => (
+                    <div className='flex justify-between'>
+                      <Button
+                        variant='text'
+                        className='text-blue-400 active:text-red-300'
+                        onClick={async () => {
+                          setOpenSpinner(true)
+                          try {
+                            const response = await fetch(
+                              `${process.env.BACKEND_URL_PUBLIC}${render.url}`,
+                              {
+                                headers: {
+                                  Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}`,
+                                },
+                              }
+                            )
 
-                  <Button
-                    className='text-red-500'
-                    onClick={() => setOpen(true)}
-                    label={t('ra.action.delete')}
-                  >
-                    <>
-                      <DeleteIcon className='stroke-red-300' />
-                      <Confirm
-                        isOpen={open}
-                        title={t('myRoot.document.delete_title', {
-                          name: `${render.name}`,
-                        })}
-                        content={t('myRoot.document.delete_content')}
-                        onConfirm={() => handleConfirm(render.id)}
-                        onClose={() => setOpen(false)}
-                      />
-                    </>
-                  </Button>
-                </div>
-              )}
-            />
-          </SimpleFormIterator>
-        </ArrayInput>
+                            if (!response.ok) {
+                              throw new Error('Failed to open document')
+                            }
+
+                            const blob = await response.blob()
+                            const fileName = `${field!.firstName}_${field!.lastName}_${render.name}`
+
+                            const downloadLink = document.createElement('a')
+                            downloadLink.href = URL.createObjectURL(blob)
+                            downloadLink.download = fileName
+                            downloadLink.style.display = 'none'
+                            downloadLink.target = '_blank'
+                            document.body.appendChild(downloadLink)
+                            downloadLink.click()
+
+                            setTimeout(
+                              () => URL.revokeObjectURL(downloadLink.href),
+                              1000
+                            )
+
+                            setOpenSpinner(false)
+                          } catch (error) {
+                            setOpenSpinner(false)
+                            notify(`Can't open document: ${error}`)
+                          }
+                          // try {
+                          //   const response = await fetch(
+                          //     `${process.env.BACKEND_URL_PUBLIC}${render.url}`,
+                          //     {
+                          //       headers: {
+                          //         Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}`,
+                          //       },
+                          //     }
+                          //   )
+                          //   if (!response.ok) {
+                          //     throw new Error('Failed to open document')
+                          //   }
+                          //   const blob = await response.blob()
+                          //   const url = URL.createObjectURL(blob)
+                          //   window.open(url, '_blank')
+                          //   if (url) {
+                          //     setOpenSpinner(false)
+                          //   }
+                          // } catch (error) {
+                          //   setOpenSpinner(false)
+                          //   notify(`cant open document ${error}}`)
+                          // }
+                        }}
+                      >
+                        <span className='mt-[3px] text-fs-base'>
+                          {render.documentTypes}
+                          {isMobile ? '' : ` - ${render.name}`}
+                        </span>
+                      </Button>
+
+                      <Button
+                        className='text-red-500'
+                        onClick={() => setOpen(true)}
+                        label={t('ra.action.delete')}
+                      >
+                        <>
+                          <DeleteIcon className='stroke-red-300' />
+                          <Confirm
+                            isOpen={open}
+                            title={t('myRoot.document.delete_title', {
+                              name: `${render.name}`,
+                            })}
+                            content={t('myRoot.document.delete_content')}
+                            onConfirm={() => handleConfirm(render.id)}
+                            onClose={() => setOpen(false)}
+                          />
+                        </>
+                      </Button>
+                    </div>
+                  )}
+                />
+              </SimpleFormIterator>
+            </ArrayInput>
+          )}
+        />
       </SimpleForm>
     </Edit>
   )
@@ -382,11 +421,22 @@ const MyToolbar: (notify: any) => JSX.Element = () => {
                   type: 'application/zip',
                 })
                 const url = URL.createObjectURL(blob)
-                window.open(url, '_blank')
+                const fileName = `${record!.firstName}_${record!.lastName}_all_documents`
+                const downloadLink = document.createElement('a')
+                downloadLink.href = URL.createObjectURL(blob)
+                downloadLink.download = fileName
+                downloadLink.style.display = 'none'
+                downloadLink.target = '_blank'
+                document.body.appendChild(downloadLink)
+                downloadLink.click()
+
                 if (url) {
                   setOpenSpinner(false)
+                } else {
+                  setOpenSpinner(false)
+                  notify(`cant open document `)
                 }
-                window.URL.revokeObjectURL(url)
+                setTimeout(() => URL.revokeObjectURL(downloadLink.href), 1000)
               } catch (error) {
                 setOpenSpinner(false)
                 notify(`cant open document ${error}}`)
