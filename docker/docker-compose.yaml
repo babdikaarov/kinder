@@ -76,7 +76,7 @@ services:
       env_file:
          - ./envs/cms/.env
       volumes:
-         - "../cms/public/uploads:/opt/app/public/uploads"
+        # - "../cms/public/uploads:/opt/app/public/uploads"
          - "../cms/config:/opt/app/config"
          - "../cms/src:/opt/app/src"
          - "../cms/package.json:/opt/package.json"
