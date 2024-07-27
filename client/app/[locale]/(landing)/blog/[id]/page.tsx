@@ -28,10 +28,10 @@ export async function generateMetadata({
   const post = data[index]
   return {
     title: post[params.locale].title,
-    description: `Читать ${post[params.locale].title} статью от Кашкалдак`,
+    description: `Читать статью "${post[params.locale].title}"  от Кашкалдак`,
     openGraph: {
       title: post[params.locale].title,
-      description: `Читать ${post[params.locale].title} статью от Кашкалдак`,
+      description: `Читать статью "${post[params.locale].title}"  от Кашкалдак`,
       url: `${process.env.BASE_URL}/ru/blog/${params.id}`,
       siteName: 'Кашкалдак',
       images: [

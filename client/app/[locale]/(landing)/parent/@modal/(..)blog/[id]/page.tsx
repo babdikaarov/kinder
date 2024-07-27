@@ -2,8 +2,6 @@ import { BlogModal } from '@widgets/index'
 import { getData } from '@entities/index'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { LoaderCircle } from 'lucide-react'
-import { Skeleton } from '@/app/_5_shared/skeletons/Skeleton'
 
 interface PageProps {
   params: { locale: string; id: string }
