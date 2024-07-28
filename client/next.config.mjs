@@ -43,6 +43,11 @@ const nextConfig = {
         hostname: '**',
         port: '**',
       },
+      {
+        protocol: 'http',
+        hostname: 'strapi',
+        port: '1337',
+      },
     ],
   },
 }

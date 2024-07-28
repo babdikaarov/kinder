@@ -68,6 +68,7 @@ const Page: React.FC<PageProps> = async ({ params }) => {
     notFound()
   }
   const post = data[index]
+  console.log(post)
 
   const shareT = await getTranslations()
   const shareText = {
