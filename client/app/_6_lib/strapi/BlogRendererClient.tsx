@@ -70,20 +70,18 @@ const BlogRendererClient: React.FC<BlogRendererClientProps> = ({ content }) => {
         },
         image: ({ image }) => {
           return (
-            <picture>
-              <img
-                src={image.url}
-                width={image.width}
-                height={image.height}
-                alt={image.alternativeText || 'blog image'}
-                className='mx-auto w-1/2'
-                style={{
-                  width: 'auto',
-                  height: 'auto',
-                  objectFit: 'cover',
-                }}
-              />
-            </picture>
+            <Image
+              src={image.url}
+              width={image.width}
+              height={image.height}
+              alt={image.alternativeText || 'blog image'}
+              className='mx-auto w-1/2'
+              style={{
+                width: 'auto',
+                height: 'auto',
+                objectFit: 'cover',
+              }}
+            />
           )
         },
         link: ({ children, url }) => (
